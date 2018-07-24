@@ -11,3 +11,13 @@ from sklearn import metrics
 from sklearn import svm
 from sklearn.grid_search import GridSearchCV
 import pickle
+from nltk.corpus import stopwords
+
+
+path = 'op_spam_train/'
+
+label = []
+
+configfiles = [os.path.join(subdir,f)
+for subdir, dirs, files in os.walk(path)
+    for f in fnmath.filter(files, '*.txt')
