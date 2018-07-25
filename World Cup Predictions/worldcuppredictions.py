@@ -13,7 +13,7 @@ FIFA18 = pd.read_csv('/Users/Dre/Documents/GitHub/PersonalProject/World Cup Pred
 
 #Using Repository On PC
 
-FIFA18 = pd.read_csv('\User\as70906n\Documents\PersonalProject\World Cup Predictions\fifa-18-demo-player-dataset\CompleteDataset.csv', low_memory = False)
+FIFA18 = pd.read_csv('/Users/as70906n/Documents/PersonalProject/World Cup Predictions/fifa-18-demo-player-dataset/CompleteDataset.csv', low_memory = False)
 
 FIFA18.columns
 
