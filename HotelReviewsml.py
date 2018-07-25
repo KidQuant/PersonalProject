@@ -20,4 +20,6 @@ label = []
 
 configfiles = [os.path.join(subdir,f)
 for subdir, dirs, files in os.walk(path)
-    for f in fnmath.filter(files, '*.txt')
+    for f in fnmath.filter(files, '*.txt')]
+
+len(configfiles)
