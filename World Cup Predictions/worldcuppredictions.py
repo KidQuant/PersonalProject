@@ -353,3 +353,18 @@ rating_442_POR_Potential, best_list_442_POR_Potential = get_best_squad_n(squad_4
 print('-Potential-')
 print('Average rating: {:.1f}'.format(rating_442_POR_Potential))
 print(best_list_442_POR_Potential)
+
+Uruguay = pd.DataFrame(np.array(get_summary_n(squad_list, squad_name, ['Uruguay'])).reshape(-1,4), columns = ['Nationality', 'Squad', 'Overall', 'Potential'])
+Uruguay.set_index('Nationality', inplace=True)
+Uruguay[['Overall', 'Potential']] = Uruguay[['Overall', 'Potential']].astype(float)
+print(Uruguay)
+
+rating_4312_URG_Overall, best_list_4312_URG_Overall = get_best_squad_n(squad_4312_strict, 'Uruguay', 'Overall')
+print('-Overall-')
+print('Average rating: {:.1f}'.format(rating_4312_URG_Overall))
+print(best_list_4312_URG_Overall)
+
+rating_442_URG_Potential, best_list_442_URG_Potential = get_best_squad_n(squad_442_strict, 'Uruguay', 'Potential')
+print('-Potential-')
+print('Average rating: {:.1f}'.format(rating_442_URG_Potential))
+print(best_list_442_URG_Potential)
