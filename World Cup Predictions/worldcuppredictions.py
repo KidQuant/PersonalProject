@@ -279,7 +279,7 @@ print('-Potential-')
 print('Average rating: {:.1f}'.format(rating_4231_ENG_Overall))
 print(best_list_4231_ENG_Potential)
 
-Spain = pd.DataFrame(np.array(get_summary_n(squad_list, squad_name, ['Spain'])).reshape(-1,4), columns = ['Nationality', 'Spain', 'Overall', 'Potential'])
+Spain = pd.DataFrame(np.array(get_summary_n(squad_list, squad_name, ['Spain'])).reshape(-1,4), columns = ['Nationality', 'Squad', 'Overall', 'Potential'])
 Spain.set_index('Nationality', inplace=True)
 Spain[['Overall', 'Potential']] = Spain[['Overall', 'Potential']]
 print(Spain)
@@ -294,7 +294,7 @@ print('-Potential-')
 print('Average rating: {:.1f}'.format(rating_433_ESP_Potential))
 print(best_list_433_ESP_Potential)
 
-Brazil = pd.DataFrame(np.array(get_summary_n(squad_list, squad_name, ['Brazil'])).reshape(-1,4), columns = ['Nationality', 'Spain', 'Overall', 'Potential'])
+Brazil = pd.DataFrame(np.array(get_summary_n(squad_list, squad_name, ['Brazil'])).reshape(-1,4), columns = ['Nationality', 'Squad', 'Overall', 'Potential'])
 Brazil.set_index('Nationality', inplace=True)
 Brazil[['Overall', 'Potential']] = Brazil[['Overall', 'Potential']]
 print(Brazil)
@@ -309,7 +309,7 @@ print('-Potential-')
 print('Average rating: {:.1f}'.format(rating_433_BRA_Potential))
 print(best_list_433_BRA_Potential)
 
-Argentina = pd.DataFrame(np.array(get_summary_n(squad_list, squad_name, ['Brazil'])).reshape(-1,4), columns = ['Nationality', 'Argentina', 'Overall', 'Potential'])
+Argentina = pd.DataFrame(np.array(get_summary_n(squad_list, squad_name, ['Brazil'])).reshape(-1,4), columns = ['Nationality', 'Squad', 'Overall', 'Potential'])
 Argentina.set_index('Nationality', inplace=True)
 Argentina[['Overall', 'Potential']] = Argentina[['Overall', 'Potential']]
 print(Argentina)
@@ -324,7 +324,7 @@ print('-Potential-')
 print('Average rating: {:.1f}'.format(rating_4231_ARG_Potential))
 print(best_list_4231_ARG_Potential)
 
-Belgium = pd.DataFrame(np.array(get_summary_n(squad_list, squad_name, ['Belgium'])).reshape(-1,4), columns = ['Nationality', 'Belgium', 'Overall', 'Potential'])
+Belgium = pd.DataFrame(np.array(get_summary_n(squad_list, squad_name, ['Belgium'])).reshape(-1,4), columns = ['Nationality', 'Squad', 'Overall', 'Potential'])
 Belgium.set_index('Nationality', inplace=True)
 Belgium[['Overall', 'Potential']] = Belgium[['Overall', 'Potential']]
 print(Belgium)
@@ -339,7 +339,7 @@ print('-Potential-')
 print('Average rating: {:.1f}'.format(rating_433_BEL_Potential))
 print(best_list_433_BEL_Potential)
 
-Portugal = pd.DataFrame(np.array(get_summary_n(squad_list, squad_name, ['Portugal'])).reshape(-1,4), columns = ['Nationality','Portugal', 'Overall', 'Potential'])
+Portugal = pd.DataFrame(np.array(get_summary_n(squad_list, squad_name, ['Portugal'])).reshape(-1,4), columns = ['Nationality','Squad', 'Overall', 'Potential'])
 Portugal.set_index('Nationality', inplace=True)
 Portugal[['Overall', 'Potential']] = Portugal[['Overall', 'Potential']]
 print(Portugal)
