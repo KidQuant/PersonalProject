@@ -7,7 +7,14 @@ from plotly.offline import iplot, init_notebook_mode
 from geopy.geocoders import Nominatim
 import plotly.plotly as py
 
+#Using Repository on Mac
+
 FIFA18 = pd.read_csv('/Users/Dre/Documents/GitHub/PersonalProject/World Cup Predictions/fifa-18-demo-player-dataset/CompleteDataset.csv', low_memory = False)
+
+#Using Repository On PC
+
+FIFA18 = pd.read_csv('\User\as70906n\Documents\PersonalProject\World Cup Predictions\fifa-18-demo-player-dataset\CompleteDataset.csv', low_memory = False)
+
 FIFA18.columns
 
 interesting_columns = [
