@@ -44,5 +44,3 @@ def read_match_data(season=None, sort=True):
     assert data, 'No match ineups to return, have you selected a valid season?'
 
     return data
-
-        
