@@ -324,7 +324,7 @@ print('-Potential-')
 print('Average rating: {:.1f}'.format(rating_4231_ARG_Potential))
 print(best_list_4231_ARG_Potential)
 
-Belgium = pd.DataFrame(np.array(get_summary_n(squad_list, squad_name, ['Belgium'])).reshape(-1,4), columns = ['Nationality', 'Spain', 'Overall', 'Potential'])
+Belgium = pd.DataFrame(np.array(get_summary_n(squad_list, squad_name, ['Belgium'])).reshape(-1,4), columns = ['Nationality', 'Belgium', 'Overall', 'Potential'])
 Belgium.set_index('Nationality', inplace=True)
 Belgium[['Overall', 'Potential']] = Belgium[['Overall', 'Potential']]
 print(Belgium)
@@ -338,3 +338,18 @@ rating_433_BEL_Potential, best_list_433_BEL_Potential = get_best_squad_n(squad_4
 print('-Potential-')
 print('Average rating: {:.1f}'.format(rating_433_BEL_Potential))
 print(best_list_433_BEL_Potential)
+
+Portugal = pd.DataFrame(np.array(get_summary_n(squad_list, squad_name, ['Portugal'])).reshape(-1,4), columns = ['Nationality','Portugal', 'Overall', 'Potential'])
+Portugal.set_index('Nationality', inplace=True)
+Portugal[['Overall', 'Potential']] = Portugal[['Overall', 'Potential']]
+print(Portugal)
+
+rating_433_POR_Overall, best_list_433_POR_Overall = get_best_squad_n(squad_433_strict, 'Portugal', 'Overall')
+print('-Overall-')
+print('Average rating: {:.1f}'.format(rating_433_POR_Overall))
+print(best_list_433_POR_Overall)
+
+rating_442_POR_Potential, best_list_442_POR_Potential = get_best_squad_n(squad_442_strict, 'Portugal', 'Potential')
+print('-Potential-')
+print('Average rating: {:.1f}'.format(rating_442_POR_Potential))
+print(best_list_442_POR_Potential)
