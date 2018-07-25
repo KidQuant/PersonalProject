@@ -368,3 +368,18 @@ rating_442_URG_Potential, best_list_442_URG_Potential = get_best_squad_n(squad_4
 print('-Potential-')
 print('Average rating: {:.1f}'.format(rating_442_URG_Potential))
 print(best_list_442_URG_Potential)
+
+Croatia = pd.DataFrame(np.array(get_summary_n(squad_list, squad_name, ['Croatia'])).reshape(-1,4), columns = ['Nationality', 'Squad', 'Overall', 'Potential'])
+Croatia.set_index('Nationality', inplace=True)
+Croatia[['Overall', 'Potential']] = Croatia[['Overall', 'Potential']]
+print(Croatia)
+
+rating_433_CRO_Overall, best_list_433_CRO_Overall = get_best_squad_n(squad_433_strict, 'Croatia', 'Overall')
+print('-Overall-')
+print('Average rating: {:.1f}'.format(rating_433_CRO_Overall))
+print(best_list_433_CRO_Overall)
+
+rating_4231_CRO_Potential, best_list_4231_CRO_Potential = get_best_squad_n(squad_4231_strict, 'Croatia', 'Potential')
+print('-Potential-')
+print('Average rating: {:.1f}'.format(rating_4231_CRO_Potential))
+print(best_list_4231_CRO_Potential)
