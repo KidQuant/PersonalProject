@@ -143,3 +143,91 @@ plt.show()
 
 FIFA18 = FIFA18[['Name', 'Age', 'Nationality', 'Overall', 'Potential', 'Club', 'Position', 'Value', 'Wage']]
 FIFA18.head(10)
+
+def get_best_squad(formation):
+    FIFA18_copy = FIFA18.copy()
+    store = []
+
+    for i in formation:
+        store.append([
+        i,
+        FIFA18_copy.loc[[FIFA18_copy[FIFA18_copy['Position'] == i]['Overall'].idxmax()]]['Name'].to_string(index = False),
+            FIFA18_copy[FIFA18_copy['Position'] == i]['Overall'].max(),
+            FIFA18_copy.loc[[FIFA18_copy[FIFA18_copy['Position'] == i]['Overall'].idxmax()]]['Age'].to_string(index = False),
+            FIFA18_copy.loc[[FIFA18_copy[FIFA18_copy['Position'] == i]['Overall'].idxmax()]]['Club'].to_string(index = False),
+            FIFA18_copy.loc[[FIFA18_copy[FIFA18_copy['Position'] == i]['Overall'].idxmax()]]['Value'].to_string(index = False),
+            FIFA18_copy.loc[[FIFA18_copy[FIFA18_copy['Position'] == i]['Overall'].idxmax()]]['Wage'].to_string(index = False)
+        ])
+
+        FIFA18_copy.drop(FIFA18_copy[FIFA18_copy['Position'] == i]['Overall'].idxmax(),
+                         inplace = True)
+
+    # return store with only necessary columns
+    return pd.DataFrame(np.array(store).reshape(11,7),
+                        columns = ['Position', 'Player', 'Overall', 'Age', 'Club', 'Value', 'Wage']).to_string(index = False)
+
+squad_433 = ['GK', 'RB', 'CB', 'CB', 'LB', 'CDM', 'CM', 'CAM', 'RW', 'ST', 'LW']
+print('4-3-3')
+print(get_best_squad(squad_433))
+
+squad_442 = ['GK', 'RB', 'CB', 'CB', 'LB', 'RM', 'CM', 'CM', 'LM', 'ST', 'ST']
+print('4-4-2')
+print(get_best_squad(squad_442))
+
+squad_4231 = ['GK', 'RB', 'CB', 'CB', 'LB', 'CDM', 'CDM', 'CAM', 'CAM', 'CAM', 'ST']
+print('4-2-3-1')
+print(get_best_squad(squad_4231))
+
+def get_best_squad_n(formation, nationality, measurement = 'Overall'):
+    FIFA18_copy = FIFA18.copy()
+    FIFA18_copy = FIFA18_copy[FIFA18_copy['Nationality'] == nationality]
+    store = []
+
+    for i in formation:
+        store.append([
+            FIFA18_copy.loc[[FIFA18_copy[FIFA18_copy['Position'].str.contains(i)][measurement].idxmax()]]['Position'].to_string(index = False),
+            FIFA18_copy.loc[[FIFA18_copy[FIFA18_copy['Position'].str.contains(i)][measurement].idxmax()]]['Name'].to_string(index = False),
+            FIFA18_copy[FIFA18_copy['Position'].str.contains(i)][measurement].max(),
+            FIFA18_copy.loc[[FIFA18_copy[FIFA18_copy['Position'].str.contains(i)][measurement].idxmax()]]['Age'].to_string(index = False),
+            FIFA18_copy.loc[[FIFA18_copy[FIFA18_copy['Position'].str.contains(i)][measurement].idxmax()]]['Club'].to_string(index = False),
+            FIFA18_copy.loc[[FIFA18_copy[FIFA18_copy['Position'].str.contains(i)][measurement].idxmax()]]['Value'].to_string(index = False),
+            FIFA18_copy.loc[[FIFA18_copy[FIFA18_copy['Position'].str.contains(i)][measurement].idxmax()]]['Wage'].to_string(index = False)
+        ])
+
+        FIFA18_copy.drop(FIFA18_copy[FIFA18_copy['Position'].str.contains(i)][measurement].idxmax(),
+                         inplace = True)
+
+    return np.mean([x[2] for x in store]).round(2), pd.DataFrame(np.array(store).reshape(11,7),
+                                                                 columns = ['Position', 'Player', measurement, 'Age', 'Club', 'Value', 'Wage']).to_string(index = False)
+
+def get_summary_n(squad_list, squad_name, nationality_list):
+    summary = []
+
+    for i in nationality_list:
+        count = 0
+        for j in squad_list:
+
+            # for overall rating
+            O_temp_rating, _  = get_best_squad_n(formation = j, nationality = i, measurement = 'Overall')
+
+            # for potential rating & corresponding value
+            P_temp_rating, _ = get_best_squad_n(formation = j, nationality = i, measurement = 'Potential')
+
+            summary.append([i, squad_name[count], O_temp_rating.round(2), P_temp_rating.round(2)])
+            count += 1
+
+    return summary
+
+squad_343_strict = ['GK', 'CB', 'CB', 'CB', 'RB|RWB', 'CM|CDM', 'CM|CDM', 'LB|LWB', 'RM|RW', 'ST|CF', 'LM|LW']
+squad_442_strict = ['GK', 'RB|RWB', 'CB', 'CB', 'LB|LWB', 'RM', 'CM|CDM', 'CM|CAM', 'LM', 'ST|CF', 'ST|CF']
+squad_4312_strict = ['GK', 'RB|RWB', 'CB', 'CB', 'LB|LWB', 'CM|CDM', 'CM|CAM|CDM', 'CM|CAM|CDM', 'CAM|CF', 'ST|CF', 'ST|CF']
+squad_433_strict = ['GK', 'RB|RWB', 'CB', 'CB', 'LB|LWB', 'CM|CDM', 'CM|CAM|CDM', 'CM|CAM|CDM', 'RM|RW', 'ST|CF', 'LM|LW']
+squad_4231_strict = ['GK', 'RB|RWB', 'CB', 'CB', 'LB|LWB', 'CM|CDM', 'CM|CDM', 'RM|RW', 'CAM', 'LM|LW', 'ST|CF']
+
+squad_list =[squad_343_strict, squad_442_strict, squad_4312_strict, squad_433_strict, squad_4231_strict]
+squad_name = ['3-4-3', '4-4-2', '4-3-1-2', '4-3-3', '4-2-3-1']
+
+France = pd.DataFrame(np.array(get_summary_n(squad_list, squad_name, ['France'])).reshape(-1,4), columns = ['Nationality', 'Squad', 'Overall', 'Potential'])
+France.set_index('Nationality', inplace = True)
+France[['Overall', 'Potential']] = France[['Overall', 'Potential']].astype(float)
+print(France)
