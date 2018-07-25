@@ -263,3 +263,18 @@ rating_433_GER_Potential, best_list_433_GER_Potential = get_best_squad_n(squad_4
 print('-Potential-')
 print('Average rating: {:.1f}'.format(rating_433_GER_Potential))
 print(best_list_433_GER_Potential)
+
+England = pd.DataFrame(np.array(get_summary_n(squad_list, squad_name, ['England'])).reshape(-1,4), columns = ['Nationality', 'Squad', 'Overall', 'Potential'])
+England.set_index('Nationality', inplace = True)
+England[['Overall', 'Potential']] = England[['Overall', 'Potential']]
+print(England)
+
+rating_433_ENG_Overall, best_list_433_ENG_Overall = get_best_squad_n(squad_433_strict, 'England', 'Potential')
+print('-Overall-')
+print('Average rating: {:.1f}'.format(rating_433_ENG_Overall))
+print(best_list_433_ENG_Overall)
+
+rating_4231_ENG_Potential, best_list_4231_ENG_Potential = get_best_squad_n(squad_4231_strict, 'England', 'Potential')
+print('-Potential-')
+print('Average rating: {:.1f}'.format(rating_4231_ENG_Overall))
+print(best_list_4231_ENG_Potential)
