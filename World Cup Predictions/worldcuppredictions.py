@@ -308,3 +308,18 @@ rating_433_BRA_Potential, best_list_433_BRA_Potential = get_best_squad_n(squad_4
 print('-Potential-')
 print('Average rating: {:.1f}'.format(rating_433_BRA_Potential))
 print(best_list_433_BRA_Potential)
+
+Argentina = pd.DataFrame(np.array(get_summary_n(squad_list, squad_name, ['Brazil'])).reshape(-1,4), columns = ['Nationality', 'Argentina', 'Overall', 'Potential'])
+Argentina.set_index('Nationality', inplace=True)
+Argentina[['Overall', 'Potential']] = Argentina[['Overall', 'Potential']]
+print(Argentina)
+
+rating_433_ARG_Overall, best_list_433_ARG_Overall = get_best_squad_n(squad_433_strict, 'Argentina', 'Overall')
+print('-Overall')
+print('Average rating: {:.1f}'.format(rating_433_ARG_Overall))
+print(best_list_433_ARG_Overall)
+
+rating_4231_ARG_Potential, best_list_4231_ARG_Potential = get_best_squad_n(squad_4231_strict, 'Argentina', 'Potential')
+print('-Potential-')
+print('Average rating: {:.1f}'.format(rating_4231_ARG_Potential))
+print(best_list_4231_ARG_Potential)
