@@ -256,3 +256,18 @@ rating_433_GER_Potential, best_list_433_GER_Potential = get_best_squad_n(squad_4
 print('-Potential-')
 print('Average rating: {:.1f}'.format(rating_433_GER_Potential))
 print(best_list_433_GER_Potential)
+
+Spain = pd.DataFrame(np.array(get_summary_n(squad_list, squad_name, ['Spain'])).reshape(-1,4), columns = ['Nationality', 'Spain', 'Overall', 'Potential'])
+Spain.set_index('Nationality', inplace=True)
+Spain[['Overall', 'Potential']] = Spain[['Overall', 'Potential']]
+print(Spain)
+
+rating_4231_ESP_Overall, best_list_4231_ESP_Overall = get_best_squad_n(squad_4231_strict, 'Spain', 'Overall')
+print('-Overall-')
+print('Average rating: {:.1f}'.format(rating_4231_ESP_Overall))
+print(best_list_4231_ESP_Overall)
+
+rating_433_ESP_Potential, best_list_433_ESP_Potential = get_best_squad_n(squad_433_strict, 'Spain', 'Potential')
+print('-Potential-')
+print('Average rating: {:.1f}'.format(rating_433_ESP_Potential))
+print(best_list_433_ESP_Potential)
