@@ -58,3 +58,8 @@ diabetes_y_test = diabetes.target[-20]
 regr = linear_model.LinearRegression()
 
 regr.fit(diabetes_X_train, diabetes_y_train)
+
+print('Input Values')
+print(diabetes_X_test)
+
+diabetes_y_pred = regr.predict(diabetes_X_test)
