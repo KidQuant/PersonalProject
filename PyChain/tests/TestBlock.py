@@ -21,4 +21,20 @@ class TestBlock(unittest.TestCase):
         hash_value = self.test_block.calculate_hash()
         regex = re.match(r'[A-Fa-f0-9]{64}', hash_value)
 
-        self
+        self.assertEqual(len(hash_value), 64)
+        self.assertIsNotNone(regex)
+
+    def test_mine_returns_a_hash(self):
+        hash_value = self.test_block.mine(3)
+        regex = re.match(r'[A-Fa-f0-9]{64}', hash_value)
+
+        self.assertEqual(len(hash_value), 64)
+        self.assertIsNotNone(regex)
+
+    def test_mine_should_start_with_n_zeros(self):
+        hash_value = self.test_block.mine(3)
+
+        self.assertEqual(hash_value[0:3], '000')
+
+if __name__ == '__main__':
+    unittest.main()
