@@ -92,3 +92,18 @@ y_pred = classifier.predict(X_test)
 cm = confusion_matrix(y_test, y_pred)
 print(cm)
 print('Accuracy', accuracy_score(y_test, y_pred))
+
+from sklearn.linear_model import LogisticRegression
+from sklearn.pipeline import Pipeline
+
+X_train, X_test, y_train, y_test = train_test_split(X,y,test_size=0.3, random_state=1)
+pca = PCA(n_components=23)
+logReg = LogisticRegression()
+
+pipe = Pipeline([('pca', pca), ('logistic', logReg)])
+pipe.fit(X_train, y_train)
+y_pred = pipe.predict(X_test)
+
+cm = confusion_matrix(y_test, y_pred)
+print(cm)
+print('Accuracy', accuracy_score(y_test, y_pred))
