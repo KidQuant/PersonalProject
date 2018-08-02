@@ -56,3 +56,8 @@ df_new = pd.concat([not_booking_sample, booking_sample], axis = 0)
 print('Percentage of not booking clicks: ', len(df_new[df_new.is_booking == 0]) / len(df_new))
 print('Percentage of booking clicks: ', len(df_new[df_new.is_booking == 1]) / len(df_new))
 print('Total number of records in resampled data: ', len(df_new))
+
+df_new = df_new.sample(frac = 1).reset_index(drop = True)
+
+X = df_new.loc[:, df_new.columns != 'is_booking']
+y = df_new.loc[:, df_new.columns == 'is_booking']
