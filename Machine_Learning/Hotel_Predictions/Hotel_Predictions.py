@@ -61,3 +61,34 @@ df_new = df_new.sample(frac = 1).reset_index(drop = True)
 
 X = df_new.loc[:, df_new.columns != 'is_booking']
 y = df_new.loc[:, df_new.columns == 'is_booking']
+
+scaler = StandardScaler()
+X = scaler.fit_transform(X)
+X
+
+pca = PCA(n_components = 23)
+pca.fit(X)
+
+var = np.cumsum(np.round(pca.explained_variance_ratio_, decimals = 3) * 100)
+var
+
+plt.ylabel('% Variance Explained')
+plt.xlabel('# of Features')
+plt.title('PCA Analysis')
+plt.style.context('seaborn-whitegrid')
+plt.plot(var)
+
+X_train, X_test, y_train, y_test = train_test_split(X,y,test_size=0.3,random_state=1)
+
+pca = PCA()
+X_train = pca.fit_transform(X_train)
+X_test = pca.transform(X_test)
+
+classifier = RandomForestClassifier(max_depth = 2, random_state = 0)
+classifier.fit(X_train, y_train)
+
+y_pred = classifier.predict(X_test)
+
+cm = confusion_matrix(y_test, y_pred)
+print(cm)
+print('Accuracy', accuracy_score(y_test, y_pred))
