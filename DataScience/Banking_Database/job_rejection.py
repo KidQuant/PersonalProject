@@ -10,3 +10,8 @@ import nltk
 sns.set(style = 'whitegrid', palette = 'muted', font_scale=1.3)
 
 df = pd.read_csv('andres_rejections.csv')
+df.head()
+
+df.info()
+
+df['Subject'].value_counts()
