@@ -23,19 +23,14 @@ subjects = []
 
 for emailid in items:
 
-    # Fetch everything from the id
     resp, data = m.fetch(emailid, "(RFC822)")
 
-    # Get the content
     email_body = data[0][1]
 
-    # Convert to mail object
     mail = email.message_from_bytes(email_body)
 
-    # Get subject
     subjects.append(email.header.decode_header(mail['Subject'])[0][0])
 
-    # Get date
     date_tuple = email.utils.parsedate_tz(mail['Date'])
     dates.append(datetime.fromtimestamp(email.utils.mktime_tz(date_tuple)))
 
