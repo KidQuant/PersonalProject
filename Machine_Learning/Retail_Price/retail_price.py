@@ -117,3 +117,6 @@ X_name = cv.fit_transform(merge['name'])
 
 cv = CountVectorizer()
 X_category = cv.fit_transform(merge['category_name'])
+
+tv = TfidfVectorizer(max_features=MAX_FEATURES_ITEM_DESCRIPTION, ngram_range=(1,3), stop_words = 'english')
+X_description = tv.fit_transform(merge['item_description'])
