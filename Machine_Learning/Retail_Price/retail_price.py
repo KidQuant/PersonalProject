@@ -68,7 +68,7 @@ train['category_name'].value_counts()[:10]
 sns.boxplot(x = 'item_condition_id', y = np.log(train['price']+1),
 data = train, palette = sns.color_palette('RdBu',5))
 
-NUM_BRAND = 4000
+NUM_BRANDS = 4000
 NUM_CATEGORIES = 1000
 NAME_MIN_DF = 10
 MAX_FEATURES_ITEM_DESCRIPTION = 50000
@@ -83,7 +83,7 @@ def handle_missing_inplace(dataset):
     dataset['category_name'].fillna(value = 'missing', inplace=True)
     dataset['brand_name'].fillna(value = 'missing', inplace = True)
     dataset['item_description'].replace('No description yet,''missing', inplace=True)
-    dtatset['item_description'].fillna(value='missing', inplace=True)
+    dataset['item_description'].fillna(value='missing', inplace=True)
 
 def cutting(dataset):
     pop_brand = dataset['brand_name'].value_counts().loc[lambda x: x.index != 'missing'].index[:NUM_BRANDS]
@@ -94,3 +94,26 @@ def to_categorical(dataset):
     dataset['category_name'] = dataset['category_name'].astype('category')
     dataset['brand_name'] = dataset['brand_name'].astype('category')
     dataset['item_condition_id'] = dataset['item_condition_id'].astype('category')
+
+df = pd.read_csv('mercari/train.tsv', sep = '\t')
+msk = np.random.rand(len(df)) < 0.8
+train = df[msk]
+test = df[msk]
+test_new = test.drop('price', axis =1)
+y_test = np.log1p(test['price'])
+
+train = train[train.price != 0].reset_index(drop=True)
+
+nrow_train = train.shape[0]
+y = np.log1p(train['price'])
+merge: pd.DataFrame = pd.concat([train, test_new])
+
+handle_missing_inplace(merge)
+cutting(merge)
+to_categorical(merge)
+
+cv = CountVectorizer(min_df = NAME_MIN_DF)
+X_name = cv.fit_transform(merge['name'])
+
+cv = CountVectorizer()
+X_category = cv.fit_transform(merge['category_name'])
