@@ -7,14 +7,13 @@ df.loc[29:29]
 
 networking = pd.read_csv('networking.csv')
 
-networking.head()
 networking.tail()
 
 del df5
 
-df5 = pd.DataFrame({'Name':['Gabrielle DiBuono'],
+df5 = pd.DataFrame({'Name':['Kathleen Goettelmann'],
                     'Firm':['Lazard'],
-                    'Email':['gabrielle.dibuono@lazard.com'],
+                    'Email':['kathleen.goettelmann@lazard.com'],
                     'Have Contacted?':['No'],
                     'Recieved Response?':['N/A'],
                     'Followed Up?':['N/A']})
@@ -26,7 +25,7 @@ networking.tail()
 
 networking.sort_values(by = ['Firm'], inplace=True)
 
-networking.duplicated()
+networking.duplicated().sum()
 
 networking.drop_duplicates()
 
