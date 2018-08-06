@@ -84,3 +84,13 @@ def handle_missing_inplace(dataset):
     dataset['brand_name'].fillna(value = 'missing', inplace = True)
     dataset['item_description'].replace('No description yet,''missing', inplace=True)
     dtatset['item_description'].fillna(value='missing', inplace=True)
+
+def cutting(dataset):
+    pop_brand = dataset['brand_name'].value_counts().loc[lambda x: x.index != 'missing'].index[:NUM_BRANDS]
+    dataset.loc[~dataset['brand_name'].isin(pop_brand), 'brand_name'] = 'missing'
+    pop_category = dataset['category_name'].value_counts().loc[lambda x: x.index != 'missing'].index[:NUM_CATEGORIES]
+
+def to_categorical(dataset):
+    dataset['category_name'] = dataset['category_name'].astype('category')
+    dataset['brand_name'] = dataset['brand_name'].astype('category')
+    dataset['item_condition_id'] = dataset['item_condition_id'].astype('category')
