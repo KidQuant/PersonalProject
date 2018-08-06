@@ -2,6 +2,7 @@ Name,Firm,Location,Email,Phone,Have Contacted?,Recieved Response?,Followed Up?
 Alison Mancuso,Bank of America,"New York, New York",alison.mancuso@bankofamerica.com,,No,,
 Amy Smith,Bank of America,"Dallas, Texas",amy.smith@bankofamerica.com,,No,,
 Anthony Picano,Bank of America,"New York, New York",anthony.picano@bankofamerica.com,,No,,
+Blair Landen,Bank of America,"Chapel Hill, North Carolina",blair.landen@bankofamerica.com,,No,N/A,N/A
 Brett Parker,Bank of America,"New York, New York",brett.parker@bankofamerica.com,,No,,
 Catherine Murphy,Bank of America,"West Simsbury, Connecticut",catherina.murphy@bankofamerica.com,,No,,
 Heather VanDerheyden,Bank of America,"New York, New York",heather.vanderheyden@bankofamerica.com,,No,,
@@ -11,6 +12,7 @@ Kaley Pak,Bank of America,"New York, New York",kaley.pak@bankofamerica.com,,No,,
 Mary Catherine Horne,Bank of America,"New York, New York",mary.horne@bankofamerica.com,,No,,
 Meaghan Lang,Bank of America,"New York, New York",meaghan.lang@bankofamerica.com,,No,,
 Megan Whitlock,Bank of America,"Charlotte, North Carolina",megan.whitlock@bankofamerica.com,,No,,
+Natalie Choe,Bank of America,"New York, New York",natalie.choe@bankofamerica.com,,No,N/A,N/A
 Sean Hille,Bank of America,"New York, New York",sean.hille@bankofamerica.com,,No,N/A,N/A
 Stephanie Moss,Bank of America,"New York, New York",stephanie.moss@bankofamerica.com,,No,,
 Steven M. Bow,Bank of America,"New York, New York",steven.bow@bankofamerica.com,,No,,
@@ -19,11 +21,19 @@ Brooke Bandazian,Barclays,"New York, New York",brooke.bandazian@barcap.com,1-(21
 Caroline Dee,Barclays,"New York, New York",caroline.dee@barcap.com,,No,,
 Janet Liu,Barclays,"New York, New York",janet.liu@barcap.com,,No,,
 Rachael Pardini,Barclays,"New York, New York",rachael.pardini@barcap.com,,No,,
+Brendan Connarton,Citigroup,"New York, New York",brendan.connarton@citi.group,,No,N/A,N/A
+Camille Pasquier,Citigroup,"New York, New York",camille.pasquier@citi.com,,No,N/A,N/A
 Chelsea Herritt,Citigroup,"New York, New York",chelsea.herritt@citi.com,,No,,
+Cheyenne Dougherty,Citigroup,"New York, New York",cheyenne.dougherty@citi.com,,No,N/A,N/A
+Daria Bumazhnaya,Citigroup,"New York, New York",daria.bumazhnaya@citi.com,,No,N/A,N/A
 Doreen Goldman,Citigroup,"New York, New York",doreen.goldman@citi.com,,No,,
 Jack Sloan,Citigroup,"London, United Kingdom",jack.sloan@hotmail.co.uk,,No,,
+Jacqueline Waugh,Citigroup,"New York, New York",jacqueline.waugh@citi.com,,No,N/A,N/A
 Jamie Leopold,Citigroup,"New York, New York",jamie.leopold@citi.com,,No,,
+Kristian Haughton,Citigroup,"New York, New York",kristian.haughton@citi.com,,No,N/A,N/A
 Madeline Perretti,Citigroup,"New York, New York",madeline.perretti@citi.com,,No,,
+Marissa Frey,Citigroup,"New York, New York",jacqueline.waugh@citi.com,,No,N/A,N/A
+Melissa Kinel,Citigroup,"New York, New York",melissa.kinel@citi.com,,No,N/A,N/A
 Natalie Augustine,Citigroup,"New York, New York",natalie.augustine@citi.com,,No,,
 Sarah Glaser,Citigroup,"New York, New York",sarah.glaser@citi.com,,No,,
 Brianna Nielsen,Goldman Sachs,"New York, New York",brianna.nielsen@gs.com,,No,,
