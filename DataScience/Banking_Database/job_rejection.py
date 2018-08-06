@@ -15,3 +15,8 @@ df.head()
 df.info()
 
 df['Subject'].value_counts()
+
+plt.figure(figsize=(10,8))
+sns.countplot(df['Day'], order=['Mon', 'Tues', 'Weds', 'Thur', 'Fri', 'Sat', 'Sun']);
+plt.xlabel('Day of the Week')
+plt.ylabel('Count');
