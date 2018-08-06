@@ -64,3 +64,23 @@ plt.show()
 print('There are', train['category_name'].nunique(), 'unique values in category name column')
 
 train['category_name'].value_counts()[:10]
+
+sns.boxplot(x = 'item_condition_id', y = np.log(train['price']+1),
+data = train, palette = sns.color_palette('RdBu',5))
+
+NUM_BRAND = 4000
+NUM_CATEGORIES = 1000
+NAME_MIN_DF = 10
+MAX_FEATURES_ITEM_DESCRIPTION = 50000
+
+print('There are %d items that do not have a category name.'
+%train['category_name'].isnull().sum())
+
+print('There are %d items that do not have a description.'
+%train['item_description'].isnull().sum())
+
+def handle_missing_inplace(dataset):
+    dataset['category_name'].fillna(value = 'missing', inplace=True)
+    dataset['brand_name'].fillna(value = 'missing', inplace = True)
+    dataset['item_description'].replace('No description yet,''missing', inplace=True)
+    dtatset['item_description'].fillna(value='missing', inplace=True)
