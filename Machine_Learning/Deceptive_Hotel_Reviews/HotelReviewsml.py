@@ -11,7 +11,10 @@ from sklearn import metrics
 from sklearn import svm
 from sklearn.grid_search import GridSearchCV
 import pickle
+from sklearn.cross_validation import train_test_split
 from nltk.corpus import stopwords
+
+
 
 path = 'op_spam_v1.4/'
 
@@ -77,3 +80,10 @@ os1['pos'] = os1['review_without_stopwords'].map(lambda x:' '.join(['/'.join(x) 
 
 result = result = pd.merge(result, os1, right_index=True, left_index = True)
 result.head()
+
+review_train, review_test, label_train, label_test = train_test_split(result['pos'], result['Labels'], test_size=0.2, random_state=13)
+
+tf_vect = TfidfVectorizer(lowercase = True, use_idf = True, smooth_idf = True, sublinear_tf = False)
+
+X_train_tf = tf_vect.fit_transform(review_train)
+X_test_tf = tf_vect.transform(review_test)
