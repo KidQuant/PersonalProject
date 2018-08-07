@@ -87,3 +87,23 @@ tf_vect = TfidfVectorizer(lowercase = True, use_idf = True, smooth_idf = True, s
 
 X_train_tf = tf_vect.fit_transform(review_train)
 X_test_tf = tf_vect.transform(review_test)
+
+def svc_param_selection(X,y,nfolds):
+    Cs = [0.001, 0.01, 0.1, 1, 10]
+    gammas = [0.001, 0.01, 0.1, 1]
+    param_grid = {'C': Cs, 'gamma' : gammas}
+    grid_search = GridSearchCV(svm.SVC(kernel='linear'), param_grid, cv=nfolds)
+    grid_search.fit(X, y)
+    return grid_search.best_params_
+
+svc_param_selection(X_train_tf, label_train, 5)
+
+clf = svm.SVC(C=10, gamma=0.001, kernel='linear')
+clf.fit(X_train_tf,label_train)
+pred = clf.predict(X_test_tf)
+
+with open('vectorizer.pickle', 'wb') as fin:
+    pickle.dump(tf_vect, fin)
+
+with open('mlmodel.pickle', 'wb') as f:
+    pickle.dump(clf,f)
