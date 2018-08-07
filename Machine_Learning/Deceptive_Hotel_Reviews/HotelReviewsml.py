@@ -7,14 +7,13 @@ from nltk.corpus import stopwords
 import regex as re
 import operator
 from sklearn.svm import SVC, LinearSVC
+from sklearn.metrics import classification_report, accuracy_score, confusion_matrix
 from sklearn import metrics
 from sklearn import svm
 from sklearn.grid_search import GridSearchCV
 import pickle
 from sklearn.cross_validation import train_test_split
 from nltk.corpus import stopwords
-
-
 
 path = 'op_spam_v1.4/'
 
@@ -107,3 +106,14 @@ with open('vectorizer.pickle', 'wb') as fin:
 
 with open('mlmodel.pickle', 'wb') as f:
     pickle.dump(clf,f)
+
+pkl = open('mlmodel.pickle', 'rb')
+clf = pickle.load(pkl)
+vec = open('vectorizer.pickle', 'rb')
+tf_vector = pickle.load(vec)
+
+X_test_tf = tf_vect.transform(review_test)
+pred = clf.predict(X_test_tf)
+
+print(metrics.accuracy_score(label_test, pred))
+print(confusion_matrix(label_test, pred))
