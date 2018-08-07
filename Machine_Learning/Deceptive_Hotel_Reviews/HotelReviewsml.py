@@ -150,3 +150,12 @@ pred = clf.predict(X_test_tf)
 
 print(metrics.accuracy_score(label_test, pred))
 print(classification_report(label_test, pred))
+
+def test_string(s):
+    X_test_tf = tf_vect.transform([s])
+    y_predict = clf.predict(X_test_tf)
+    return y_predict
+
+test_string('The hotel was good. The room had a 27-inch Samsung led tv, a microwave. The room had a double bed')
+
+test_string('My family and I are huge fans of this place. The staff is super nice, and the food is great. The chicken is very good, and the garlic sauce is perfect. Ice cream topped with fruit is delicious too. Highly recommend!')
