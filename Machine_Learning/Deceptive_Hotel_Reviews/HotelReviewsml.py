@@ -52,3 +52,28 @@ result = pd.merge(reviews, labels, right_index = True, left_index = True)
 result['HotelReviews'] = result['HotelReviews'].map(lambda x: x.lower())
 
 result.head()
+
+import nltk
+nltk.download('stopwords')
+
+stop = stopwords.words('english')
+
+result['review_without_stopwords'] = result['HotelReviews'].apply(lambda x: ' '.join([word for word in x.split() if word not in (stop)]))
+
+result.head()
+
+import nltk
+nltk.download('punkt')
+nltk.download('averaged_perceptron_tagger')
+
+def pos(review_without_stopwords):
+    return TextBlob(review_without_stopwords).tags
+
+os = result.review_without_stopwords.apply(pos)
+os1 = pd.DataFrame(os)
+os1.head()
+
+os1['pos'] = os1['review_without_stopwords'].map(lambda x:' '.join(['/'.join(x) for x in x]))
+
+result = result = pd.merge(result, os1, right_index=True, left_index = True)
+result.head()
