@@ -117,3 +117,36 @@ pred = clf.predict(X_test_tf)
 
 print(metrics.accuracy_score(label_test, pred))
 print(confusion_matrix(label_test, pred))
+
+print(classification_report(label_test, pred))
+
+#Random State 1
+
+review_train, review_test, label_train, label_test = train_test_split(result['pos'], result['Labels'], test_size=0.2, random_state=1)
+X_test_tf = tf_vect.transform(review_test)
+pred = clf.predict(X_test_tf)
+
+print(metrics.accuracy_score(label_test, pred))
+print(confusion_matrix(label_test, pred))
+
+print(classification_report(label_test, pred))
+
+#Random State 10
+
+review_train, review_test, label_train, label_test = train_test_split(result['pos'], result['Labels'], test_size = 0.2, random_state = 10)
+X_test_tf = tf_vect.transform(review_test)
+pred = clf.predict(X_test_tf)
+
+print(metrics.accuracy_score(label_test, pred))
+print(confusion_matrix(label_test, pred))
+
+print(classification_report(label_test, pred))
+
+#Random State 42
+
+review_train, review_test, label_train, label_test = train_test_split(result['pos'], result['Labels'], test_size = 0.2, random_state = 42)
+X_test_tf = tf_vect.transform(review_test)
+pred = clf.predict(X_test_tf)
+
+print(metrics.accuracy_score(label_test, pred))
+print(classification_report(label_test, pred))
