@@ -13,13 +13,14 @@ from sklearn.grid_search import GridSearchCV
 import pickle
 from nltk.corpus import stopwords
 
-
-path = 'op_spam_train/'
+path = 'op_spam_v1.4/'
 
 label = []
 
 configfiles = [os.path.join(subdir,f)
 for subdir, dirs, files in os.walk(path)
-    for f in fnmath.filter(files, '*.txt')]
+    for f in fnmatch.filter(files, '*.txt')]
 
 len(configfiles)
+
+config
