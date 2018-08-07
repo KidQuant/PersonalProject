@@ -47,6 +47,8 @@ reviews = pd.DataFrame(review, columns = ['HotelReviews'])
 
 reviews.head(5)
 
-results = pd.merge(reviews, labels, right_index = True, left_index = True)
+result = pd.merge(reviews, labels, right_index = True, left_index = True)
 
-results['HotelReviews'] = results['HotelReviews'].map(lambda x: x.lower())
+result['HotelReviews'] = result['HotelReviews'].map(lambda x: x.lower())
+
+result.head()
