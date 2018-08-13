@@ -3,7 +3,9 @@ import numpy as np
 
 df = pd.read_csv('company_database.csv', encoding = 'latin1', index_col = False)
 
-df.loc[0:15]
+df.loc[0:10]
+
+df[df['Company Name'] == 'HSBC']
 
 networking = pd.read_csv('networking.csv')
 
@@ -12,10 +14,10 @@ networking.tail()
 
 del df5
 
-df5 = pd.DataFrame({'Name':['Laura Dlug'],
-                    'Firm':['Deutsche Bank'],
-                    'Location':['New York, New York'],
-                    'Email':['Laura.dlug@db.com'],
+df5 = pd.DataFrame({'Name':['Yvonne Lau'],
+                    'Firm':['UBS'],
+                    'Location':['Hong Kong, Hong Kong'],
+                    'Email':['yvonne.lau@ubs.com'],
                     'Have Contacted?':['No'],
                     'Recieved Response?':['N/A'],
                     'Followed Up?':['N/A']})
@@ -32,4 +34,6 @@ networking.drop_duplicates()
 
 networking.to_csv('networking.csv', index = False)
 
-networking.loc[]
+networking
+
+networking[networking['Firm'] == 'Bank of America']
