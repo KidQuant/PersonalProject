@@ -2,18 +2,18 @@ Name,Firm,Location,Email,Phone,Have Contacted?,Recieved Response?,Followed Up?
 Alison Mancuso,Bank of America,"New York, New York",alison.mancuso@bankofamerica.com,,No,,
 Amy Smith,Bank of America,"Dallas, Texas",amy.smith@bankofamerica.com,,No,,
 Anthony Picano,Bank of America,"New York, New York",anthony.picano@bankofamerica.com,,No,,
-Blair Landen,Bank of America,"Chapel Hill, North Carolina",blair.landen@bankofamerica.com,,No,N/A,N/A
+Blair Landen,Bank of America,"Chapel Hill, North Carolina",blair.landen@bankofamerica.com,,No,,
 Brett Parker,Bank of America,"New York, New York",brett.parker@bankofamerica.com,,No,,
 Catherine Murphy,Bank of America,"West Simsbury, Connecticut",catherina.murphy@bankofamerica.com,,No,,
 Heather VanDerheyden,Bank of America,"New York, New York",heather.vanderheyden@bankofamerica.com,,No,,
 Jennifer Brennan,Bank of America,"New York, New York",jennifer.brennan@bankofamerica.com,,No,,
-Jessica Chisholm,Bank of America,"New York, New York",jessica.chisholm@bankofamerica.com,,No,N/A,N/A
+Jessica Chisholm,Bank of America,"New York, New York",jessica.chisholm@bankofamerica.com,,No,,
 Kaley Pak,Bank of America,"New York, New York",kaley.pak@bankofamerica.com,,No,,
 Mary Catherine Horne,Bank of America,"New York, New York",mary.horne@bankofamerica.com,,No,,
 Meaghan Lang,Bank of America,"New York, New York",meaghan.lang@bankofamerica.com,,No,,
 Megan Whitlock,Bank of America,"Charlotte, North Carolina",megan.whitlock@bankofamerica.com,,No,,
-Natalie Choe,Bank of America,"New York, New York",natalie.choe@bankofamerica.com,,No,N/A,N/A
-Sean Hille,Bank of America,"New York, New York",sean.hille@bankofamerica.com,,No,N/A,N/A
+Natalie Choe,Bank of America,"New York, New York",natalie.choe@bankofamerica.com,,No,,
+Sean Hille,Bank of America,"New York, New York",sean.hille@bankofamerica.com,,No,,
 Stephanie Moss,Bank of America,"New York, New York",stephanie.moss@bankofamerica.com,,No,,
 Steven M. Bow,Bank of America,"New York, New York",steven.bow@bankofamerica.com,,No,,
 Brian Hurley,Barclays,"Philadelphia, Pennsylvania",brian.hurley@barcap.com,,No,,
@@ -21,26 +21,34 @@ Brooke Bandazian,Barclays,"New York, New York",brooke.bandazian@barcap.com,1-(21
 Caroline Dee,Barclays,"New York, New York",caroline.dee@barcap.com,,No,,
 Janet Liu,Barclays,"New York, New York",janet.liu@barcap.com,,No,,
 Rachael Pardini,Barclays,"New York, New York",rachael.pardini@barcap.com,,No,,
-Brendan Connarton,Citigroup,"New York, New York",brendan.connarton@citi.group,,No,N/A,N/A
-Camille Pasquier,Citigroup,"New York, New York",camille.pasquier@citi.com,,No,N/A,N/A
+Brendan Connarton,Citigroup,"New York, New York",brendan.connarton@citi.group,,No,,
+Camille Pasquier,Citigroup,"New York, New York",camille.pasquier@citi.com,,No,,
 Chelsea Herritt,Citigroup,"New York, New York",chelsea.herritt@citi.com,,No,,
-Cheyenne Dougherty,Citigroup,"New York, New York",cheyenne.dougherty@citi.com,,No,N/A,N/A
-Daria Bumazhnaya,Citigroup,"New York, New York",daria.bumazhnaya@citi.com,,No,N/A,N/A
+Cheyenne Dougherty,Citigroup,"New York, New York",cheyenne.dougherty@citi.com,,No,,
+Daria Bumazhnaya,Citigroup,"New York, New York",daria.bumazhnaya@citi.com,,No,,
 Doreen Goldman,Citigroup,"New York, New York",doreen.goldman@citi.com,,No,,
 Jack Sloan,Citigroup,"London, United Kingdom",jack.sloan@hotmail.co.uk,,No,,
-Jacqueline Waugh,Citigroup,"New York, New York",jacqueline.waugh@citi.com,,No,N/A,N/A
+Jacqueline Waugh,Citigroup,"New York, New York",jacqueline.waugh@citi.com,,No,,
 Jamie Leopold,Citigroup,"New York, New York",jamie.leopold@citi.com,,No,,
-Jillian Moran,Citigroup,"New York, New York",jillian.moran@citi.com,,No,N/A,N/A
-Kristian Haughton,Citigroup,"New York, New York",kristian.haughton@citi.com,,No,N/A,N/A
+Jillian Moran,Citigroup,"New York, New York",jillian.moran@citi.com,,No,,
+Kristian Haughton,Citigroup,"New York, New York",kristian.haughton@citi.com,,No,,
 Madeline Perretti,Citigroup,"New York, New York",madeline.perretti@citi.com,,No,,
-Marissa Frey,Citigroup,"New York, New York",jacqueline.waugh@citi.com,,No,N/A,N/A
-Melissa Kinel,Citigroup,"New York, New York",melissa.kinel@citi.com,,No,N/A,N/A
+Marissa Frey,Citigroup,"New York, New York",jacqueline.waugh@citi.com,,No,,
+Melissa Kinel,Citigroup,"New York, New York",melissa.kinel@citi.com,,No,,
 Natalie Augustine,Citigroup,"New York, New York",natalie.augustine@citi.com,,No,,
-Nicole Allotta,Citigroup,"New York, New York",nicole.allotta@citi.com,,No,N/A,N/A
+Nicole Allotta,Citigroup,"New York, New York",nicole.allotta@citi.com,,No,,
 Sarah Glaser,Citigroup,"New York, New York",sarah.glaser@citi.com,,No,,
-Laura Dlug,Deutsche Bank,"New York, New York",Laura.dlug@db.com,,No,N/A,N/A
+Laura Dlug,Deutsche Bank,"New York, New York",Laura.dlug@db.com,,No,,
 Brianna Nielsen,Goldman Sachs,"New York, New York",brianna.nielsen@gs.com,,No,,
+Damian Babis,HSBC,"Hong Kong, Hong Kong",damian.babis@hsbcib.com,,No,,
+Jess Tsang,HSBC,"Hong Kong, Hong Kong",jess.tsang@hsbcib.com,,No,,
+Josh Meltz,HSBC,"New York, New York",jmeltz@jefferies.com,,No,,
+Lin Li,HSBC,"New York, New York",lin.li@hsbcib.com,,No,,
+Natasha Jaroensilp,HSBC,"Hong Kong, Hong Kong",natasha.jareonsilp@hsbcib.com,,No,,
+Stephanie Louie,HSBC,"New York, New York",stephanie.louie@hsbcib.com,,No,,
+Tommy Leung,HSBC,"Hong Kong, Hong Kong",tommy.leung@hsbcib.com,,No,,
 Jonah Franco,J.P. Morgan,"New York, New York",jonah.franco@jpmorgan.com,,No,,
+Jenna Connelly,Jefferies,"New York, New York",jconnelly@jefferies.com,,No,,
 Gabrielle DiBuono,Lazard,"New York, New York",gabrielle.dibuono@lazard.com,,No,,
 Kathleen Goettelmann,Lazard,"New York, New York",kathleen.goettelmann@lazard.com,,No,,
 Tuvia Lwowski,Lazard,"New York, New York",tuvia.lwowski@lazard.com,,No,,
@@ -50,4 +58,8 @@ Kelly Barnaiche,RBC Capital Markets,"New York, New York",kelly.bernaiche@rbccm.c
 Min Jee Choi,RBC Capital Markets,"New York, New York",min.choi@rbccm.com,,No,,
 Nick Bradford,RBC Capital Markets,"Jersey City, New Jersey",nick.bradford@rbccm.com,,No,,
 Victoria Vesely,RBC Capital Markets,"New York, New York",victoria.vesely@rbccm.com,,No,,
+Lauren DeBowes,UBS,"New York, New York",lauren.debowes@ubs.com,,No,,
+Matthew Woods,UBS,"New York, New York",matthew.woods@ubs.com,,No,,
 Nicholas Della Penna,UBS,"New York, New York",nicholas.penna@ubs.com,,No,,
+Rannie Wong,UBS,"Hong Kong, Hong Kong",rannie.wong@ubs.com,,No,,
+Yvonne Lau,UBS,"Hong Kong, Hong Kong",yvonne.lau@ubs.com,,No,N/A,N/A
