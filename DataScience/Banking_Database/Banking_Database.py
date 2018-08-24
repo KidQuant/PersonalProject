@@ -36,11 +36,11 @@ networking.to_csv('networking.csv', index = False)
 
 networking
 
-networking[networking['Firm'] == 'Nomura Holdings']
+networking[networking['Firm'] == 'UBS']
 
-networking[74:75]
+networking[98:99]
 
 
-networking['Have Contacted?'][74:75] = 'Yes'
-networking['Recieved Response?'][74:75] = 'Yes'
-networking['Followed Up?'][74:75] = 'Not Yet'
+networking['Have Contacted?'][98:99] = 'Yes'
+networking['Recieved Response?'][98:99] = 'No'
+networking['Followed Up?'][98:99] = 'Not Yet'
