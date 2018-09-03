@@ -14,10 +14,10 @@ networking.tail()
 
 del df5
 
-df5 = pd.DataFrame({'Name':['Katherine Jandric'],
+df5 = pd.DataFrame({'Name':['Mimi Bekele'],
                     'Firm':['Piper Jaffray'],
-                    'Location':['Minneapolis, Minnesota'],
-                    'Email':['katherine.jandric@pjc.com'],
+                    'Location':['St. Paul, Minnesota'],
+                    'Email':['mimi.bekele@pjc.com'],
                     'Have Contacted?':['No'],
                     'Recieved Response?':['N/A'],
                     'Followed Up?':['N/A']})
@@ -42,3 +42,4 @@ networking['Location'][90:91] = 'Minneapolis, Minnesota'
 networking['Have Contacted?'][98:99] = 'Yes'
 networking['Recieved Response?'][98:99] = 'No'
 networking['Followed Up?'][98:99] = 'Not Yet'
+networking[networking['Have Contacted?'] == 'Yes']
