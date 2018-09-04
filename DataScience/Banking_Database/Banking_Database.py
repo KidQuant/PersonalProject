@@ -40,8 +40,8 @@ networking[networking['Firm'] == 'Cowen']
 networking[-80]
 
 networking['Location'][79:80] = 'Chicago, Illinois'
-networking['Email'][57:58] = 'rebecca@cowengroup.com'
+networking['Email'][57:58] = 'rebecca.mcadams@cowen.com'
 networking['Have Contacted?'][55:56] = 'Yes'
-networking['Recieved Response?'][55:56] = 'No'
+networking['Recieved Response?'][55:56] = 'Yes - Automated Repsonse'
 networking['Followed Up?'][55:56] = 'No'
 networking[networking['Have Contacted?'] == 'Yes']
