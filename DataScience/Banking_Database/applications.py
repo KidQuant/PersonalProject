@@ -49,5 +49,6 @@ df['Hour'] = df['Time'].apply(lambda x: x.hour)
 df = df[['Date', 'Time', 'Day', 'Hour', 'Subject', 'Text']]
 
 df.head()
+df.tail()
 df.info()
 df.to_csv('andres_job_applications.csv', index = False)
