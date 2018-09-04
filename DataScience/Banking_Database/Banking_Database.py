@@ -5,19 +5,20 @@ df = pd.read_csv('company_database.csv', encoding = 'latin1', index_col = False)
 
 df.loc[0:60]
 
-df[df['Company Name'] == 'Piper Jaffray']
+df[df['Company Name'] == 'Cowen Group']
 
 networking = pd.read_csv('networking.csv')
 
 networking.head()
 networking.tail()
+networking
 
 del df5
 
-df5 = pd.DataFrame({'Name':['Mimi Bekele'],
-                    'Firm':['Piper Jaffray'],
-                    'Location':['St. Paul, Minnesota'],
-                    'Email':['mimi.bekele@pjc.com'],
+df5 = pd.DataFrame({'Name':['Diana Yovera'],
+                    'Firm':['Loop Capital Markets'],
+                    'Location':['Chicago, Illinois'],
+                    'Email':['diana.yovera@loopcapital.com'],
                     'Have Contacted?':['No'],
                     'Recieved Response?':['N/A'],
                     'Followed Up?':['N/A']})
@@ -34,12 +35,13 @@ networking.to_csv('networking.csv', index = False)
 
 networking
 
-networking[networking['Firm'] == 'Piper Jaffray']
+networking[networking['Firm'] == 'Cowen']
 
-networking[90:91]
+networking[-80]
 
-networking['Location'][90:91] = 'Minneapolis, Minnesota'
-networking['Have Contacted?'][98:99] = 'Yes'
-networking['Recieved Response?'][98:99] = 'No'
-networking['Followed Up?'][98:99] = 'Not Yet'
+networking['Location'][79:80] = 'Chicago, Illinois'
+networking['Email'][57:58] = 'rebecca@cowengroup.com'
+networking['Have Contacted?'][55:56] = 'Yes'
+networking['Recieved Response?'][55:56] = 'No'
+networking['Followed Up?'][55:56] = 'No'
 networking[networking['Have Contacted?'] == 'Yes']
