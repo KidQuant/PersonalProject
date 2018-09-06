@@ -5,7 +5,7 @@ df = pd.read_csv('company_database.csv', encoding = 'latin1', index_col = False)
 
 df.loc[0:60]
 
-df[df['Company Name'] == 'Cowen Group']
+df[df['Company Name'] == 'SunTrust']
 
 networking = pd.read_csv('networking.csv')
 
@@ -15,10 +15,10 @@ networking
 
 del df5
 
-df5 = pd.DataFrame({'Name':['Diana Yovera'],
-                    'Firm':['Loop Capital Markets'],
-                    'Location':['Chicago, Illinois'],
-                    'Email':['diana.yovera@loopcapital.com'],
+df5 = pd.DataFrame({'Name':['Michael Hasselt'],
+                    'Firm':['Mizuho Bank'],
+                    'Location':['New York, New York'],
+                    'Email':['michael.hasselt@mizuhocbus.com'],
                     'Have Contacted?':['No'],
                     'Recieved Response?':['N/A'],
                     'Followed Up?':['N/A']})
@@ -29,19 +29,19 @@ networking.sort_values(by = ['Firm', 'Name'], inplace=True)
 
 networking.duplicated().sum()
 
-networking.drop_duplicates()
+networking.drop(networking.index[81], inplace=True)
 
 networking.to_csv('networking.csv', index = False)
 
 networking
 
-networking[networking['Firm'] == 'Cowen']
+networking[networking['Firm'] == 'Loop Capital Markets']
 
-networking[-80]
 
-networking['Location'][79:80] = 'Chicago, Illinois'
+
+networking['Location'][3:4] = 'Chicago, Illinois'
 networking['Email'][57:58] = 'rebecca.mcadams@cowen.com'
-networking['Have Contacted?'][55:56] = 'Yes'
-networking['Recieved Response?'][55:56] = 'Yes - Automated Repsonse'
-networking['Followed Up?'][55:56] = 'No'
+networking['Have Contacted?'][80:81] = 'Yes'
+networking['Recieved Response?'][80:81] = 'No'
+networking['Followed Up?'][80:81] = 'No'
 networking[networking['Have Contacted?'] == 'Yes']
