@@ -21,6 +21,8 @@ new_members_list.reset_index(inplace=True)
 
 new_members_list
 
-new_members_list.drop('index', axis =1)
+new_members_list.drop('index', axis =1, inplace=True)
 
-members.to_csv('new_members_list.csv')
+new_members_list
+
+new_members_list.to_csv('new_members_list.csv')
