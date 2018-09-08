@@ -1,6 +1,8 @@
 import pandas as pd
 import numpy as np
 
+#Cleaning data for PIC members list
+
 members = pd.read_csv('members_list.csv', encoding = 'latin1', index_col = False)
 
 members
