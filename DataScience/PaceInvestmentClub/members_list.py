@@ -3,7 +3,7 @@ import numpy as np
 
 #Cleaning data for PIC members list
 
-members = pd.read_csv('members_list.csv', encoding = 'latin1', index_col = False)
+members = pd.read_csv('members_list.csv', encoding = 'latin1')
 
 members = members.drop(['Middle Initial', 'Title', 'Phone','Mailing Address','Birthday'], axis =1)
 
@@ -29,4 +29,4 @@ new_members_list
 
 new_members_list[(new_members_list['Joined'] > '2018-09-01')]
 
-new_members_list.to_csv('new_members_list.csv')
+new_members_list.to_csv('new_members_list.csv', index = False)
