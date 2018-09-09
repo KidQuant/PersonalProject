@@ -21,15 +21,11 @@ new_members_list = members[(members['Joined'] > '2016-01-01')]
 
 new_members_list.reset_index(inplace=True)
 
-new_members_list
-
 new_members_list =  new_members_list.drop('index', axis =1)
 
 for index, row in new_members_list.iterrows():
     if row['Last'] == 'Caoimh':
         new_members_list.drop(index, inplace=True)
-
-new_members_list
 
 new_members_list
 
