@@ -20,3 +20,4 @@ for index, row in welcomeback.iterrows():
         welcomeback.drop(index, inplace = True)
 
 welcomeback[welcomeback['Rating'] >= 3].count().Email
+welcomeback[welcomeback['Rating'] >= 3]
