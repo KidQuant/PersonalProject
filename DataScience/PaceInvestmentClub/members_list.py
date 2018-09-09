@@ -25,6 +25,12 @@ new_members_list
 
 new_members_list =  new_members_list.drop('index', axis =1)
 
+for index, row in new_members_list.iterrows():
+    if row['Last'] == 'Caoimh':
+        new_members_list.drop(index, inplace=True)
+
+new_members_list
+
 new_members_list
 
 new_members_list[(new_members_list['Joined'] > '2018-09-01')]
