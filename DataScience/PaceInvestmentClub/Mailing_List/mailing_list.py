@@ -4,6 +4,8 @@ import math
 
 subscribed = pd.read_csv('subscribed_members.csv')
 
+subscribed.head()
+
 subscribed = subscribed.drop(['OPTIN_TIME','LATITUDE', 'LONGITUDE','GMTOFF','DSTOFF','CC','REGION',
                               'LAST_CHANGED','LEID','EUID','NOTES', 'OPTIN_IP','CONFIRM_IP', 'TIMEZONE'], axis = 1)
 
@@ -12,6 +14,7 @@ subscribed['Last Name'] = subscribed['Last Name'].str.capitalize()
 
 subscribed.head()
 
+subscribed['First Name'].count()
 
 subscribed[(subscribed['First Name'] == 'Andre') & (subscribed['Last Name'] == 'Sealy')]
 
@@ -28,3 +31,5 @@ for index, row in subscribed.iterrows():
         subscribed.drop(index, inplace=True)
 
 subscribed[subscribed['MEMBER_RATING'] >= 3 ].count().MEMBER_RATING
+
+subscribed[subscribed['First Name'] == 'Emily']
