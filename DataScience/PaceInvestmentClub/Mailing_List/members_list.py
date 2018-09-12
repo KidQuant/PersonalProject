@@ -28,10 +28,12 @@ for index, row in new_members_list.iterrows():
     if row['Last'] == 'Caoimh':
         new_members_list.drop(index, inplace=True)
 
-new_members_list
+new_members_list.head()
 
 new_members_list.to_csv('new_members_list.csv', index = False)
 
 new_members_list = pd.read_csv('new_members_list.csv')
 
 new_members_list[(new_members_list['Joined'] > '2018-09-01')]
+
+new_members_list[new_members_list['First'] == '']
