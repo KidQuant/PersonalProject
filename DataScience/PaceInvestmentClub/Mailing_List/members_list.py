@@ -30,7 +30,9 @@ for index, row in new_members_list.iterrows():
 
 new_members_list
 
-new_members_list.to_csv('new_members_list.csv', index = False)
+new_members_list[new_members_list['Joined'] == '2018-09-11']
+
+new_members_list.to_csv('DataScience/PaceInvestmentClub/Mailing_List/new_members_list.csv', index = False)
 
 new_members_list = pd.read_csv('new_members_list.csv')
 
