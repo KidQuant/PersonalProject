@@ -2,7 +2,7 @@ import numpy as np
 import pandas as pd
 import math
 
-subscribed = pd.read_csv('subscribed_members.csv')
+subscribed = pd.read_csv('DataScience/PaceInvestmentClub/Mailing_List/subscribed_members.csv')
 
 subscribed.head()
 
@@ -29,6 +29,8 @@ for index, row in subscribed.iterrows():
         subscribed.drop(index, inplace = True)
     elif (row['First Name'] == 'Andre' and row['Last Name'] == 'Sealy'):
         subscribed.drop(index, inplace=True)
+
+subscribed['First Name'].count()
 
 subscribed[subscribed['MEMBER_RATING'] >= 3 ].count().MEMBER_RATING
 
