@@ -30,8 +30,6 @@ for index, row in new_members_list.iterrows():
 
 new_members_list
 
-
-
 new_members_list = pd.read_csv('new_members_list.csv')
 
 new_members_list[(new_members_list['Joined'] > '2018-09-01')]
