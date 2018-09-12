@@ -4,7 +4,7 @@ import math
 
 #Cleaning data for PIC members list
 
-members = pd.read_csv('members_list.csv', encoding = 'latin1')
+members = pd.read_csv('DataScience/PaceInvestmentClub/Mailing_List/members_list.csv', encoding = 'latin1')
 
 members = members.drop(['Middle Initial', 'Title', 'Phone','Mailing Address','Birthday'], axis =1)
 
@@ -29,6 +29,8 @@ for index, row in new_members_list.iterrows():
         new_members_list.drop(index, inplace=True)
 
 new_members_list
+
+new_members_list.to_csv('new_members_list.csv', index = False)
 
 new_members_list = pd.read_csv('new_members_list.csv')
 
