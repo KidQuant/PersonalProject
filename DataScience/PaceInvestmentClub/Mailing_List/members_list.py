@@ -40,17 +40,19 @@ new_members_list[(new_members_list['Joined'] > '2018-09-01')]
 
 new_members_list.head()
 
-df = pd.DataFrame({'Last':['Kane'],
-                   'First':['Katie'],
+new_members_list = pd.read_csv('DataScience/PaceInvestmentClub/Mailing_List/new_members_list.csv')
+
+df = pd.DataFrame({'Last':['Kujawski'],
+                   'First':['Matthew'],
                    'Groups':['New Accounts'],
-                   'Joined':['2018-09-10'],
-                   'Last_Login':['2018-09-10'],
-                   'Email':['katiehkane@gmail.com']})
+                   'Joined':['2018-09-13'],
+                   'Last_Login':['2018-09-13'],
+                   'Email':['mk29856n@pace.edu']})
 
 new_members_list = new_members_list.append(df, ignore_index = True, sort = False)
 
 new_members_list.tail()
 
-new_members_list.to_csv('new_members_list.csv', index = False)
+new_members_list.to_csv('DataScience/PaceInvestmentClub/Mailing_List/new_members_list.csv', index = False)
 
-new_members_list['First'].count()
+new_members_list.tail()
