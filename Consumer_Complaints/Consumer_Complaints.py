@@ -22,8 +22,12 @@ fig = plt.figure(figsize=(8,6))
 df.groupby('Product').Consumer_complaint_narrative.count().plot.bar(ylim=0)
 plt.show()
 
+from sklearn.feature_extraction.text import TfidfVectorizer
+
 tfidf = TfidfVectorizer(sublinear_tf=True, min_df=5, norm='l2', encoding='latin-1', ngram_range=(1, 2), stop_words='english')
 
 features = tfidf.fit_transform(df.Consumer_complaint_narrative).toarray()
 labels = df.category_id
 features.shape
+
+from sklearn.feature_selection import chi2
