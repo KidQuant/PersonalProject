@@ -35,11 +35,11 @@ networking.to_csv('networking.csv', index = False)
 
 networking
 
-networking[networking['Firm'] == 'BB&T']
+networking[networking['Firm'] == 'Lazard']
 
 networking['Location'][3:4] = 'Chicago, Illinois'
 networking['Email'][57:58] = 'rebecca.mcadams@cowen.com'
 networking['Have Contacted?'][2:3] = 'No'
 networking['Recieved Response?'][3:4] = 'No'
 networking['Followed Up?'][3:4] = 'No'
-networking[networking['Have Contacted?'] == 'Yes']
+networking[(networking['Have Contacted?'] == 'Yes') & (networking['Firm'] == 'Lazard')]
