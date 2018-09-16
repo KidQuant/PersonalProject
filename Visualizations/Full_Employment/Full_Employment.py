@@ -11,12 +11,8 @@ end = dt.datetime.now()
 
 df = pd.read_csv('Visualizations/Full_Employment/fredgraph.csv')
 
-
-
 df['DATE'] = pd.to_datetime(df['DATE'])
 df.head()
-
-
 
 ax = df.plot('DATE','NILFWJN_UNEMPLOY', label = 'Unemployed + Not In Labor Force (Want a Job)', color = 'blue', xlim=('1994-01-01','2018-06-01'), figsize=(12,6))
 ax.set_xlabel('Source: Bureau Labor of Statistics', style='italic', x=.89)
