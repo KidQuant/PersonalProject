@@ -30,10 +30,29 @@ for index, row in new_members_list.iterrows():
 
 new_members_list.head()
 
-new_members_list.to_csv('new_members_list.csv', index = False)
+
 
 new_members_list = pd.read_csv('new_members_list.csv')
 
 new_members_list[(new_members_list['Joined'] > '2018-09-01')]
 
+<<<<<<< HEAD
 new_members_list[new_members_list['First'] == '']
+=======
+new_members_list.head()
+
+df = pd.DataFrame({'Last':['Kane'],
+                   'First':['Katie'],
+                   'Groups':['New Accounts'],
+                   'Joined':['2018-09-10'],
+                   'Last_Login':['2018-09-10'],
+                   'Email':['katiehkane@gmail.com']})
+
+new_members_list = new_members_list.append(df, ignore_index = True, sort = False)
+
+new_members_list.tail()
+
+new_members_list.to_csv('new_members_list.csv', index = False)
+
+new_members_list['First'].count()
+>>>>>>> cb4ec790ed02f5e392402c93b8e366c20e959ec1
