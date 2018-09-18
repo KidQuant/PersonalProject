@@ -14,6 +14,8 @@ subscribed['Last Name'] = subscribed['Last Name'].str.capitalize()
 
 subscribed.head()
 
+subscribed
+
 subscribed['First Name'].count()
 
 subscribed[(subscribed['First Name'] == 'Andre') & (subscribed['Last Name'] == 'Sealy')]
@@ -30,8 +32,8 @@ for index, row in subscribed.iterrows():
     elif (row['First Name'] == 'Andre' and row['Last Name'] == 'Sealy'):
         subscribed.drop(index, inplace=True)
 
-subscribed['First Name'].count()
-
 subscribed[subscribed['MEMBER_RATING'] >= 3 ].count().MEMBER_RATING
 
-subscribed[subscribed['First Name'] == 'Emily']
+subscribed[subscribed['First Name'] == 'Patrick']
+
+subscribed.to_csv('DataScience/PaceInvestmentClub/Mailing_List/subscribed.csv', index= False)

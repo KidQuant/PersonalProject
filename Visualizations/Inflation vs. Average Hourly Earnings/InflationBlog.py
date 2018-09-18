@@ -1,12 +1,10 @@
 import pandas as pd
 import matplotlib.ticker as mtick
 import matplotlib.gridspec as gridspec
-df =  pd.read_csv('ch2_co2_levels.csv')
 pd.core.common.is_list_like = pd.api.types.is_list_like
 import pandas_datareader.data as web
 import datetime as dt
 import matplotlib.pyplot as plt
-
 
 
 df = pd.read_csv('fredgraph.csv', )
