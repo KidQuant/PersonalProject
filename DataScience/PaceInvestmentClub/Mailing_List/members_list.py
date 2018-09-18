@@ -43,17 +43,20 @@ new_members_list.head()
 
 new_members_list = pd.read_csv('DataScience/PaceInvestmentClub/Mailing_List/new_members_list.csv')
 
-df = pd.DataFrame({'Last':['Schilling'],
-                   'First':['Brittany'],
+df = pd.DataFrame({'Last':['Loomis'],
+                   'First':['Savannah'],
                    'Groups':['New Accounts'],
-                   'Joined':['2018-09-13'],
-                   'Last_Login':['2018-09-13'],
-                   'Email':['bs90466n@pace.edu']})
+                   'Joined':['2018-09-15'],
+                   'Last_Login':['2018-09-15'],
+                   'Email':['sl03680n@pace.edu']})
 
 new_members_list = new_members_list.append(df, ignore_index = True, sort = False)
 
+new_members_list[new_members_list['First'] == 'Savannah']
+
+#new_members_list.drop(new_members_list.index[173], inplace=True)
+
+new_members_list.head()
 new_members_list.tail()
 
 new_members_list.to_csv('DataScience/PaceInvestmentClub/Mailing_List/new_members_list.csv', index = False)
-
-new_members_list.tail()
