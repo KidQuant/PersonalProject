@@ -34,3 +34,5 @@ from sklearn.feature_selection import chi2
 
 for Product, category_id in sorted(category_to_id.items()):
     features_chi2 = chi2(features, labels == categories_id)
+
+asd
