@@ -2,7 +2,6 @@ import pandas as pd
 import numpy as np
 import math
 
-
 #Cleaning data for PIC members list
 
 members = pd.read_csv('DataScience/PaceInvestmentClub/Mailing_List/members_list.csv', encoding = 'latin1')
@@ -69,16 +68,16 @@ new_members_list.head()
 
 new_members_list = pd.read_csv('DataScience/PaceInvestmentClub/Mailing_List/new_members_list.csv')
 
-df = pd.DataFrame({'Last':['Loomis'],
-                   'First':['Savannah'],
+df = pd.DataFrame({'Last':['Doiteau'],
+                   'First':['Benoit'],
                    'Groups':['New Accounts'],
-                   'Joined':['2018-09-15'],
-                   'Last_Login':['2018-09-15'],
-                   'Email':['sl03680n@pace.edu']})
+                   'Joined':['2018-19-17'],
+                   'Last_Login':['2018-19-17'],
+                   'Email':['bd07998n@pace.edu']})
 
 new_members_list = new_members_list.append(df, ignore_index = True, sort = False)
 
-new_members_list[new_members_list['First'] == 'Savannah']
+new_members_list[new_members_list['Last'] == 'Doiteau']
 
 #new_members_list.drop(new_members_list.index[173], inplace=True)
 
