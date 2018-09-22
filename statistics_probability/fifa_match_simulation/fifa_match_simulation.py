@@ -69,3 +69,13 @@ df_teams_1930.loc[df_teams_1930.winning_team == 'Draw', 'winning_team'] = 1
 df_teams_1930.loc[df_teams_1930.winning_team == df_teams_1930.away_team, 'winning_team'] = 0
 
 df_teams_1930.head()
+
+final = pd.get_dummies(df_teams_1930, prefix=['home_team', 'away_team'], columns =['home_team', 'away_team'])
+
+X = final.drop(['winning_team'], axis =1)
+y = final['winning_team']
+y = y.astype('int')
+
+
+X_train, X_test, y_train, y_test = train_test_split(X,y,test_size = 0.30, random_state = 42)
+}
