@@ -39,6 +39,19 @@ nigeria['match_year'] = year
 nigeria_1930 = nigeria[nigeria.match_year >= 1930]
 nigeria_1930.count()
 
+wins = []
+for row in nigeria_1930['winning_team']:
+    if row != 'Nigeria' and row != 'Draw':
+        wins.append('Loss')
+    else:
+        wins.append(row)
+winsdf = pd.DataFrame(wins, columns = ['Nigeria_Results'])
+
+fig, ax = plt.subplots(1)
+fig.set_size_inches(10.7, 6.27)
+sns.set(style='darkgrid')
+sns.countplot(x='Nigeria_Results', data=winsdf)
+
 worldcup_teams = ['Australia', 'Iran', 'Japan', 'Korean Republic',
                   'Saudi Arabia', 'Egypt', 'Morocco', 'Nigeria',
                   'Senegal', 'Tunisia', 'Costa Rica', 'Mexico',
@@ -78,4 +91,17 @@ y = y.astype('int')
 
 
 X_train, X_test, y_train, y_test = train_test_split(X,y,test_size = 0.30, random_state = 42)
-}
+
+logreg = LogisticRegression()
+logreg.fit(X_train, y_train)
+
+score = logreg.score(X_train, y_train)
+score2 = logreg.score(X_test, y_test)
+
+print('Training set accuracy: ', '%.3f'%(score))
+print('Test: set accuracy: ' '%.3f'%(score2))
+
+fixtures = pd.read_csv('statistics_probability/fifa_match_simulation/fixtures.csv')
+ranking = pd.read_csv('statistics_probability/fifa_match_simulation/fifa_ranking.csv')
+
+predictions = logreg.predict(pred_set)
