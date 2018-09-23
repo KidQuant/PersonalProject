@@ -30,7 +30,7 @@ for index, row in new_members_list.iterrows():
 
 new_members_list
 
-new_members_list[new_members_list['Joined'] == '2018-09-14']
+new_members_list[new_members_list['Joined'] == '2018-09-20']
 
 <<<<<<< HEAD
 
@@ -38,7 +38,7 @@ new_members_list[new_members_list['Joined'] == '2018-09-14']
 new_members_list.to_csv('DataScience/PaceInvestmentClub/Mailing_List/new_members_list.csv', index = False)
 >>>>>>> 6d33bcc3a2e3304f2ac15e757b9a35c4f8843b85
 
-new_members_list = pd.read_csv('new_members_list.csv')
+new_members_list = pd.read_csv('DataScience/PaceInvestmentClub/Mailing_List/new_members_list.csv')
 
 new_members_list[(new_members_list['Joined'] > '2018-09-01')]
 
@@ -68,16 +68,16 @@ new_members_list.head()
 
 new_members_list = pd.read_csv('DataScience/PaceInvestmentClub/Mailing_List/new_members_list.csv')
 
-df = pd.DataFrame({'Last':['Doiteau'],
-                   'First':['Benoit'],
+df = pd.DataFrame({'Last':['Berdoulat'],
+                   'First':['Yoann'],
                    'Groups':['New Accounts'],
-                   'Joined':['2018-19-17'],
-                   'Last_Login':['2018-19-17'],
-                   'Email':['bd07998n@pace.edu']})
+                   'Joined':['2018-09-21'],
+                   'Last_Login':['2018-19-21'],
+                   'Email':['yb94809n@pace.edu']})
 
 new_members_list = new_members_list.append(df, ignore_index = True, sort = False)
 
-new_members_list[new_members_list['Last'] == 'Doiteau']
+new_members_list[new_members_list['Last'] == 'Berdoulat']
 
 #new_members_list.drop(new_members_list.index[173], inplace=True)
 

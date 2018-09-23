@@ -1,5 +1,5 @@
 import pandas as pd
-df = pd.read_csv('Machine_Learning/Consumer_Complaints/Consumer_Complaints.csv')
+df = pd.read_csv('Consumer_Complaints/Consumer_Complaints.csv')
 df.head()
 
 col = ['Product', 'Consumer complaint narrative']
