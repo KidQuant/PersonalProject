@@ -32,6 +32,10 @@ new_members_list
 
 new_members_list[new_members_list['Joined'] == '2018-09-22']
 
+new_members_list[new_members_list['First'] == 'Christian']
+
+
+
 new_members_list.to_csv('DataScience/PaceInvestmentClub/Mailing_List/new_members_list.csv', index = False)
 
 new_members_list = pd.read_csv('DataScience/PaceInvestmentClub/Mailing_List/new_members_list.csv')
