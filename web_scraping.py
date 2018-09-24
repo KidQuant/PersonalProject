@@ -6,7 +6,7 @@ import seaborn as sns
 from urllib.request import urlopen
 from bs4 import BeautifulSoup
 
-url = 'http://www.hubertiming.com/results/2017GPTR10K'
+url = "http://www.hubertiming.com/results/2017GPTR10K"
 html = urlopen(url)
 
 soup = BeautifulSoup(html, 'lxml')
@@ -57,3 +57,12 @@ df[0] = df1[0].str.strip('[')
 df1.head(10)
 
 col_labels = soup.find_all('th')
+
+all_header = []
+col_str = str(col_labels)
+cleantext2 = BeautifulSoup(col_str, 'lxml').get_text()
+all_header.append(cleantext2)
+print(all_header)
+
+df2 = pd.DataFrame(all_header)
+df2.head()
