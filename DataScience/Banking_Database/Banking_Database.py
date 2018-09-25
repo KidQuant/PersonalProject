@@ -11,31 +11,36 @@ networking = pd.read_csv('DataScience/Banking_Database/networking.csv')
 
 networking.head()
 networking.tail()
-networking
 
 del df5
 
-df5 = pd.DataFrame({'Name':['Michael Hasselt'],
-                    'Firm':['Mizuho Bank'],
-                    'Location':['New York, New York'],
-                    'Email':['michael.hasselt@mizuhocbus.com'],
-                    'Have Contacted?':['No'],
-                    'Recieved Response?':['N/A'],
-                    'Followed Up?':['N/A']})
+df = pd.DataFrame({'Name':['Melinda Pesapane'],
+                   'Firm':['Duff & Phelps'],
+                   'Location':['New York, New York'],
+                   'Email':['melinda.pesapane@duffandphelps.com'],
+                   'Have Contacted?':['No'],
+                   'Recieved Response?':['N/A'],
+                   'Followed Up?':['N/A']})
 
-networking  = networking.append(df5, ignore_index= True, sort = False)
+df = df[['Name','Firm','Location','Email','Have Contacted?','Recieved Response?','Followed Up?']]
 
-networking.sort_values(by = ['Firm', 'Name'], inplace=True)
+df.head()
+
+networking  = networking.append(df, ignore_index= True)
+
+networking.sort_values(by = ['Name', 'Firm'], inplace=True)
+
+networking = networking[['Name', 'Firm', 'Location', 'Email', 'Have Contacted?', 'Recieved Response?', 'Followed Up?']]
 
 networking.duplicated().sum()
 
-networking.drop(networking.index[81], inplace=True)
+#networking.drop(networking.index[81], inplace=True)
 
 networking.to_csv('networking.csv', index = False)
 
 networking
 
-networking[networking['Firm'] == 'PNC']
+networking[networking['Firm'] == 'Duff & Phelps']
 
 networking['Location'][3:4] = 'Chicago, Illinois'
 networking['Email'][57:58] = 'rebecca.mcadams@cowen.com'
