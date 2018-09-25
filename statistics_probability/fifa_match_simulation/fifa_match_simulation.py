@@ -9,7 +9,6 @@ from sklearn.linear_model import LogisticRegression
 
 world_cup = pd.read_csv('statistics_probability/fifa_match_simulation/World Cup 2018 Dataset.csv')
 results = pd.read_csv('statistics_probability/fifa_match_simulation/results.csv')
-
 world_cup.head()
 results.head()
 
@@ -21,6 +20,7 @@ for i in range (len(results['home_team'])):
         winner.append(results['away_team'][i])
     else:
         winner.append('Draw')
+
 results['winning_team'] = winner
 
 results['goal_difference'] = np.absolute(results['home_score'] - results['away_score'])
@@ -90,9 +90,6 @@ y = final["winning_team"]
 y = y.astype('int')
 
 
-<<<<<<< HEAD
-X_train, X_test, y_train, y_test = train_test_split(X,y,test_size = 0.30, random_state = 42)
-=======
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.30, random_state=42)
 final.head()
 
@@ -104,11 +101,10 @@ score2 = logreg.score(X_test, y_test)
 print("Training set accuracy: ", '%.3f'%(score))
 print("Test set accuracy: ", '%.3f'%(score2))
 
-fixtures = pd.read_csv('statistics_probability/fifa_match_simulation/fixtures.csv')
+fixtures = pd.read_csv('statistics_probability/fifa_match_simulation/fixture.csv')
 ranking = pd.read_csv('statistics_probability/fifa_match_simulation/fifa_ranking.csv')
 
 pred_set = []
 
 fixtures.insert(1, 'first_position', fixtures['Home Team'].map(ranking.set_index('Team')['Position']))
 fixtures.insert(2, 'second_position', fixtures['Away Team'].map(ranking.set_index('Team')['Position']))
->>>>>>> 27f1461bcb5a62aab383d6516b5fa99abc04ad9a
