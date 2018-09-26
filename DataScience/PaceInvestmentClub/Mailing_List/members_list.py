@@ -14,6 +14,8 @@ members['First Name'] = members['First Name'].str.capitalize()
 
 members = members.rename(index=str, columns = {'Last Name':'Last','First Name':'First','Last Login':'Last_Login' ,'Join Date': 'Joined', 'Email Address': 'Email'})
 
+members.head()
+
 members['Joined'] = pd.to_datetime(members['Joined'])
 
 members['Last_Login'] = pd.to_datetime(members['Last_Login'])
@@ -30,7 +32,7 @@ for index, row in new_members_list.iterrows():
 
 new_members_list
 
-new_members_list[new_members_list['Joined'] == '2018-09-24']
+new_members_list[new_members_list['Joined'] == '2018-09-25']
 
 new_members_list[new_members_list['First'] == 'Christian']
 
@@ -42,12 +44,12 @@ new_members_list.head()
 
 new_members_list[(new_members_list['Joined'] > '2018-09-01')]
 
-df = pd.DataFrame({'Last':['Korogluyan'],
-                   'First':['Aret'],
+df = pd.DataFrame({'Last':['Pasquariello'],
+                   'First':['Jason'],
                    'Groups':['New Accounts'],
-                   'Joined':['2018-09-24'],
-                   'Last_Login':['2018-19-24'],
-                   'Email':['ak07549p@pace.edu']})
+                   'Joined':['2018-09-26'],
+                   'Last_Login':['2018-19-26'],
+                   'Email':['jp70695n@pace.edu']})
 
 new_members_list = new_members_list.append(df, ignore_index = True, sort = False)
 
