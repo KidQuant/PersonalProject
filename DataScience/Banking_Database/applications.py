@@ -48,7 +48,7 @@ df['Day'] = df['Date'].apply(lambda x: x.weekday()).map({0:'Mon', 1:'Tues', 2:'W
 df['Hour'] = df['Time'].apply(lambda x: x.hour)
 df = df[['Date', 'Time', 'Day', 'Hour', 'Subject', 'Text']]
 
-df.head()
+df
 df.tail()
 df
 df.info()
