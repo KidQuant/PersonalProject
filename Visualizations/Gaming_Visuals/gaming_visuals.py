@@ -14,5 +14,7 @@ plt.xlabel('Source: Huya F-1; Bloomberg', x=0.9,style='italic')
 plt.savefig('Visualizations/Gaming_Visuals/gaming_trends.jpeg', bbox_inches='tight')
 
 
-headset_trends = pd.DataFrame({'Gaming Peripheral': [1.5, 2.3, 2.9, 4.0, 4.2, 4.4, 4.6]},
+headset_trends = pd.DataFrame({'Gaming Peripheral': [1.5, 2.3, 2.9, 3.3, 4.2, 4.6, 5.9]},
                               index = ['2014A','2015A','2016A','2017A','2018E','2020E','2021E'])
+
+headset_trends.plot(kind = 'bar', figsize=(11,5))
