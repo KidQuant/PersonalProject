@@ -37,4 +37,4 @@ technology.plot('Date', 'Technology', label = 'Technology', color = 'red', xlim 
 ax.set_title('12-Month Beta: S&P 500 Tech, Financials', fontsize=18, x=.25, y=1.02)
 ax.set_xlabel('Source: Bloomberg', style = 'italic', x=0.95)
 ax.legend(fontsize=10)
-plt.savefig('Visualizations/Rolling_Beta/rolling_beta.jpeg', bbox_inches='tight')
+plt.savefig('Visualizations/Rolling_Beta/tech_fin_beta.jpeg', bbox_inches='tight')
