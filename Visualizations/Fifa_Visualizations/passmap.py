@@ -68,3 +68,49 @@ fig.set_size_inches(7,5)
 ax = fig.add_subplot(1,1,1)
 draw_pitch(ax)
 plt.show()
+
+with open('./Visualizations/Fifa_Visualizations/events/7567.json') as data_file:
+    data = json.load(data_file)
+
+df = json_normalize(data, sep = "_")
+ozil_pass = df[(df['type_name'] == "Pass") & (df['player_name']=='Mesut Ã–zil')] # get passing information of Ozil
+pass_column = [i for i in df.columns if i.startswith("pass")]
+ozil_pass = ozil_pass[["id", "period", "timestamp", "location", "pass_end_location", "pass_recipient_name"]]
+ozil_pass.head()
+
+fig, ax = plt.subplots()
+fig.set_size_inches(7, 5)
+ax.set_xlim([0,120])
+ax.set_ylim([0,80])
+for i in range(len(ozil_pass)):
+    # can also differentiate by color
+    color = "blue" if ozil_pass.iloc[i]['period'] == 1 else "red"
+    ax.annotate("", xy = (ozil_pass.iloc[i]['pass_end_location'][0], ozil_pass.iloc[i]['pass_end_location'][1]), xycoords = 'data',
+               xytext = (ozil_pass.iloc[i]['location'][0], ozil_pass.iloc[i]['location'][1]), textcoords = 'data',
+               arrowprops=dict(arrowstyle="->",connectionstyle="arc3", color = "blue"),)
+plt.show()
+
+def heat_pass_map(data, player_name):
+    pass_data = data[(data['type_name'] == "Pass") & (data['player_name'] == player_name)]
+    action_data = data[(data['player_name']==player_name)]
+
+    fig=plt.figure()
+    fig.set_size_inches(7, 5)
+    ax=fig.add_subplot(1,1,1)
+    draw_pitch(ax)
+    plt.axis('off')
+
+    for i in range(len(pass_data)):
+        # we also differentiate different half by different color
+        color = "blue" if pass_data.iloc[i]['period'] == 1 else "red"
+        ax.annotate("", xy = (pass_data.iloc[i]['pass_end_location'][0], pass_data.iloc[i]['pass_end_location'][1]), xycoords = 'data',
+               xytext = (pass_data.iloc[i]['location'][0], pass_data.iloc[i]['location'][1]), textcoords = 'data',
+               arrowprops=dict(arrowstyle="->",connectionstyle="arc3", color = color),)
+    x_coord = [i[0] for i in action_data["location"]]
+    y_coord = [i[1] for i in action_data["location"]]
+    sns.kdeplot(x_coord, y_coord, shade = "True", color = "green", n_levels = 30)
+    plt.ylim(0, 80) # need this, otherwise kde plot will go outside
+    plt.xlim(0, 120)
+    plt.show()
+
+heat_pass_map(df, 'Toni Kroos')
