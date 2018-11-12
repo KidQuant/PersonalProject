@@ -69,14 +69,14 @@ ax = fig.add_subplot(1,1,1)
 draw_pitch(ax)
 plt.show()
 
-with open('./Visualizations/Fifa_Visualizations/events/7567.json') as data_file:
+with open('./Visualizations/Fifa_Visualizations/events/7567.json', encoding = 'utf-8') as data_file:
     data = json.load(data_file)
 
 df = json_normalize(data, sep = "_")
-ozil_pass = df[(df['type_name'] == "Pass") & (df['player_name']=='Mesut Ã–zil')] # get passing information of Ozil
+ozil_pass = df[(df['type_name'] == "Pass") & (df['player_name']=='Mesut Özil')] # get passing information of Ozil
 pass_column = [i for i in df.columns if i.startswith("pass")]
 ozil_pass = ozil_pass[["id", "period", "timestamp", "location", "pass_end_location", "pass_recipient_name"]]
-ozil_pass
+ozil_pass.head()
 
 fig, ax = plt.subplots()
 fig.set_size_inches(7, 5)
@@ -115,7 +115,7 @@ def heat_pass_map(data, player_name):
 
 heat_pass_map(df, 'Toni Kroos')
 
-ozil_action = df[(df['player_name'] == 'Mesut Ã–zil')][['id', 'type_name', 'period', 'timestamp', 'location']]
+ozil_action = df[(df['player_name'] == 'Mesut Özil')][['id', 'type_name', 'period', 'timestamp', 'location']]
 ozil_action.head()
 ozil_action
 
@@ -152,6 +152,6 @@ def heat_pass_map(data, player_name):
     plt.xlim(0, 120)
     plt.show()
 
-heat_pass_map(df, 'Thomas MÃ¼ller')
+heat_pass_map(df, 'Thomas Müller')
 heat_pass_map(df, 'Toni Kroos')
-heat_pass_map(df, 'Mesut Ã–zil')
+heat_pass_map(df, 'Mesut Özil')
