@@ -69,7 +69,7 @@ ax = fig.add_subplot(1,1,1)
 draw_pitch(ax)
 plt.show()
 
-with open('./Visualizations/Fifa_Visualizations/events/7567.json') as data_file:
+with open('./events/7567.json') as data_file:
     data = json.load(data_file)
 
 df = json_normalize(data, sep = "_")
@@ -155,3 +155,14 @@ def heat_pass_map(data, player_name):
 heat_pass_map(df, 'Thomas MÃ¼ller')
 heat_pass_map(df, 'Toni Kroos')
 heat_pass_map(df, 'Mesut Ã–zil')
+
+data_id = [7546, 7563, 8655, 8658, 7530, 7580, 8649]
+all_france = pd.DataFrame()
+for i in data_id:
+    with open('/events/'+str(i)+'.json') as data_file:
+        data = json.load(data_file)
+    df = json_normalize(data, sep = '_')
+    if all_france.empty:
+        all_france = df
+    else:
+        all_france = pd.concat([all_france, df], join = 'outer', sort = False)
