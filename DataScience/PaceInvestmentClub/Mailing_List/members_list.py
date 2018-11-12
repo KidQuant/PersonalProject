@@ -44,16 +44,18 @@ new_members_list.head()
 
 new_members_list[(new_members_list['Joined'] > '2018-09-01')]
 
-df = pd.DataFrame({'Last':['Pasquariello'],
-                   'First':['Jason'],
+df = pd.DataFrame({'Last':['Patel'],
+                   'First':['Romi'],
                    'Groups':['New Accounts'],
-                   'Joined':['2018-09-26'],
-                   'Last_Login':['2018-19-26'],
-                   'Email':['jp70695n@pace.edu']})
+                   'Joined':['2018-10-18'],
+                   'Last_Login':['2018-10-18'],
+                   'Email':['romipatel2000@gmail.com']})
 
-new_members_list = new_members_list.append(df, ignore_index = True, sort = False)
+new_members_list = new_members_list.append(df, ignore_index = True)
 
 new_members_list[new_members_list['Last'] == 'Yang']
+
+new_members_list =  new_members_list[['Last', 'First', 'Groups', 'Last_Login', 'Joined', 'Email']]
 
 #new_members_list.drop(new_members_list.index[173], inplace=True)
 
