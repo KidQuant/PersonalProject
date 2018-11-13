@@ -69,14 +69,14 @@ ax = fig.add_subplot(1,1,1)
 draw_pitch(ax)
 plt.show()
 
-with open('./events/7567.json') as data_file:
+with open('./Visualizations/Fifa_Visualizations/events/7567.json', encoding = 'utf-8') as data_file:
     data = json.load(data_file)
 
 df = json_normalize(data, sep = "_")
-ozil_pass = df[(df['type_name'] == "Pass") & (df['player_name']=='Mesut Ã–zil')] # get passing information of Ozil
+ozil_pass = df[(df['type_name'] == "Pass") & (df['player_name']=='Mesut Özil')] # get passing information of Ozil
 pass_column = [i for i in df.columns if i.startswith("pass")]
 ozil_pass = ozil_pass[["id", "period", "timestamp", "location", "pass_end_location", "pass_recipient_name"]]
-ozil_pass
+ozil_pass.head()
 
 fig, ax = plt.subplots()
 fig.set_size_inches(7, 5)
@@ -115,7 +115,7 @@ def heat_pass_map(data, player_name):
 
 heat_pass_map(df, 'Toni Kroos')
 
-ozil_action = df[(df['player_name'] == 'Mesut Ã–zil')][['id', 'type_name', 'period', 'timestamp', 'location']]
+ozil_action = df[(df['player_name'] == 'Mesut Özil')][['id', 'type_name', 'period', 'timestamp', 'location']]
 ozil_action.head()
 ozil_action
 
@@ -152,17 +152,105 @@ def heat_pass_map(data, player_name):
     plt.xlim(0, 120)
     plt.show()
 
-heat_pass_map(df, 'Thomas MÃ¼ller')
+heat_pass_map(df, 'Thomas Müller')
 heat_pass_map(df, 'Toni Kroos')
-heat_pass_map(df, 'Mesut Ã–zil')
+heat_pass_map(df, 'Mesut Özil')
 
 data_id = [7546, 7563, 8655, 8658, 7530, 7580, 8649]
 all_france = pd.DataFrame()
 for i in data_id:
-    with open('/events/'+str(i)+'.json') as data_file:
+    with open('./Visualizations/Fifa_Visualizations/events/'+str(i)+'.json', encoding = 'utf-8') as data_file:
         data = json.load(data_file)
     df = json_normalize(data, sep = '_')
     if all_france.empty:
         all_france = df
     else:
         all_france = pd.concat([all_france, df], join = 'outer', sort = False)
+
+shot_data = all_france[(all_france['type_name'] == 'Shot') & (all_france['team_name'] == 'France')]
+
+fig=plt.figure()
+fig.set_size_inches(7,5)
+ax=fig.add_subplot(1,1,1)
+draw_pitch(ax)
+plt.axis('off')
+
+for i in range(len(shot_data)):
+    color = 'red' if shot_data.iloc[i]['shot_outcome_name'] == 'Goal' else 'black'
+    ax.annotate('', xy = (shot_data.iloc[i]['shot_end_location'][0], shot_data.iloc[i]['shot_end_location'][1]),
+    xycoords = 'data', xytext = (shot_data.iloc[i]['location'][0], shot_data.iloc[i]['location'][1]),
+    textcoords = 'data', arrowprops = dict(arrowstyle='->', connectionstyle='arc3', color = color),)
+
+plt.ylim(0,80)
+plt.xlim(0,120)
+plt.show()
+
+def draw_half_pitch(ax):
+    # focus on only half of the pitch
+    #Pitch Outline & Centre Line
+    Pitch = Rectangle([60,0], width = 60, height = 80, fill = False)
+    #Right Penalty Area
+    RightPenalty = Rectangle([105.4,22.3], width = 14.6, height = 35.3, fill = False)
+
+    #Right 6-yard Box
+    RightSixYard = Rectangle([115.1,32], width = 4.9, height = 16, fill = False)
+
+    #Prepare Circles
+    centreCircle = Arc((60,40),width = 8.1, height = 8.1, angle=0,theta1=270,theta2=90,color="black")
+    centreSpot = plt.Circle((60,40),0.71,color="black")
+    rightPenSpot = plt.Circle((110.3,40),0.71,color="black")
+    rightArc = Arc((110.3,40),height=16.2,width=16.2,angle=0,theta1=130,theta2=230,color="black")
+
+    element = [Pitch, RightPenalty, RightSixYard, centreCircle, centreSpot, rightPenSpot, rightArc]
+    for i in element:
+        ax.add_patch(i)
+
+fig=plt.figure()
+fig.set_size_inches(7, 5)
+ax=fig.add_subplot(1,1,1)
+draw_half_pitch(ax)
+plt.axis('off')
+# draw the scatter plot for goals
+x_coord_goal = [location[0] for i, location in enumerate(shot_data["location"]) if shot_data.iloc[i]['shot_outcome_name'] == "Goal"]
+y_coord_goal = [location[1] for i, location in enumerate(shot_data["location"]) if shot_data.iloc[i]['shot_outcome_name'] == "Goal"]
+# shots that end up with no goal
+x_coord = [location[0] for i, location in enumerate(shot_data["location"]) if shot_data.iloc[i]['shot_outcome_name'] != "Goal"]
+y_coord = [location[1] for i, location in enumerate(shot_data["location"]) if shot_data.iloc[i]['shot_outcome_name'] != "Goal"]
+#put the two scatter plots on the pitch
+
+ax.scatter(x_coord_goal, y_coord_goal, c = 'red', label = 'goal')
+ax.scatter(x_coord, y_coord, c = 'blue', label = 'shots')
+plt.ylim(0, 80)
+plt.xlim(0, 120)
+plt.legend(loc='upper right')
+plt.axis('off')
+plt.show()
+
+# we use a joint plot to see the density of the shot distribution across the 2 axes of the pitch
+joint_shot_chart = sns.jointplot(x_coord, y_coord, stat_func=None,
+                                 kind='scatter', space=0, alpha=0.5)
+joint_shot_chart.fig.set_size_inches(7,5)
+ax = joint_shot_chart.ax_joint
+# overlaying the plot with a pitch
+draw_half_pitch(ax)
+ax.set_xlim(0.5,120.5)
+ax.set_ylim(0.5,80.5)
+# draw the scatter plot for goals
+x_coord_goal = [location[0] for i, location in enumerate(shot_data["location"]) if shot_data.iloc[i]['shot_outcome_name'] == "Goal"]
+y_coord_goal = [location[1] for i, location in enumerate(shot_data["location"]) if shot_data.iloc[i]['shot_outcome_name'] == "Goal"]
+# shots that end up with no goal
+x_coord = [location[0] for i, location in enumerate(shot_data["location"]) if shot_data.iloc[i]['shot_outcome_name'] != "Goal"]
+y_coord = [location[1] for i, location in enumerate(shot_data["location"]) if shot_data.iloc[i]['shot_outcome_name'] != "Goal"]
+# put the two scatter plots on to the pitch
+ax.scatter(x_coord, y_coord, c = 'b', label = 'shots')
+ax.scatter(x_coord_goal, y_coord_goal, c = 'r', label = 'goal')
+# Get rid of axis labels and tick marks
+ax.set_xlabel('')
+ax.set_ylabel('')
+joint_shot_chart.ax_marg_x.set_axis_off()
+ax.set_axis_off()
+plt.ylim(-.5, 80)
+plt.axis('off')
+plt.show()
+
+france = plt.imread('')
