@@ -15,7 +15,7 @@ import pickle
 from sklearn.cross_validation import train_test_split
 from nltk.corpus import stopwords
 
-path = 'op_spam_v1.4/'
+path = 'Machine_Learning/Deceptive_Hotel_Reviews/op_spam_v1.4/'
 
 label = []
 
@@ -36,7 +36,7 @@ labels = pd.DataFrame(label, columns = ['Labels'])
 labels.head(5)
 
 review = []
-directory = os.path.join('op_spam_v1.4')
+directory = os.path.join('Machine_Learning/Deceptive_Hotel_Reviews/op_spam_v1.4')
 for subdir, dirs, files in os.walk(directory):
     print(subdir)
     for file in files:
