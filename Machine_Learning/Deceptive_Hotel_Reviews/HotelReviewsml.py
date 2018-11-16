@@ -10,9 +10,9 @@ from sklearn.svm import SVC, LinearSVC
 from sklearn.metrics import classification_report, accuracy_score, confusion_matrix
 from sklearn import metrics
 from sklearn import svm
-from sklearn.grid_search import GridSearchCV
+from sklearn.model_selection import GridSearchCV
 import pickle
-from sklearn.cross_validation import train_test_split
+from sklearn.model_selection import train_test_split
 from nltk.corpus import stopwords
 
 path = 'op_spam_v1.4/'
