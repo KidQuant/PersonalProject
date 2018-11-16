@@ -15,7 +15,7 @@ import pickle
 from sklearn.model_selection import train_test_split
 from nltk.corpus import stopwords
 
-path = 'op_spam_v1.4/'
+path = 'Machine_Learning/Deceptive_Hotel_Reviews/op_spam_v1.4/'
 
 label = []
 
@@ -36,7 +36,7 @@ labels = pd.DataFrame(label, columns = ['Labels'])
 labels.head(5)
 
 review = []
-directory = os.path.join('op_spam_v1.4')
+directory = os.path.join('Machine_Learning/Deceptive_Hotel_Reviews/op_spam_v1.4')
 for subdir, dirs, files in os.walk(directory):
     print(subdir)
     for file in files:
@@ -157,5 +157,7 @@ def test_string(s):
     return y_predict
 
 test_string('The hotel was good. The room had a 27-inch Samsung led tv, a microwave. The room had a double bed')
+
+array(['truth'], dtype = object)
 
 test_string('My family and I are huge fans of this place. The staff is super nice, and the food is great. The chicken is very good, and the garlic sauce is perfect. Ice cream topped with fruit is delicious too. Highly recommend!')
