@@ -10,9 +10,9 @@ from sklearn.svm import SVC, LinearSVC
 from sklearn.metrics import classification_report, accuracy_score, confusion_matrix
 from sklearn import metrics
 from sklearn import svm
-from sklearn.grid_search import GridSearchCV
+from sklearn.model_selection import GridSearchCV
 import pickle
-from sklearn.cross_validation import train_test_split
+from sklearn.model_selection import train_test_split
 from nltk.corpus import stopwords
 
 path = 'Machine_Learning/Deceptive_Hotel_Reviews/op_spam_v1.4/'
@@ -157,5 +157,7 @@ def test_string(s):
     return y_predict
 
 test_string('The hotel was good. The room had a 27-inch Samsung led tv, a microwave. The room had a double bed')
+
+array(['truth'], dtype = object)
 
 test_string('My family and I are huge fans of this place. The staff is super nice, and the food is great. The chicken is very good, and the garlic sauce is perfect. Ice cream topped with fruit is delicious too. Highly recommend!')
