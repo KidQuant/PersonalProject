@@ -64,7 +64,6 @@ result['review_without_stopwords'] = result['HotelReviews'].apply(lambda x: ' '.
 
 result.head()
 
-import nltk
 nltk.download('punkt')
 nltk.download('averaged_perceptron_tagger')
 
