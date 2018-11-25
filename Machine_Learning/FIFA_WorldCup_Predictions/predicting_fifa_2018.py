@@ -81,8 +81,8 @@ df_teams_1930.head()
 
 #dropping columns that will not affect match outcomes
 
-df_teams_1930 = df_teams.drop(['date', 'home_score', 'away_score', 'tournament', 'city', 'country'
-                              ,'goal_difference', 'match_year'], axis = 1)
+df_teams_1930 = df_teams.drop(['date', 'home_score', 'away_score', 'tournament', 'city', 'country',
+                               'goal_difference', 'match_year'], axis = 1)
 
 df_teams_1930.head()
 
@@ -124,10 +124,59 @@ print('Test set accuracy ', '%.3f'%(score2))
 # world cup games
 
 fixtures = pd.read_csv('Machine_Learning/FIFA_WorldCup_Predictions/fixtures.csv')
-ranking = pd.read_csv('Machine_Learning/FIFA_WorldCup_Predictions/fifa_ranking.csv')
+ranking = pd.read_csv('Machine_Learning/FIFA_WorldCup_Predictions/fifa_rankings.csv', encoding = 'latin-1')
+fixtures.head()
+ranking.head()
 
 #list for storing the group stage games
 pred_set = []
 
 #Create new columns with ranking position of each team
 fixtures.insert(1, 'first_position', fixtures['Home Team'].map(ranking.set_index('Team')['Position']))
+fixtures.insert(2, 'second_position', fixtures['Away Team'].map(ranking.set_index('Team')['Position']))
+
+
+#We only need to group stage games, so we have to slice the dataset
+fixtures = fixtures.iloc[:48, :]
+fixtures.tail()
+
+#Loop to add teams to new prediction dataset based on the ranking position of each team
+
+for index, row in fixtures.iterrows():
+    if row['first_position'] < row['second_position']:
+        pred_set.append({'home_team': row['Home Team'], 'away_team': row['Away Team'], 'winning_team': None})
+    else:
+        pred_set.append({'home_team': row['Away Team'], 'away_team': row['Home Team'], 'winning_team': None})
+
+pred_set = pd.DataFrame(pred_set)
+backup_pred_set = pred_set
+
+pred_set.head()
+
+#Get dummy variables and drop winning_team column
+pred_set = pd.get_dummies(pred_set, prefix = ['home_team', 'away_team'], columns = ['home_team', 'away_team'])
+
+#Add missing columns compared to the model's training dataset
+missing_cols = set(final.columns) - set(pred_set.columns)
+for c in missing_cols:
+    pred_set[c] = 0
+pred_set = pred_set[final.columns]
+
+#Remove winning team column
+pred_set = pred_set.drop(['winning_team'], axis = 1)
+
+pred_set.head()
+
+#group match predictions
+predictions = logreg.predict(pred_set)
+for i in range(fixtures.shape[0]):
+    print(backup_pred_set.iloc[i, 1] + ' and ' + backup_pred_set.iloc[i, 0])
+    if predictions[i] == 2:
+        print('Winner: ' + backup_pred_set.iloc[i, 1])
+    elif predictions[i] == 1:
+        print('Draw')
+    elif predictions[i] == 0:
+        print('Winner: ' + backup_pred_set.iloc[i, 0])
+    print('Probability of Draw: ', '%.3f'%(logreg.predict_proba(pred_set)[i][1]))
+    print('Probability of ' + backup_pred_set.iloc[i,0] + ' winning: ', '%.3f'%(logreg.predict_proba(pred_set)[i][0]))
+    print('')
