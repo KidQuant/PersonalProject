@@ -118,3 +118,16 @@ score2 = logreg.score(X_test, y_test)
 
 print('Training set accuracy ', '%.3f'%(score))
 print('Test set accuracy ', '%.3f'%(score2))
+
+#teams ranked higher will be considered the favorite and will be positioned
+# under the "home teams" column since there are no "home" or "away" teams in
+# world cup games
+
+fixtures = pd.read_csv('Machine_Learning/FIFA_WorldCup_Predictions/fixtures.csv')
+ranking = pd.read_csv('Machine_Learning/FIFA_WorldCup_Predictions/fifa_ranking.csv')
+
+#list for storing the group stage games
+pred_set = []
+
+#Create new columns with ranking position of each team
+fixtures.insert(1, 'first_position', fixtures['Home Team'].map(ranking.set_index('Team')['Position']))
