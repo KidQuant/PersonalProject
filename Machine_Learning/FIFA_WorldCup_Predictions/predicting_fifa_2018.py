@@ -253,3 +253,18 @@ def clean_and_predict(matches, ranking, final, logreg):
         print('')
 
 clean_and_predict(group_16, ranking, final, logreg)
+
+quarters = [('Portugal', 'France'),
+            ('Spain', 'Argentina'),
+            ('Brazil', 'England'),
+            ('Germany', 'Belgium')]
+
+clean_and_predict(quarters, ranking, final, logreg)
+
+semi = [('Portugal', 'Brazil'),
+        ('Argentina', 'Germany')]
+
+clean_and_predict(semi, ranking, final, logreg)
+finals = [('Brazil', 'Germany')]
+
+clean_and_predict(finals, ranking, final, logreg)
