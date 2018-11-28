@@ -4,6 +4,8 @@ import matplotlib.pyplot as plt
 import matplotlib.ticker as mtick
 import matplotlib.gridspec as gridspec
 
+plt.style.use('fivethirtyeight')
+
 deficit = pd.read_csv('Visualizations\PIC_PRC\FYFSD.csv')
 df = deficit[80:]
 df
@@ -59,7 +61,10 @@ after = df4.copy()
 after['GDPC1_PCA'][0:14] = 0
 df4['GDPC1_PCA'][14:] = 0
 
-labels = ['Q2 14', 'Q3 14', 'Q4 14',
+df4
+
+
+labels = ['Q3 14', 'Q4 14',
           'Q1 15', 'Q2 15', 'Q3 15', 'Q4 15',
           'Q1 16', 'Q2 16', 'Q3 16', 'Q4 16',
           'Q1 17', 'Q2 17', 'Q3 17', 'Q4 17',
@@ -72,3 +77,45 @@ ax3.set_xticklabels(labels,rotation=0)
 ax3.legend('')
 ax3.set_xlabel('Source: Bureau of Economic Analysis', style='italic', x=.80)
 plt.savefig('Visualizations/PIC_PRC/GDP.png', bbox_inches ='tight')
+
+receipts = pd.read_csv('Visualizations\PIC_PRC\W006RC1Q027SBEA.csv')
+expenditures = pd.read_csv('Visualizations\PIC_PRC\FGEXPND.csv')
+
+receipts['DATE'] = pd.to_datetime(receipts['DATE'])
+expenditures['DATE'] = pd.to_datetime(expenditures['DATE'])
+
+expenditures.head()
+expenditures.tail()
+
+fmt = '{x:,.0f}'
+
+receipts = receipts.rename(columns = {'W006RC1Q027SBEA': 'Receipts'})
+
+ax4 = receipts.plot('DATE', 'Receipts', label = 'Current Tax Receipts', color = 'blue', xlim = ('1980-01-01','2018-07-01'), figsize = (12,6))
+expenditures.plot('DATE', 'FGEXPND', label = 'Current Government Expenditures', ax=ax4, color = 'red', )
+ax4.axvspan('1980-01-01', '1980-09-01', color='grey', alpha=0.5)
+ax4.axvspan('1981-09-01', '1982-12-01', color='grey', alpha=0.5)
+ax4.axvspan('1990-09-01', '1991-03-01', color='grey', alpha=0.5)
+ax4.axvspan('2001-04-01', '2001-11-01', color='grey', alpha=0.5)
+ax4.axvspan('2008-01-01', '2009-07-01', color='grey', alpha=0.5)
+ax4.set_xlabel('Source: Bureau of Economic Analysis', style='italic', x=.8)
+ax4.set_ylabel('In Billions')
+ax4.yaxis.set_major_formatter(mtick.StrMethodFormatter(fmt))
+plt.savefig('Visualizations/PIC_PRC/receipts_expenditures.png', bbox_inches ='tight')
+
+df5 = pd.read_csv('Visualizations\PIC_PRC\CP.csv')
+
+df5['DATE'] = pd.to_datetime(df5['DATE'])
+df5.tail()
+
+ax5 = df5.plot('DATE', 'CP', xlim = ('1980-01-01', '2018-04-01'), figsize = (12,6) )
+ax5.legend('')
+ax5.axvspan('1980-01-01', '1980-09-01', color='grey', alpha=0.5)
+ax5.axvspan('1981-09-01', '1982-12-01', color='grey', alpha=0.5)
+ax5.axvspan('1990-09-01', '1991-03-01', color='grey', alpha=0.5)
+ax5.axvspan('2001-04-01', '2001-11-01', color='grey', alpha=0.5)
+ax5.axvspan('2008-01-01', '2009-07-01', color='grey', alpha=0.5)
+ax5.yaxis.set_major_formatter(mtick.StrMethodFormatter(fmt))
+ax5.set_ylabel('In Trillions')
+ax5.set_xlabel('Source: Bureau of Economic Analysis', style='italic', x=.8)
+plt.savefig('Visualizations/PIC_PRC/CP.png', bbox_inches = 'tight')
