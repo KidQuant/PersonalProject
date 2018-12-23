@@ -15,9 +15,8 @@ def print_items(items):
         print(item)
 
 def main():
-    url = sys.argv[1]
     words = fetch_words()
     print_items(words)
 
 if __name__ == '__main__':
-    main()
+    main(sys.argv[1])
