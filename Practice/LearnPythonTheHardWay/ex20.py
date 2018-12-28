@@ -37,11 +37,17 @@ print("Now let's rewind, kind of like a tape.")
 
 rewind(current_file)
 
+#Reads the current file and prints the first line of it
+
 current_line = 1
 print_a_line(current_line, current_file)
 
+#Reads the current file and prints the second line of it
+
 current_line = current_line + 1
 print_a_line(current_line, current_file)
+
+#Reads the current file and prints the third line of it
 
 current_line = current_line + 1
 print_a_line(current_line, current_file)
