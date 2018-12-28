@@ -44,10 +44,10 @@ print_a_line(current_line, current_file)
 
 #Reads the current file and prints the second line of it
 
-current_line = current_line + 1
+current_line += 1
 print_a_line(current_line, current_file)
 
-#Reads the current file and prints the third line of it
+#Reads the current file and prints the third
 
-current_line = current_line + 1
+current_line += 1
 print_a_line(current_line, current_file)
