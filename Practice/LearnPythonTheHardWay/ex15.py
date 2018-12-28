@@ -1,4 +1,4 @@
-#Imports the subpackage argv from the package sys
+#Imports the argv feature from the package sys
 
 from sys import argv
 
@@ -10,10 +10,14 @@ script, filename = argv
 
 txt = open(filename)
 
-#prints the name of the filename and the contents of the file
+#prints the name of the filename and the file object
 
 print(f'Here\'s your file {filename}:')
 print(txt.read())
+
+#Closes the object files
+
+txt.close()
 
 #asks for the file name again
 
@@ -27,3 +31,7 @@ txt_again = open(file_again)
 #prints the contents of the filename
 
 print(txt_again.read())
+
+#Closes the object files
+
+txt_again.close()
