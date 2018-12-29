@@ -21,16 +21,15 @@ print("Adding two ages together:")
 age = add(float(input()), float(input()))
 
 print("subtracting two heights from one another:")
-height = subtract(78, 4)
+height = subtract(float(input()), float(input()))
 
 print("Multiplying two weights together:")
-weight = multiply(90, 2)
+weight = multiply(float(input()), float(input()))
 
 print("Dividing two IQs")
-iq = divide(100, 2)
+iq = divide(float(input()), float(input()))
 
 print(f"Age: {age}, Height: {height}, Weight: {weight}, IQ: {iq}")
-
 
 #A puzzle for the extra credit, type it in anyway.
 print("Here is a puzzle")
