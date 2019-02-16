@@ -166,3 +166,21 @@ sessions.action_type.unique()
 display(sessions.isnull().sum())
 
 sessions.action_type.unique()
+
+sessions.action_type.replace('-unknown-', np.nan, inplace = True)
+
+sessions.action.value_counts().head(10)
+
+sessions.action_type.value_counts().head(10)
+
+sessions.action_detail.value_counts().head(10)
+
+plt.figure(figsize=(18,6))
+sns.countplot(x='device_type', data=sessions)
+plt.xlabel('Device type')
+plt.ylabel('Number of sessions')
+plt.title('Device type distribution')
+plt.xticks(rotation=90)
+plt.show()
+
+session_booked = pd.merge(df_without_NDF, sessions, how = 'left', left_on = 'id', right_on = 'user_id')
