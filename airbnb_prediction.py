@@ -200,3 +200,11 @@ df['date_account_created'] = pd.to_datetime(df['date_account_created'])
 df['timestamp_first_active'] = pd.to_datetime((df.timestamp_first_active // 1000000), format='%Y%m%d')
 
 df['weekday_account_created'] = df.date_account_created.dt.weekday_name
+df['day_account_created'] = df.date_account_created.dt.day
+df['month_account_created'] = df.date_account_created.dt.month
+df['year_account_created'] = df.date_account_created.dt.year
+
+#Calculating the time lag variables
+
+df['time_lag'] = (df['date_account_created'] - df['timestamp_first_active'])
+df['time_lag'] = df['time_lag'].astype(pd.Timedelta).apply(lambda l: l.days)
