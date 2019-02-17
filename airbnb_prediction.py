@@ -184,3 +184,19 @@ plt.xticks(rotation=90)
 plt.show()
 
 session_booked = pd.merge(df_without_NDF, sessions, how = 'left', left_on = 'id', right_on = 'user_id')
+session_booked.columns
+
+session_booked.action.value_counts().head(5)
+
+#Predictive Modeling
+train_users = pd.read_csv('data/train_users_2.csv')
+test_users = pd.read_csv('data/test_users.csv')
+df = pd.concat((train_users, test_users), axis = 0, ignore_index=True)
+df.drop('date_first_booking', axis=1, inplace=True)
+
+#Feature engineering
+
+df['date_account_created'] = pd.to_datetime(df['date_account_created'])
+df['timestamp_first_active'] = pd.to_datetime((df.timestamp_first_active // 1000000), format='%Y%m%d')
+
+df['weekday_account_created'] = df.date_account_created.dt.weekday_name
