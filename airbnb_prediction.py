@@ -199,12 +199,18 @@ df.drop('date_first_booking', axis=1, inplace=True)
 #Feature engineering
 
 df['date_account_created'] = pd.to_datetime(df['date_account_created'])
+
 df['timestamp_first_active'] = pd.to_datetime((df.timestamp_first_active // 1000000), format='%Y%m%d')
 
 df['weekday_account_created'] = df.date_account_created.dt.weekday_name
 df['day_account_created'] = df.date_account_created.dt.day
 df['month_account_created'] = df.date_account_created.dt.month
 df['year_account_created'] = df.date_account_created.dt.year
+
+df['weekday_first_active'] = df.timestamp_first_active.dt.weekday_name
+df['day_first_active'] = df.timestamp_first_active.dt.day
+df['month_first_active'] = df.timestamp_first_active.dt.month
+df['year_first_active'] = df.timestamp_first_active.dt.year
 
 #Calculating the time lag variables
 
@@ -258,3 +264,53 @@ df = pd.merge(df, sessions_secs_elapsed, on = 'id', how = 'left')
 print('There are', df.id.nunique(), 'users from the entire user data set that sessions information')
 
 #Encoding the categorical feature
+categorical_features = ['gender', 'signup_method', 'signup_flow', 'language','affiliate_channel', 'affiliate_provider', 'first_affiliate_tracked',
+                        'signup_app', 'first_device_type', 'first_browser', 'most_used_device', 'weekday_account_created', 'weekday_first_active']
+
+df = pd.get_dummies(df, columns=categorical_features)
+
+df.set_index('id', inplace=True)
+
+#Creating train dataset
+
+train_df = df.loc[train_users['id']]
+train_df.reset_index(inplace=True)
+train_df.fillna(-1, inplace=True)
+train_df.columns
+
+y_train = train_df['country_destination']
+
+train_df.drop(['country_destination', 'id'], axis = 1, inplace = True)
+
+from sklearn.preprocessing import LabelEncoder
+
+label_encorder = LabelEncoder()
+encoded_y_train = label_encorder.fit_transform(y_train)
+
+encoded_y_train
+
+#Creating test set
+test_df = df.loc[test_users['id']].drop('country_destination', axis=1)
+test_df.reset_index(inplace=True)
+
+test_df.columns
+
+train_df.columns
+
+id_test = test_df['id']
+test_df.drop('id', axis=1, inplace=True)
+
+duplicate_columns = train_df.columns[train_df.columns.duplicated()]
+duplicate_columns
+
+#Removing the duplicates
+train_df = train_df.loc[:,~train_df.columns.duplicated()]
+train_df.columns
+
+test_df.columns[test_df.columns.duplicated()]
+
+test_df = test_df.loc[:,~test_df.columns.duplicated()]
+
+test_df.columns
+
+import xgboost as xgb
