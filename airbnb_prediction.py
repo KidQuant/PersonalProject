@@ -5,6 +5,8 @@ import matplotlib.pyplot as plt
 %matplotlib inline
 import warnings
 warnings.filterwarnings('ignore')
+import datetime as dt
+
 
 train_users = pd.read_csv('data/train_users_2.csv')
 test_users = pd.read_csv('data/test_users.csv')
@@ -207,4 +209,14 @@ df['year_account_created'] = df.date_account_created.dt.year
 #Calculating the time lag variables
 
 df['time_lag'] = (df['date_account_created'] - df['timestamp_first_active'])
-df['time_lag'] = df['time_lag'].astype(pd.Timedelta).apply(lambda l: l.days)
+df['time_lag'] = df['time_lag'].apply(lambda l: l.days)
+
+df.drop(['date_account_created', 'timestamp_first_active'], axis = 1, inplace=True)
+
+df['age'].fillna(-1, inplace=True)
+
+sessions.rename(columns = {'user_id': 'id'}, inplace=True)
+
+action_count = sessions.groupby(['id', 'action'])['secs_elapsed'].agg(len).unstack()
+action_type_count = sessions.groupby(['id', 'action_type'])['secs_elapsed'].agg(len).unstack()
+action_detail_count = sessions.groupby(['id', 'action_detail'])['secs_elapsed'].agg(len).unstack()
