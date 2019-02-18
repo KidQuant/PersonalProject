@@ -220,3 +220,41 @@ sessions.rename(columns = {'user_id': 'id'}, inplace=True)
 action_count = sessions.groupby(['id', 'action'])['secs_elapsed'].agg(len).unstack()
 action_type_count = sessions.groupby(['id', 'action_type'])['secs_elapsed'].agg(len).unstack()
 action_detail_count = sessions.groupby(['id', 'action_detail'])['secs_elapsed'].agg(len).unstack()
+device_type_sum = sessions.groupby(['id', 'device_type'])['secs_elapsed'].agg(sum).unstack()
+
+sessions_data = pd.concat([action_count, action_type_count, action_detail_count, device_type_sum],axis=1)
+sessions_data.columns = sessions_data.columns.map(lambda x: str(x) + '_count')
+
+#most used device
+sessions_data['most_used_device'] = sessions.groupby('id')['device_type'].max()
+
+print('There were', sessions.shape[0], 'recorded sessions in which there were', sessions.id.nunique(), 'unique users.')
+
+sessions_data.index.names = ['id']
+sessions_data.reset_index(inplace=True)
+
+secs_elapsed = sessions.groupby('id')['secs_elapsed']
+
+secs_elapsed = secs_elapsed.agg(
+    {
+        'secs_elapsed_sum': np.sum,
+        'secs_elapsed_mean': np.mean,
+        'secs_elapsed_min': np.min,
+        'secs_elapsed_max': np.max,
+        'secs_elapsed_median': np.median,
+        'secs_elapsed_std': np.std,
+        'secs_elapsed_var': np.var,
+        'day_pauses': lambda x: (x > 86400).sum(),
+        'long_pauses': lambda x: (x > 300000).sum(),
+        'short_pauses': lambda x: (x < 3600).sum(),
+        'session_length': np.count_nonzero
+    }
+)
+
+secs_elapsed.reset_index(inplace=True)
+sessions_secs_elapsed = pd.merge(sessions_data, secs_elapsed, on='id', how='left')
+df = pd.merge(df, sessions_secs_elapsed, on = 'id', how = 'left')
+
+print('There are', df.id.nunique(), 'users from the entire user data set that sessions information')
+
+#Encoding the categorical feature
