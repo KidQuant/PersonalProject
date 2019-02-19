@@ -314,3 +314,41 @@ test_df = test_df.loc[:,~test_df.columns.duplicated()]
 test_df.columns
 
 import xgboost as xgb
+
+xg_train = xgb.DMatrix(train_df, label=encoded_y_train)
+
+params = {'max_depth': 10,
+    'learning_rate': 1,
+    'n_estimators': 5,
+    'objective': 'multi:softprob',
+    'num_class': 12,
+    'gamma': 0,
+    'min_child_weight': 1,
+    'max_delta_weight': 0,
+    'subsample': 1,
+    'colsample_bytree': 1,
+    'colsample_bylevel': 1,
+    'reg_alpha': 0,
+    'reg_lambda': 1,
+    'scale_pos_weight': 1,
+    'base_score': 0.5,
+    'missing': None,
+    'nthread': 4,
+    'seed': 42
+    }
+
+num_boost_round = 5
+
+print('Train a XGBoost model')
+gbm = xgb.train(params, xg_train, num_boost_round)
+
+y_pred =  gbm.predict(xgb.DMatrix(test_df))
+ids = []
+cts = []
+for i in range(len(id_test)):
+    idx = id_test[i]
+    ids += [idx] * 5
+    cts += label_encorder.inverse_transform(np.argsort(y_))
+
+predict = pd.DataFrame(np.column_stack((ids,cts)), columns=['id', 'country'])
+predict.to_csv('prediction.csv', index=False)
