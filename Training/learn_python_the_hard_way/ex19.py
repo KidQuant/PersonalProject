@@ -21,6 +21,7 @@ amount_of_crackers = 50
 # Uses the function with the assigned variables
 cheese_and_crackers(amount_of_cheese, amount_of_crackers)
 
+
 #Uses math insides of the two variables
 print("We can even do math inside too:")
 cheese_and_crackers(10 + 20, 5 + 6)
