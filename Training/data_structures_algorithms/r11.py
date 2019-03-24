@@ -1,4 +1,4 @@
 
-x = [i**(i-1) for i in range(1, 10) ]
+x = [2**i for i in range(0, 9) ]
 
 x
