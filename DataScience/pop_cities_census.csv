@@ -1,6 +1,6 @@
-City,Population
-"Brooklyn, NY",
-"Bronx, NY",
-"Queens, NY",
-"Manhattan, NY",
-"Staten Island, NY",
+City,Population (MM)
+"Brooklyn, NY",2.58
+"Bronx, NY",1.43
+"Queens, NY",2.27
+"Manhattan, NY",1.66
+"Staten Island, NY",0.47
