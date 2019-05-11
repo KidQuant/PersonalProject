@@ -1,5 +1,5 @@
 
-#%% 
+#%%
 
 import matplotlib
 import numpy as np
@@ -8,7 +8,7 @@ import seaborn as sns
 import pandas as pd
 from pandas import *
 
-%matplotlib inline 
+%matplotlib inline
 
 import warnings
 warnings.filterwarnings('ignore')
@@ -39,7 +39,7 @@ def reorder(location):
 
 #%%
 
-new_york = read_csv('DataScience\listings.csv.gz')
+new_york = read_csv('/Users/andresealy/Documents/PersonalProject/DataScience/listings.csv')    #For Mac Computers
 new_york = read_data(new_york)
 new_york['price'] = new_york['price'].map(lambda x: str(x)[1:]).convert_objects(convert_numeric=True)
 
@@ -55,10 +55,18 @@ east_flatbush.head()
 east_flatbush.reset_index(inplace=True)
 east_flatbush =  east_flatbush.drop('index', axis =1)
 
+east_flatbush_s = get_stats(east_flatbush)
+east_flatbush_s['location'] = 'East Flatbush'
+east_flatbush_s = reorder(east_flatbush_s)
+
 bensonhurst = new_york[(new_york['neighbourhood_cleansed'] == 'Bensonhurst')]
 bensonhurst.head()
 bensonhurst.reset_index(inplace=True)
 bensonhurst =  bensonhurst.drop('index', axis =1)
+
+bensonhurst_s = get_stats(bensonhurst)
+bensonhurst_s['location'] = 'Bensonhurst'
+bensonhurst_s = reorder(bensonhurst_s)
 
 navy_hill = new_york[(new_york['neighbourhood_cleansed'] == 'Navy Hill')]
 navy_hill.head()
@@ -70,160 +78,281 @@ williamsburg.head()
 williamsburg.reset_index(inplace=True)
 williamsburg =  williamsburg.drop('index', axis =1)
 
+williamsburg_s = get_stats(williamsburg)
+williamsburg_s['location'] = 'Williamsburg'
+williamsburg_s = reorder(williamsburg_s)
+
 city_island = new_york[(new_york['neighbourhood_cleansed'] == 'City Island')]
 city_island.head()
 city_island.reset_index(inplace=True)
 city_island =  city_island.drop('index', axis =1)
+
+city_island_s = get_stats(city_island)
+city_island_s['location'] = 'City Island'
+city_island_s = reorder(city_island_s)
 
 bay_ridge = new_york[(new_york['neighbourhood_cleansed'] == 'Bay Ridge')]
 bay_ridge.head()
 bay_ridge.reset_index(inplace=True)
 bay_ridge =  bay_ridge.drop('index', axis =1)
 
+bay_ridge_s = get_stats(bay_ridge)
+bay_ridge_s['location'] = 'Bay Ridge'
+bay_ridge_s = reorder(bay_ridge_s)
+
 mariners_harbor = new_york[(new_york['neighbourhood_cleansed'] == 'Mariners Harbor')]
 mariners_harbor.head()
 mariners_harbor.reset_index(inplace=True)
 mariners_harbor =  mariners_harbor.drop('index', axis =1)
 
+<<<<<<< HEAD
+=======
+mariners_harbor_s = get_stats(mariners_harbor)
+mariners_harbor_s['location'] = 'Mariners Harbor'
+mariners_harbor_s = reorder(mariners_harbor_s)
+
+>>>>>>> 93d9bc86859ba9399cbe63a828c272f485d44145
 crown_heights = new_york[(new_york['neighbourhood_cleansed'] == 'Crown Heights')]
 crown_heights.head()
 crown_heights.reset_index(inplace=True)
 crown_heights =  crown_heights.drop('index', axis =1)
 
-bensonhurst = new_york[(new_york['neighbourhood_cleansed'] == 'Bensonhurst')]
-bensonhurst.head()
-bensonhurst.reset_index(inplace=True)
-bensonhurst =  bensonhurst.drop('index', axis =1)
+crown_heights_s = get_stats(crown_heights)
+crown_heights_s['location'] = 'Crown Heights'
+crown_heights_s = reorder(crown_heights_s)
 
 south_slope = new_york[(new_york['neighbourhood_cleansed'] == 'South Slope')]
 south_slope.head()
 south_slope.reset_index(inplace=True)
 south_slope =  south_slope.drop('index', axis =1)
 
+south_slope_s = get_stats(south_slope)
+south_slope_s['location'] = 'South Slope'
+south_slope_s = reorder(south_slope_s)
+
 bedford_stuyvesant = new_york[(new_york['neighbourhood_cleansed'] == 'Bedford-Stuyvesant')]
 bedford_stuyvesant.head()
 bedford_stuyvesant.reset_index(inplace=True)
 bedford_stuyvesant =  bedford_stuyvesant.drop('index', axis =1)
+
+bedford_stuyvesant_s = get_stats(bedford_stuyvesant)
+bedford_stuyvesant_s['location'] = 'Bedford-Stuyvesant'
+bedford_stuyvesant_s = reorder(bedford_stuyvesant_s)
 
 boerum_hill = new_york[(new_york['neighbourhood_cleansed'] == 'Boerum Hill')]
 boerum_hill.head()
 boerum_hill.reset_index(inplace=True)
 boerum_hill =  boerum_hill.drop('index', axis =1)
 
+boerum_hill_s = get_stats(boerum_hill)
+boerum_hill_s['location'] = 'Boerum Hill'
+boerum_hill_s = reorder(boerum_hill_s)
+
 kensington = new_york[(new_york['neighbourhood_cleansed'] == 'Kensington')]
 kensington.head()
 kensington.reset_index(inplace=True)
 kensington =  kensington.drop('index', axis =1)
+
+kensington_s = get_stats(kensington)
+kensington_s['location'] = 'Kensington'
+kensington_s = reorder(kensington_s)
 
 borough_park = new_york[(new_york['neighbourhood_cleansed'] == 'Borough Park')]
 borough_park.head()
 borough_park.reset_index(inplace=True)
 borough_park =  borough_park.drop('index', axis =1)
 
+borough_park_s = get_stats(borough_park)
+borough_park_s['location'] = 'Borough Park'
+borough_park_s = reorder(borough_park_s)
+
 bushwick = new_york[(new_york['neighbourhood_cleansed'] == 'Bushwick')]
 bushwick.head()
 bushwick.reset_index(inplace=True)
 bushwick =  bushwick.drop('index', axis =1)
+
+bushwick_s = get_stats(bushwick)
+bushwick_s['location'] = 'Bushwick'
+bushwick_s = reorder(bushwick_s)
 
 greenpoint = new_york[(new_york['neighbourhood_cleansed'] == 'Greenpoint')]
 greenpoint.head()
 greenpoint.reset_index(inplace=True)
 greenpoint =  greenpoint.drop('index', axis =1)
 
+greenpoint_s = get_stats(greenpoint)
+greenpoint_s['location'] = 'Greenpoint'
+greenpoint_s = reorder(greenpoint_s)
+
 coney_island = new_york[(new_york['neighbourhood_cleansed'] == 'Coney Island')]
 coney_island.head()
 coney_island.reset_index(inplace=True)
 coney_island =  coney_island.drop('index', axis =1)
+
+coney_island_s = get_stats(coney_island)
+coney_island_s['location'] = 'Coney Island'
+coney_island_s = reorder(coney_island_s)
+
 
 flatbush = new_york[(new_york['neighbourhood_cleansed'] == 'Flatbush')]
 flatbush.head()
 flatbush.reset_index(inplace=True)
 flatbush =  flatbush.drop('index', axis =1)
 
+flatbush_s = get_stats(flatbush)
+flatbush_s['location'] = 'Flatbush'
+flatbush_s = reorder(flatbush_s)
+
 dyker_heights = new_york[(new_york['neighbourhood_cleansed'] == 'Dyker Heights')]
 dyker_heights.head()
 dyker_heights.reset_index(inplace=True)
 dyker_heights =  dyker_heights.drop('index', axis =1)
+
+dyker_heights_s = get_stats(dyker_heights)
+dyker_heights_s['location'] = 'Dyker Heights'
+dyker_heights_s = reorder(dyker_heights_s)
 
 sheepshead_bay = new_york[(new_york['neighbourhood_cleansed'] == 'Sheepshead Bay')]
 sheepshead_bay.head()
 sheepshead_bay.reset_index(inplace=True)
 sheepshead_bay =  sheepshead_bay.drop('index', axis =1)
 
+sheepshead_bay_s = get_stats(sheepshead_bay)
+sheepshead_bay_s['location'] = 'Sheepshead Bay'
+sheepshead_bay_s = reorder(sheepshead_bay_s)
+
 red_hook = new_york[(new_york['neighbourhood_cleansed'] == 'Red Hook')]
 red_hook.head()
 red_hook.reset_index(inplace=True)
 red_hook =  red_hook.drop('index', axis =1)
+
+red_hook_s = get_stats(red_hook)
+red_hook_s['location'] = 'Red Hook'
+red_hook_s = reorder(red_hook_s)
 
 bergen_beach = new_york[(new_york['neighbourhood_cleansed'] == 'Bergen Beach')]
 bergen_beach.head()
 bergen_beach.reset_index(inplace=True)
 bergen_beach =  bergen_beach.drop('index', axis =1)
 
+bergen_beach_s = get_stats(bergen_beach)
+bergen_beach_s['location'] = 'Bergen Beach'
+bergen_beach_s = reorder(bergen_beach_s)
+
 canarsie = new_york[(new_york['neighbourhood_cleansed'] == 'Canarsie')]
 canarsie.head()
 canarsie.reset_index(inplace=True)
 canarsie =  canarsie.drop('index', axis =1)
+
+canarsie_s = get_stats(canarsie)
+canarsie_s['location'] = 'Canarsie'
+canarsie_s = reorder(canarsie_s)
 
 prospect_heights = new_york[(new_york['neighbourhood_cleansed'] == 'Prospect Heights')]
 prospect_heights.head()
 prospect_heights.reset_index(inplace=True)
 prospect_heights =  prospect_heights.drop('index', axis =1)
 
+prospect_heights_s = get_stats(prospect_heights)
+prospect_heights_s['location'] = 'Prospect Heights'
+prospect_heights_s = reorder(prospect_heights_s)
+
 east_flatbush = new_york[(new_york['neighbourhood_cleansed'] == 'East Flatbush')]
 east_flatbush.head()
 east_flatbush.reset_index(inplace=True)
 east_flatbush =  east_flatbush.drop('index', axis =1)
+
+east_flatbush_s = get_stats(east_flatbush)
+east_flatbush_s['location'] = 'East Flatbush'
+east_flatbush_s = reorder(east_flatbush_s)
 
 carroll_gardens = new_york[(new_york['neighbourhood_cleansed'] == 'Carroll Gardens')]
 carroll_gardens.head()
 carroll_gardens.reset_index(inplace=True)
 carroll_gardens = carroll_gardens.drop('index', axis =1)
 
+carroll_gardens_s = get_stats(carroll_gardens)
+carroll_gardens_s['location'] = 'Carroll Gardens'
+carroll_gardens_s = reorder(carroll_gardens_s)
+
 fort_greene = new_york[(new_york['neighbourhood_cleansed'] == 'Fort Greene')]
 fort_greene.head()
 fort_greene.reset_index(inplace=True)
 fort_greene = fort_greene.drop('index', axis =1)
+
+fort_greene_s = get_stats(fort_greene)
+fort_greene_s['location'] = 'Fort Greene'
+fort_greene_s = reorder(fort_greene_s)
 
 prospect_lefferts = new_york[(new_york['neighbourhood_cleansed'] == 'Prospect-Lefferts Gardens')]
 prospect_lefferts.head()
 prospect_lefferts.reset_index(inplace=True)
 prospect_lefferts = prospect_lefferts.drop('index', axis =1)
 
+prospect_heights_s = get_stats(prospect_heights)
+prospect_heights_s['location'] = 'Prospect-Lefferts Gardens'
+prospect_heights_s = reorder(prospect_heights_s)
+
 brighton_beach = new_york[(new_york['neighbourhood_cleansed'] == 'Brighton Beach')]
 brighton_beach.head()
 brighton_beach.reset_index(inplace=True)
 brighton_beach = brighton_beach.drop('index', axis =1)
+
+brighton_beach_s = get_stats(brighton_beach)
+brighton_beach_s['location'] = 'Brighton Beach'
+brighton_beach_s = reorder(brighton_beach_s)
 
 dumbo = new_york[(new_york['neighbourhood_cleansed'] == 'DUMBO')]
 dumbo.head()
 dumbo.reset_index(inplace=True)
 dumbo = dumbo.drop('index', axis =1)
 
+dumbo_s = get_stats(dumbo)
+dumbo_s['location'] = 'DUMBO'
+dumbo_s = reorder(dumbo_s)
+
 columbia = new_york[(new_york['neighbourhood_cleansed'] == 'Columbia St')]
 columbia.head()
 columbia.reset_index(inplace=True)
 columbia = columbia.drop('index', axis =1)
+
+columbia_s = get_stats(columbia)
+columbia_s['location'] = 'Columbia St'
+columbia_s = reorder(columbia_s)
 
 cypress_hills = new_york[(new_york['neighbourhood_cleansed'] == 'Cypress Hills')]
 cypress_hills.head()
 cypress_hills.reset_index(inplace=True)
 cypress_hills = cypress_hills.drop('index', axis =1)
 
+cypress_hills_s = get_stats(cypress_hills)
+cypress_hills_s['location'] = 'Cypress Hills'
+cypress_hills_s = reorder(cypress_hills_s)
+
 park_slope = new_york[(new_york['neighbourhood_cleansed'] == 'Park Slope')]
 park_slope.head()
 park_slope.reset_index(inplace=True)
 park_slope = park_slope.drop('index', axis =1)
+
+park_slope_s = get_stats(park_slope)
+park_slope_s['location'] = 'Park Slope'
+park_slope_s = reorder(park_slope_s)
 
 gravesend = new_york[(new_york['neighbourhood_cleansed'] == 'Gravesend')]
 gravesend.head()
 gravesend.reset_index(inplace=True)
 gravesend = gravesend.drop('index', axis =1)
 
+gravesend_s = get_stats(gravesend)
+gravesend_s['location'] = 'Gravesend'
+gravesend_s = reorder(gravesend_s)
+
 sunset_park = new_york[(new_york['neighbourhood_cleansed'] == 'Sunset Park')]
 sunset_park.head()
 sunset_park.reset_index(inplace=True)
 sunset_park = sunset_park.drop('index', axis =1)
+
+
 
 boerum_hill = new_york[(new_york['neighbourhood_cleansed'] == 'Boerum Hill')]
 boerum_hill.head()
@@ -766,6 +895,7 @@ city_island_s = get_stats(city_island)
 city_island_s['location'] = 'City Island'
 city_island_s = reorder(city_island_s)
 
+<<<<<<< HEAD
 bay_ridge_s = get_stats(bay_ridge)
 bay_ridge_s['location'] = 'Bay Ridge'
 bay_ridge_s = reorder(bay_ridge_s)
@@ -777,6 +907,12 @@ mariners_harbor_s = reorder(mariners_harbor_s)
 mariners_harbor_s = get_stats(mariners_harbor)
 mariners_harbor_s['location'] = 'Mariners Harbor'
 mariners_harbor_s = reorder(mariners_harbor_s)
+=======
+#%%
+austin_s = get_stats(austin)
+austin_s['location'] = 'Austin, TX'
+austin_s = reorder(austin_s)
+>>>>>>> 93d9bc86859ba9399cbe63a828c272f485d44145
 
 crown_heights_s = get_stats(crown_heights_s)
 crown_heights_s['location'] = 'Crown Heights'
@@ -791,8 +927,8 @@ statistics.columns.values
 
 #%%
 
-x = {'Brooklyn, NY': len(brooklyn), 'Bronx, NY' : len(bronx), 
-     'Manhattan, NY' : len(manhattan), 'Queens, NY' : len(queens), 
+x = {'Brooklyn, NY': len(brooklyn), 'Bronx, NY' : len(bronx),
+     'Manhattan, NY' : len(manhattan), 'Queens, NY' : len(queens),
      'Staten Island, NY': len(staten_island) }
 
 df = DataFrame(x, index=[0]).stack()
@@ -839,8 +975,8 @@ ax.scatter(x, y, c=y,cmap = cmap, s =200)
 
 for i, txt in enumerate(n):
     ax.annotate(txt, (x[i],y[i]), fontsize = 9)
-    
-    
+
+
 plt.xlabel('Listing Count (Normalized)', fontsize=14)
 plt.ylabel('Booked Days in the next Calendar Year', fontsize=14)
 plt.title('Popularity and Normalized Listing Count', fontsize=14, fontweight='bold')
@@ -864,8 +1000,8 @@ ax.scatter(x, y, c=y,cmap = cmap, s =200)
 
 for i, txt in enumerate(n):
     ax.annotate(txt, (x[i],y[i]), fontsize = 10)
-    
-    
+
+
 plt.xlabel('Listing Count (Normalized)', fontsize=14)
 plt.ylabel('Price', fontsize=14)
 plt.title('Price and Normalized Listing Count', fontsize=14, fontweight='bold')
@@ -898,8 +1034,8 @@ ax.scatter(x, y, c=y,cmap = cmap , s =200)
 
 for i, txt in enumerate(n):
     ax.annotate(txt, (x[i],y[i]), fontsize = 10)
-    
-    
+
+
 plt.xlabel('Average Number of Days booked in next 365 days', fontsize=14)
 plt.ylabel('Average Price', fontsize=14)
 plt.title('Average Price and Popularity of Listings', fontsize=14, fontweight='bold')
@@ -920,8 +1056,8 @@ ax.scatter(x, y, c=y,cmap = cmap, s =200)
 
 for i, txt in enumerate(n):
     ax.annotate(txt, (x[i],y[i]), fontsize = 10)
-    
-    
+
+
 plt.xlabel('Average Rating', fontsize=14)
 plt.ylabel('Price', fontsize=14)
 plt.title('Price and Average Rating', fontsize=14, fontweight='bold')
@@ -1000,8 +1136,8 @@ ax.scatter(x, y, c=y,cmap = cmap , s =200)
 
 for i, txt in enumerate(n):
     ax.annotate(txt, (x[i],y[i]), fontsize = 16)
-    
-plt.xlabel('5 Year Home Price Growth ', fontsize=20)    
+
+plt.xlabel('5 Year Home Price Growth ', fontsize=20)
 plt.ylabel('Average Price ABNB Listing', fontsize=20)
 plt.title('Home Price Growth, 5 Years and ABNB Listing Price', fontsize=20, fontweight='bold')
 
