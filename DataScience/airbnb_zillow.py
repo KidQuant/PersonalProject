@@ -844,6 +844,7 @@ two_bridges_s = get_stats(two_bridges)
 two_bridges_s['location'] = 'Two Bridges'
 two_bridges_s = reorder(two_bridges_s)
 
+#%%
 #Queens
 
 long_island = new_york[(new_york['neighbourhood_cleansed'] == 'Long Island City')]
@@ -896,7 +897,7 @@ flushing.head()
 flushing.reset_index(inplace=True)
 flushing =  flushing.drop('index', axis =1)
 
-flushing_s  getstats(flushing)
+flushing_s = get_stats(flushing)
 flushing_s['location'] = 'Flushing'
 flushing_s = reorder(flushing_s)
 
@@ -932,7 +933,7 @@ little_neck.head()
 little_neck.reset_index(inplace=True)
 little_neck =  little_neck.drop('index', axis =1)
 
-little_neck_s = get_stats(little_neck_s)
+little_neck_s = get_stats(little_neck)
 little_neck_s['location'] = 'Little Neck'
 little_neck_s = reorder(little_neck_s)
 
@@ -1139,7 +1140,7 @@ edgemere.head()
 edgemere.reset_index(inplace=True)
 edgemere = edgemere.drop('index', axis =1)
 
-edgemere_s = get_stat(edgemere)
+edgemere_s = get_stats(edgemere)
 edgemere_s['location'] = 'Edgemere'
 edgemere_s = reorder(edgemere_s)
 
