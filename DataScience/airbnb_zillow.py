@@ -39,7 +39,8 @@ def reorder(location):
 
 #%%
 
-new_york = read_csv('/Users/andresealy/Documents/PersonalProject/DataScience/listings.csv')    #For Mac Computers
+new_york = read_csv('DataScience\listings.csv.gz')
+
 new_york = read_data(new_york)
 new_york['price'] = new_york['price'].map(lambda x: str(x)[1:]).convert_objects(convert_numeric=True)
 
@@ -105,13 +106,10 @@ mariners_harbor.head()
 mariners_harbor.reset_index(inplace=True)
 mariners_harbor =  mariners_harbor.drop('index', axis =1)
 
-<<<<<<< HEAD
-=======
 mariners_harbor_s = get_stats(mariners_harbor)
 mariners_harbor_s['location'] = 'Mariners Harbor'
 mariners_harbor_s = reorder(mariners_harbor_s)
 
->>>>>>> 93d9bc86859ba9399cbe63a828c272f485d44145
 crown_heights = new_york[(new_york['neighbourhood_cleansed'] == 'Crown Heights')]
 crown_heights.head()
 crown_heights.reset_index(inplace=True)
@@ -192,7 +190,6 @@ coney_island =  coney_island.drop('index', axis =1)
 coney_island_s = get_stats(coney_island)
 coney_island_s['location'] = 'Coney Island'
 coney_island_s = reorder(coney_island_s)
-
 
 flatbush = new_york[(new_york['neighbourhood_cleansed'] == 'Flatbush')]
 flatbush.head()
@@ -352,32 +349,45 @@ sunset_park.head()
 sunset_park.reset_index(inplace=True)
 sunset_park = sunset_park.drop('index', axis =1)
 
-
-
-boerum_hill = new_york[(new_york['neighbourhood_cleansed'] == 'Boerum Hill')]
-boerum_hill.head()
-boerum_hill.reset_index(inplace=True)
-boerum_hill = boerum_hill.drop('index', axis =1)
+sunset_park_s = get_stats(sunset_park)
+sunset_park_s['location'] = 'Sunset Park'
+sunset_park_s = reorder(sunset_park_s)
 
 cobble_hill = new_york[(new_york['neighbourhood_cleansed'] == 'Cobble Hill')]
 cobble_hill.head()
 cobble_hill.reset_index(inplace=True)
 cobble_hill = cobble_hill.drop('index', axis =1)
 
+cobble_hill_s = get_stats(cobble_hill)
+cobble_hill_s['location'] = 'Cobble Hill'
+cobble_hill_s = reorder(cobble_hill_s)
+
 gowanus = new_york[(new_york['neighbourhood_cleansed'] == 'Gowanus')]
 gowanus.head()
 gowanus.reset_index(inplace=True)
 gowanus = gowanus.drop('index', axis =1)
+
+gowanus_s = get_stats(gowanus)
+gowanus_s['location'] = 'Gowanus'
+gowanus_s = reorder(gowanus_s)
 
 downtown_brooklyn = new_york[(new_york['neighbourhood_cleansed'] == 'Downtown Brooklyn')]
 downtown_brooklyn.head()
 downtown_brooklyn.reset_index(inplace=True)
 downtown_brooklyn = downtown_brooklyn.drop('index', axis =1)
 
+downtown_brooklyn_s = get_stats(downtown_brooklyn)
+downtown_brooklyn_s['location'] = 'Downtown Brooklyn'
+downtown_brooklyn_s = reorder(downtown_brooklyn_s)
+
 bath_beach = new_york[(new_york['neighbourhood_cleansed'] == 'Bath Beach')]
 bath_beach.head()
 bath_beach.reset_index(inplace=True)
 bath_beach = bath_beach.drop('index', axis =1)
+
+bath_beach_s = get_stats(bath_beach)
+bath_beach_s['location'] = 'Bath Beach'
+bath_beach_s = reorder(bath_beach_s)
 
 #Bronx
 
