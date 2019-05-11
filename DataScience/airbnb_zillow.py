@@ -644,7 +644,7 @@ soho =  soho.drop('index', axis =1)
 
 soho_s = get_stats(soho)
 soho_s['location'] = 'SoHo'
-soho_s = reorder(soho)
+soho_s = reorder(soho_s)
 
 tribeca = new_york[(new_york['neighbourhood_cleansed'] == 'Tribeca')]
 tribeca.head()
@@ -860,180 +860,315 @@ ditmars_steinway.head()
 ditmars_steinway.reset_index(inplace=True)
 ditmars_steinway =  ditmars_steinway.drop('index', axis =1)
 
+ditmars_steinway_s = get_stats(ditmars_steinway)
+ditmars_steinway_s['location'] = 'Ditmars Steinway'
+ditmars_steinway_s = reorder(ditmars_steinway_s)
+
 glen_oaks = new_york[(new_york['neighbourhood_cleansed'] == 'Glen Oaks')]
 glen_oaks.head()
 glen_oaks.reset_index(inplace=True)
 glen_oaks =  glen_oaks.drop('index', axis =1)
+
+glen_oaks_s = get_stats(glen_oaks)
+glen_oaks_s['location'] = 'Glen Oaks'
+glen_oaks_s = reorder(glen_oaks_s)
 
 sunnyside = new_york[(new_york['neighbourhood_cleansed'] == 'Sunnyside')]
 sunnyside.head()
 sunnyside.reset_index(inplace=True)
 sunnyside =  sunnyside.drop('index', axis =1)
 
+sunnyside_s = get_stats(sunnyside)
+sunnyside_s['location'] = 'Sunnyside'
+sunnyside_s = reorder(sunnyside_s)
+
 astoria = new_york[(new_york['neighbourhood_cleansed'] == 'Astoria')]
 astoria.head()
 astoria.reset_index(inplace=True)
 astoria =  astoria.drop('index', axis =1)
+
+astoria_s = get_stats(astoria)
+astoria_s['location'] = 'Astoria'
+astoria_s = reorder(astoria_s)
 
 flushing = new_york[(new_york['neighbourhood_cleansed'] == 'Flushing')]
 flushing.head()
 flushing.reset_index(inplace=True)
 flushing =  flushing.drop('index', axis =1)
 
+flushing_s  getstats(flushing)
+flushing_s['location'] = 'Flushing'
+flushing_s = reorder(flushing_s)
+
 college_point = new_york[(new_york['neighbourhood_cleansed'] == 'College Point')]
 college_point.head()
 college_point.reset_index(inplace=True)
 college_point =  college_point.drop('index', axis =1)
+
+college_point_s = get_stats(college_point)
+college_point_s['location'] = 'College Point'
+college_point_s = reorder(college_point_s)
 
 whitestone = new_york[(new_york['neighbourhood_cleansed'] == 'Whitestone')]
 whitestone.head()
 whitestone.reset_index(inplace=True)
 whitestone =  whitestone.drop('index', axis =1)
 
+whitestone_s = get_stats(whitestone)
+whitestone_s['location'] = 'Whitestone'
+whitestone_s = reorder(whitestone_s)
+
 bayside = new_york[(new_york['neighbourhood_cleansed'] == 'Bayside')]
 bayside.head()
 bayside.reset_index(inplace=True)
 bayside =  bayside.drop('index', axis =1)
+
+bayside_s = get_stats(bayside)
+bayside_s['location'] = 'Bayside'
+bayside_s = reorder(bayside_s)
 
 little_neck = new_york[(new_york['neighbourhood_cleansed'] == 'Little Neck')]
 little_neck.head()
 little_neck.reset_index(inplace=True)
 little_neck =  little_neck.drop('index', axis =1)
 
+little_neck_s = get_stats(little_neck_s)
+little_neck_s['location'] = 'Little Neck'
+little_neck_s = reorder(little_neck_s)
+
 fresh_meadows = new_york[(new_york['neighbourhood_cleansed'] == 'Fresh Meadows')]
 fresh_meadows.head()
 fresh_meadows.reset_index(inplace=True)
 fresh_meadows =  fresh_meadows.drop('index', axis =1)
+
+fresh_meadows_s = get_stats(fresh_meadows)
+fresh_meadows_s['location'] = 'Fresh Meadows'
+fresh_meadows_s = reorder(fresh_meadows_s)
 
 corona = new_york[(new_york['neighbourhood_cleansed'] == 'Corona')]
 corona.head()
 corona.reset_index(inplace=True)
 corona =  corona.drop('index', axis =1)
 
+corona_s = get_stats(corona)
+corona_s['location'] = 'Corona'
+corona_s = reorder(corona_s)
+
 east_elmhurst = new_york[(new_york['neighbourhood_cleansed'] == 'East Elmhurst')]
 east_elmhurst.head()
 east_elmhurst.reset_index(inplace=True)
 east_elmhurst =  east_elmhurst.drop('index', axis =1)
+
+east_elmhurst_s = get_stats(east_elmhurst)
+east_elmhurst_s['location'] = 'East Elmhurst'
+east_elmhurst_s = reorder(east_elmhurst_s)
 
 jackson_heights = new_york[(new_york['neighbourhood_cleansed'] == 'Jackson Heights')]
 jackson_heights.head()
 jackson_heights.reset_index(inplace=True)
 jackson_heights =  jackson_heights.drop('index', axis =1)
 
+jackson_heights_s = get_stats(jackson_heights)
+jackson_heights_s['location'] = 'Jackson Heights'
+jackson_heights_s = reorder(jackson_heights_s)
+
 forest_hills = new_york[(new_york['neighbourhood_cleansed'] == 'Forest Hills')]
 forest_hills.head()
 forest_hills.reset_index(inplace=True)
 forest_hills =  forest_hills.drop('index', axis =1)
+
+forest_hills_s = get_stats(forest_hills)
+forest_hills_s['location'] = 'Forest Hills'
+forest_hills_s = reorder(forest_hills_s)
 
 woodside = new_york[(new_york['neighbourhood_cleansed'] == 'Woodside')]
 woodside.head()
 woodside.reset_index(inplace=True)
 woodside =  woodside.drop('index', axis =1)
 
+woodside_s = get_stats(woodside)
+woodside_s['location'] = 'Woodside'
+woodside_s = reorder(woodside_s)
+
 maspeth = new_york[(new_york['neighbourhood_cleansed'] == 'Maspeth')]
 maspeth.head()
 maspeth.reset_index(inplace=True)
 maspeth =  maspeth.drop('index', axis =1)
+
+maspeth_s = get_stats(maspeth)
+maspeth_s['location'] = 'Maspeth'
+maspeth_s = reorder(maspeth_s)
 
 middle_village = new_york[(new_york['neighbourhood_cleansed'] == 'Middle Village')]
 middle_village.head()
 middle_village.reset_index(inplace=True)
 middle_village =  middle_village.drop('index', axis =1)
 
+middle_village_s = get_stats(middle_village)
+middle_village_s['location'] = 'Middle Village'
+middle_village_s = reorder(middle_village_s)
+
 ridgewood = new_york[(new_york['neighbourhood_cleansed'] == 'Ridgewood')]
 ridgewood.head()
 ridgewood.reset_index(inplace=True)
 ridgewood =  ridgewood.drop('index', axis =1)
+
+ridgewood_s = get_stats(ridgewood)
+ridgewood_s['location'] = 'Ridgewood'
+ridgewood_s = reorder(ridgewood_s)
 
 cambria_heights = new_york[(new_york['neighbourhood_cleansed'] == 'Cambria Heights')]
 cambria_heights.head()
 cambria_heights.reset_index(inplace=True)
 cambria_heights =  cambria_heights.drop('index', axis =1)
 
+cambria_heights_s = get_stats(cambria_heights)
+cambria_heights_s['location'] = 'Cambria Heights'
+cambria_heights_s = reorder(cambria_heights_s)
+
 springfield = new_york[(new_york['neighbourhood_cleansed'] == 'Springfield Gardens')]
 springfield.head()
 springfield.reset_index(inplace=True)
 springfield =  springfield.drop('index', axis =1)
+
+springfield_s = get_stats(springfield)
+springfield_s['location'] = 'Springfield Gardens'
+springfield_s = reorder(springfield_s)
 
 howard_beach = new_york[(new_york['neighbourhood_cleansed'] == 'Howard Beach')]
 howard_beach.head()
 howard_beach.reset_index(inplace=True)
 howard_beach =  howard_beach.drop('index', axis =1)
 
+howard_beach_s = get_stats(howard_beach)
+howard_beach_s['location'] = 'Howard Beach'
+howard_beach_s = reorder(howard_beach_s)
+
 kew_gardens = new_york[(new_york['neighbourhood_cleansed'] == 'Kew Gardens')]
 kew_gardens.head()
 kew_gardens.reset_index(inplace=True)
 kew_gardens =  kew_gardens.drop('index', axis =1)
+
+kew_gardens_s = get_stats(kew_gardens)
+kew_gardens_s['location'] = 'Kew Gardens'
+kew_gardens_s = reorder(kew_gardens_s)
 
 ozone = new_york[(new_york['neighbourhood_cleansed'] == 'Ozone Park')]
 ozone.head()
 ozone.reset_index(inplace=True)
 ozone =  ozone.drop('index', axis =1)
 
+ozone_s = get_stats(ozone)
+ozone_s['location'] = 'Ozone Park'
+ozone_s = reorder(ozone_s)
+
 richmond_hill = new_york[(new_york['neighbourhood_cleansed'] == 'Richmond Hill')]
 richmond_hill.head()
 richmond_hill.reset_index(inplace=True)
 richmond_hill =  richmond_hill.drop('index', axis =1)
+
+richmond_hill_s = get_stats(richmond_hill)
+richmond_hill_s['location'] = 'Richmond Hill'
+richmond_hill_s = reorder(richmond_hill_s)
 
 south_ozone_park = new_york[(new_york['neighbourhood_cleansed'] == 'South Ozone Park')]
 south_ozone_park.head()
 south_ozone_park.reset_index(inplace=True)
 south_ozone_park =  south_ozone_park.drop('index', axis =1)
 
+south_ozone_park_s = get_stats(south_ozone_park)
+south_ozone_park_s['location'] = 'South Ozone Park'
+south_ozone_park_s = reorder(south_ozone_park_s)
+
 woodhaven = new_york[(new_york['neighbourhood_cleansed'] == 'Woodhaven')]
 woodhaven.head()
 woodhaven.reset_index(inplace=True)
 woodhaven =  woodhaven.drop('index', axis =1)
+
+woodhaven_s = get_stats(woodhaven)
+woodhaven_s['location'] = "Woodhaven"
+woodhaven_s = reorder(woodhaven_s)
 
 rosedale = new_york[(new_york['neighbourhood_cleansed'] == 'Rosedale')]
 rosedale.head()
 rosedale.reset_index(inplace=True)
 rosedale =  rosedale.drop('index', axis =1)
 
+rosedale_s = get_stats(rosedale)
+rosedale_s['location'] = 'Rosedale'
+rosedale_s = reorder(rosedale_s)
+
 hollis = new_york[(new_york['neighbourhood_cleansed'] == 'Hollis')]
 hollis.head()
 hollis.reset_index(inplace=True)
 hollis =  hollis.drop('index', axis =1)
+
+hollis_s = get_stats(hollis)
+hollis_s['location'] = 'Hollis'
+hollis_s = reorder(hollis_s)
 
 bellerose = new_york[(new_york['neighbourhood_cleansed'] == 'Bellerose')]
 bellerose.head()
 bellerose.reset_index(inplace=True)
 bellerose = bellerose.drop('index', axis =1)
 
+bellerose_s = get_stats(bellerose)
+bellerose_s['location'] = 'Bellerose'
+bellerose_s = reorder(bellerose_s)
+
 queens_village = new_york[(new_york['neighbourhood_cleansed'] == 'Queens Village')]
 queens_village.head()
 queens_village.reset_index(inplace=True)
 queens_village = queens_village.drop('index', axis =1)
+
+queens_village_s = get_stats(queens_village)
+queens_village_s['location'] = 'Queens Village'
+queens_village_s = reorder(queens_village_s)
 
 jamaica = new_york[(new_york['neighbourhood_cleansed'] == 'Jamaica')]
 jamaica.head()
 jamaica.reset_index(inplace=True)
 jamaica = jamaica.drop('index', axis =1)
 
+jamaica_s = get_stats(jamaica)
+jamaica_s['location'] = 'Jamaica'
+jamaica_s = reorder(jamaica_s)
+
 edgemere = new_york[(new_york['neighbourhood_cleansed'] == 'Edgemere')]
 edgemere.head()
 edgemere.reset_index(inplace=True)
 edgemere = edgemere.drop('index', axis =1)
+
+edgemere_s = get_stat(edgemere)
+edgemere_s['location'] = 'Edgemere'
+edgemere_s = reorder(edgemere_s)
 
 elmhurst = new_york[(new_york['neighbourhood_cleansed'] == 'Elmhurst')]
 elmhurst.head()
 elmhurst.reset_index(inplace=True)
 elmhurst = elmhurst.drop('index', axis =1)
 
+elmhurst_s = get_stats(elmhurst)
+elmhurst_s['location'] = 'Elmhurst'
+elmhurst_s = reorder(elmhurst_s)
+
 rego_park = new_york[(new_york['neighbourhood_cleansed'] == 'Rego Park')]
 rego_park.head()
 rego_park.reset_index(inplace=True)
 rego_park = rego_park.drop('index', axis =1)
+
+rego_park_s = get_stats(rego_park)
+rego_park_s['location'] = 'Rego Park'
+rego_park_s = reorder(rego_park_s)
 
 glendale = new_york[(new_york['neighbourhood_cleansed'] == 'Glendale')]
 glendale.head()
 glendale.reset_index(inplace=True)
 glendale = glendale.drop('index', axis =1)
 
-southozone = new_york[(new_york['neighbourhood_cleansed'] == 'South Ozone Park')]
-southozone.head()
-southozone.reset_index(inplace=True)
-southozone = southozone.drop('index', axis =1)
+glendale_s = get_stats(glendale)
+glendale_s['location'] = 'Glendale'
+glendale_s = reorder(glendale_s)
 
 #Staten Island
 
