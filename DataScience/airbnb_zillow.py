@@ -285,9 +285,9 @@ prospect_lefferts.head()
 prospect_lefferts.reset_index(inplace=True)
 prospect_lefferts = prospect_lefferts.drop('index', axis =1)
 
-prospect_heights_s = get_stats(prospect_heights)
-prospect_heights_s['location'] = 'Prospect-Lefferts Gardens'
-prospect_heights_s = reorder(prospect_heights_s)
+prospect_lefferts_s = get_stats(prospect_lefferts)
+prospect_lefferts_s['location'] = 'Prospect-Lefferts Gardens'
+prospect_lefferts_s = reorder(prospect_lefferts_s)
 
 brighton_beach = new_york[(new_york['neighbourhood_cleansed'] == 'Brighton Beach')]
 brighton_beach.head()
@@ -435,6 +435,34 @@ wakefield =  wakefield.drop('index', axis =1)
 wakefield_s = get_stats(wakefield)
 wakefield_s['location'] = 'Wakefield'
 wakefield_s = reorder(wakefield_s)
+
+kingsbridge = new_york[(new_york['neighbourhood_cleansed'] == 'Kingsbridge')]
+kingsbridge.head()
+kingsbridge.reset_index(inplace=True)
+kingsbridge =  kingsbridge.drop('index', axis =1)
+
+kingsbridge_s = get_stats(kingsbridge)
+kingsbridge_s['location'] = 'Kingsbridge'
+kingsbridge_s = reorder(kingsbridge_s)
+
+pelham_gardens = new_york[(new_york['neighbourhood_cleansed'] == 'Pelham Gardens')]
+pelham_gardens.head()
+pelham_gardens.reset_index(inplace=True)
+pelham_gardens =  pelham_gardens.drop('index', axis =1)
+
+pelham_gardens_s = get_stats(pelham_gardens)
+pelham_gardens_s['location'] = 'Pelham Gardens'
+pelham_gardens_s = reorder(pelham_gardens_s)
+
+fieldston = new_york[(new_york['neighbourhood_cleansed'] == 'Fieldston')]
+fieldston.head()
+fieldston.reset_index(inplace=True)
+fieldston =  fieldston.drop('index', axis =1)
+
+fieldston_s = get_stats(fieldston)
+fieldston_s['location'] = 'Fieldstong'
+fieldston_s = reorder(fieldston_s)
+
 
 soundview = new_york[(new_york['neighbourhood_cleansed'] == 'Soundview')]
 soundview.head()
@@ -733,16 +761,16 @@ theater_district.reset_index(inplace=True)
 theater_district =  theater_district.drop('index', axis =1)
 
 theater_district_s = get_stats(theater_district)
-theater_district['location'] = 'Theater District'
+theater_district_s['location'] = 'Theater District'
 theater_district_s = reorder(theater_district_s)
 
-hells_kitchen = new_york[(new_york['neighbourhood_cleansed'] == 'Hell\'s Kitchen')]
+hells_kitchen = new_york[(new_york['neighbourhood_cleansed'] == f"Hell's Kitchen")]
 hells_kitchen.head()
 hells_kitchen.reset_index(inplace=True)
 hells_kitchen =  hells_kitchen.drop('index', axis =1)
 
 hells_kitchen_s = get_stats(hells_kitchen)
-hells_kitchen_s['location'] = 'Hell\'s Kitchen'
+hells_kitchen_s['location'] = f"Hell's Kitchen"
 hells_kitchen_s = reorder(hells_kitchen_s)
 
 clinton_hill = new_york[(new_york['neighbourhood_cleansed'] == 'Clinton Hill')]
@@ -806,7 +834,7 @@ nolita =  nolita.drop('index', axis =1)
 
 nolita_s = get_stats(nolita)
 nolita_s['location'] = 'Nolita'
-nolita_s = reorder(nolita)
+nolita_s = reorder(nolita_s)
 
 chinatown = new_york[(new_york['neighbourhood_cleansed'] == 'Chinatown')]
 chinatown.head()
@@ -1171,6 +1199,7 @@ glendale_s = get_stats(glendale)
 glendale_s['location'] = 'Glendale'
 glendale_s = reorder(glendale_s)
 
+#%%
 #Staten Island
 
 silver_lake = new_york[(new_york['neighbourhood_cleansed'] == 'Silver Lake')]
@@ -1178,74 +1207,156 @@ silver_lake.head()
 silver_lake.reset_index(inplace=True)
 silver_lake = silver_lake.drop('index', axis =1)
 
+silver_lake_s = get_stats(silver_lake)
+silver_lake_s['location'] = 'Silver Lake'
+silver_lake_s = reorder(silver_lake_s)
+
 west_brighton = new_york[(new_york['neighbourhood_cleansed'] == 'West Brighton')]
 west_brighton.head()
 west_brighton.reset_index(inplace=True)
 west_brighton = west_brighton.drop('index', axis =1)
+
+west_brighton_s = get_stats(west_brighton)
+west_brighton_s['location'] = 'West Brighton'
+west_brighton_s = reorder(west_brighton_s)
 
 grymes_hill = new_york[(new_york['neighbourhood_cleansed'] == 'Grymes Hill')]
 grymes_hill.head()
 grymes_hill.reset_index(inplace=True)
 grymes_hill = grymes_hill.drop('index', axis =1)
 
+grymes_hill_s = get_stats(grymes_hill)
+grymes_hill_s['location'] = 'Grymes Hill'
+grymes_hill_s = reorder(grymes_hill_s)
+
 great_kills = new_york[(new_york['neighbourhood_cleansed'] == 'Great Kills')]
 great_kills.head()
 great_kills.reset_index(inplace=True)
 great_kills = great_kills.drop('index', axis =1)
+
+great_kills_s = get_stats(great_kills)
+great_kills_s['location'] = 'Great Kills'
+great_kills_s = reorder(great_kills_s)
 
 rosebank = new_york[(new_york['neighbourhood_cleansed'] == 'Rosebank')]
 rosebank.head()
 rosebank.reset_index(inplace=True)
 rosebank = rosebank.drop('index', axis =1)
 
+rosebank_s = get_stats(rosebank)
+rosebank_s['location'] = 'Rosebank'
+rosebank_s = reorder(rosebank_s)
+
 tottenville = new_york[(new_york['neighbourhood_cleansed'] == 'Tottenville')]
 tottenville.head()
 tottenville.reset_index(inplace=True)
 tottenville = tottenville.drop('index', axis =1)
+
+tottenville_s = get_stats(tottenville)
+tottenville_s['location'] = 'Tottenville'
+tottenville_s = reorder(tottenville_s)
 
 rossville = new_york[(new_york['neighbourhood_cleansed'] == 'Rossville')]
 rossville.head()
 rossville.reset_index(inplace=True)
 rossville = rossville.drop('index', axis =1)
 
+rossville_s = get_stats(rossville)
+rossville_s['location'] = 'Rossville'
+rossville_s = reorder(rossville_s)
+
 west_brighton = new_york[(new_york['neighbourhood_cleansed'] == 'West Brighton')]
 west_brighton.head()
 west_brighton.reset_index(inplace=True)
 west_brighton = west_brighton.drop('index', axis =1)
+
+west_brighton_s = get_stats(west_brighton)
+west_brighton_s['location'] = 'West Brighton'
+west_brighton_s = reorder(west_brighton_s)
 
 bull_head = new_york[(new_york['neighbourhood_cleansed'] == 'Bull\'s Head')]
 bull_head.head()
 bull_head.reset_index(inplace=True)
 bull_head = bull_head.drop('index', axis =1)
 
-randall_manor = new_york[(new_york['neighbourhood_cleansed'] == 'Randall Manor')]
+bull_head_s = get_stats(bull_head)
+bull_head_s['location'] = 'Bull\'s Head'
+bull_head_s = reorder(bull_head_s)
+
+emerson_hill = new_york[(new_york['neighbourhood_cleansed'] == 'Emerson Hill')]   
+emerson_hill.head()
+emerson_hill.reset_index(inplace=True)
+emerson_hill = emerson_hill.drop('index', axis=1)
+
+emerson_hill_s = get_stats(emerson_hill)
+emerson_hill_s['location'] = 'Emerson Hill'
+emerson_hill_s = reorder(emerson_hill_s)
+
+randall_manor = new_york[(new_york['neighbourhood_cleansed'] == 'Randall Manor')]   
 randall_manor.head()
 randall_manor.reset_index(inplace=True)
 randall_manor = randall_manor.drop('index', axis =1)
 
+randall_manor_s = get_stats(randall_manor)
+randall_manor_s['location'] = 'Randall Manor'
+randall_manor_s = reorder(randall_manor_s)
+
 #%%
 
-statistics = concat([brooklyn_s, bronx_s, manhattan_s, queens_s, staten_island_s])
+statistics = concat([east_flatbush_s, bensonhurst_s, williamsburg_s, city_island_s, bay_ridge_s, mariners_harbor_s, crown_heights_s, south_ozone_park_s, bedford_stuyvesant_s,
+                    boerum_hill_s, kensington_s, borough_park_s, bushwick_s, greenpoint_s, coney_island_s, flatbush_s, dyker_heights_s, sheepshead_bay_s, red_hook_s, bergen_beach_s,
+                    canarsie_s, prospect_heights_s, east_flatbush_s, carroll_gardens_s, fort_greene_s, prospect_lefferts_s, brighton_beach_s, dumbo_s, columbia_s, cypress_hills_s, park_slope_s,
+                    gravesend_s, sunset_park_s, sunset_park_s, cobble_hill_s, gowanus_s, downtown_brooklyn_s, bath_beach_s, chelsea_s, lower_east_side_s, east_village_s, fidi_s, flatiron_s,
+                    noho_s, soho_s, tribeca_s, west_village_s, murray_hill_s, upper_east_s, upper_west_s, midtown_s, harlem_s, east_harlem_s, washington_heights_s, theater_district_s, 
+                    hells_kitchen_s, clinton_hill_s, roosevelt_island_s, battery_park_s, riverdale_s, long_island_s, ditmars_steinway_s, inwood_s, gramercy_s, nolita_s, chinatown_s, 
+                    kips_bay_s, civic_center_s, two_bridges_s, glen_oaks_s, sunnyside_s, astoria_s, flushing_s, college_point_s, whitestone_s, bayside_s, little_neck_s, fresh_meadows_s, 
+                    corona_s, east_elmhurst_s, jackson_heights_s, forest_hills_s, woodside_s, maspeth_s, middle_village_s, ridgewood_s, cambria_heights_s, springfield_s, howard_beach_s, 
+                    kew_gardens_s, ozone_s, richmond_hill_s, south_ozone_park_s, woodhaven_s, rosedale_s, hollis_s, bellerose_s, queens_village_s, jamaica_s, edgemere_s, elmhurst_s, 
+                    rego_park_s, glendale_s, south_ozone_park_s, silver_lake_s, west_brighton_s, grymes_hill_s, rosebank_s, great_kills_s, tottenville_s, rossville_s, west_brighton_s,
+                    bull_head_s, emerson_hill_s, randall_manor_s, longwood_s, clifton_s, charleston_s, st_george_s, windsor_terrace_s, pelham_gardens_s, kingsbridge_s, fieldston_s])
+                    
+
 statistics
 
 statistics.columns.values
 
 #%%
 
-x = {'Brooklyn, NY': len(brooklyn), 'Bronx, NY' : len(bronx),
-     'Manhattan, NY' : len(manhattan), 'Queens, NY' : len(queens),
-     'Staten Island, NY': len(staten_island) }
+bronx = {'Pelham Bey': len(pelham_bay), 'Morris Park' : len(morris_park), 'Bronxdale' : len(bronxdale), 'Eastchester' : len(eastchester),
+     'Wakefield': len(wakefield), 'Kingsbridge' : len(kingsbridge), 'Pelham Gardens': len(pelham_gardens), 'Fieldston' : len(fieldston),
+     'Soundview': len(soundview), 'Mount Eden' : len(mount_eden), 'Port Morris': len(port_morris), 'Allerton' : len(allerton),
+     'Belmont': len(belmont), 'St. Albans' : len(st_albans), 'East Morrisania': len(east_morrisania), 'University Heights' : len(university_heights),
+     'Van Nest': len(van_nest), 'Morris Heights' : len(morris_heights), 'Claremont Village': len(claremont_village), }
 
-df = DataFrame(x, index=[0]).stack()
-df = DataFrame(df).sort_values([0], ascending=[False]).reset_index(0)
-df = df[0]
-df = DataFrame(df)
-df.columns = ['Count of Listings']
-df
+bronx_df = DataFrame(bronx, index=[0]).stack()
+bronx_df = DataFrame(bronx_df).sort_values([0], ascending=[False]).reset_index(0)
+bronx_df = bronx_df[0]
+bronx_df = DataFrame(bronx_df)
+bronx_df.columns = ['Count of Listings']
+bronx_df
 
-df['Count of Listings'].plot(kind = 'bar', cmap = cmap)
+bronx_df['Count of Listings'].plot(kind = 'bar', cmap = cmap)
 plt.title('Count of Listings')
 
+brooklyn = {'East Flatbush': len(east_flatbush), 'Bensonhurst' : len(bensonhurst), 'Williamsburg' : len(williamsburg), 'City Island' : len(city_island),
+     'Bay Ridge': len(bay_ridge), 'Marine Harbor' : len(mariners_harbor), 'Crown Heights': len(crown_heights), 'South Slope' : len(south_slope),
+     'Bedford-Stuyvesant': len(bedford_stuyvesant), 'Boerum Hill' : len(boerum_hill), 'Kensington': len(kensington), 'Borough Park' : len(borough_park),
+     'Bushwich': len(bushwick), 'Greenpoint' : len(greenpoint), 'Coney Island': len(coney_island), 'Flatbush' : len(flatbush),
+     'Dyker Heights': len(dyker_heights), 'Sheepshead Bey' : len(sheepshead_bay), 'Red Hook': len(red_hook), 'Bergen Beach': len(bergen_beach),
+     'Canarsie': len(canarsie), 'Prospect Heights' : len(prospect_heights), 'East Flatbush': len(east_flatbush), 'Carroll Gardens': len(carroll_gardens),
+     'Fort Greene': len(fort_greene), 'Prospect-Lefferts Gardens' : len(prospect_lefferts), 'Brighton Beach': len(brighton_beach), 'DUMBO': len(dumbo),
+     'Columbia St': len(columbia), 'Cypress Hills' : len(cypress_hills), 'Gravesend': len(gravesend), 'Sunset Park': len(sunset_park),
+     'Cobble Hill': len(cobble_hill), 'Gowanus' : len(gowanus), 'Downtown Brooklyn': len(downtown_brooklyn), 'Bath Beach': len(bath_beach)}
+
+brooklyn_df = DataFrame(brooklyn, index=[0]).stack()
+brooklyn_df = DataFrame(brooklyn_df).sort_values([0], ascending=[False]).reset_index(0)
+brooklyn_df = brooklyn_df[0]
+brooklyn_df = DataFrame(brooklyn_df)
+brooklyn_df.columns = ['Count of Listings']
+brooklyn_df
+
+brooklyn_df['Count of Listings'].plot(kind = 'bar', cmap = cmap)
+plt.title('Count of Listings')
 
 #Normalizing for Population
 #%%
