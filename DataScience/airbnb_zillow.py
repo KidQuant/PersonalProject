@@ -85,11 +85,6 @@ mariners_harbor.head()
 mariners_harbor.reset_index(inplace=True)
 mariners_harbor =  mariners_harbor.drop('index', axis =1)
 
-williamsburg = new_york[(new_york['neighbourhood_cleansed'] == 'Williamsburg')]
-williamsburg.head()
-williamsburg.reset_index(inplace=True)
-williamsburg =  williamsburg.drop('index', axis =1)
-
 crown_heights = new_york[(new_york['neighbourhood_cleansed'] == 'Crown Heights')]
 crown_heights.head()
 crown_heights.reset_index(inplace=True)
@@ -749,52 +744,43 @@ randall_manor.head()
 randall_manor.reset_index(inplace=True)
 randall_manor = randall_manor.drop('index', axis =1)
 
-# Extracting the statistics
-
-tribeca.reset_index(inplace=True)
-tribeca.head()
-tribeca.reset_index(inplace=True)
-tribeca =  tribeca.drop('index', axis =1)
-
-west_village = new_york[(new_york['neighbourhood_cleansed'] == 'West Village')]
-west_village.head()
-west_village.reset_index(inplace=True)
-west_village =  west_village.drop('index', axis =1)
-
-murray_hill = new_york[(new_york['neighbourhood_cleansed'] == 'Murray Hill')]
-murray_hill.head()
-murray_hill.reset_index(inplace=True)
-murray_hill =  murray_hill.drop('index', axis =1)
-
-upper_west = new_york[(new_york['neighbourhood_cleansed'] == 'Upper West Side')]
-upper_west.head()
-upper_west.reset_index(inplace=True)
-upper_west =  upper_west.drop('index', axis =1)
-
-upper_east = new_york[(new_york['neighbourhood_cleansed'] == 'Upper East Side')]
-upper_east.head()
-upper_east.reset_index(inplace=True)
-upper_east =  upper_east.drop('index', axis =1)
-
-midtown = new_york[(new_york['neighbourhood_cleansed'] == 'Midtown')]
-midtown.head()
-midtown.reset_index(inplace=True)
-midtown =  midtown.drop('index', axis =1)
-
-harlem = new_york[(new_york['neighbourhood_cleansed'] == 'Harlem')]
-harlem.head()
-harlem.reset_index(inplace=True)
-harlem =  harlem.drop('index', axis =1)
-
-east_harlem = new_york[(new_york['neighbourhood_cleansed'] == 'East Harlem')]
-east_harlem.head()
-east_harlem.reset_index(inplace=True)
-east_harlem =  east_harlem.drop('index', axis =1)
-
 #%%
 
+east_flatbush_s = get_stats(east_flatbush)
+east_flatbush_s['location'] = 'East Flatbush'
+east_flatbush_s = reorder(east_flatbush_s)
 
+bensonhurst_s = get_stats(bensonhurst)
+bensonhurst_s['location'] = 'Bensonhurst'
+bensonhurst_s = reorder(bensonhurst_s)
 
+navy_hill_s = get_stats(navy_hill)
+navy_hill_s['location'] = 'Navy Hill'
+navy_hill_s = reorder(navy_hill_s)
+
+williamsburg_s = get_stats(williamsburg)
+williamsburg_s['location'] = 'Williamsburg'
+williamsburg_s = reorder(williamsburg_s)
+
+city_island_s = get_stats(city_island)
+city_island_s['location'] = 'City Island'
+city_island_s = reorder(city_island_s)
+
+bay_ridge_s = get_stats(bay_ridge)
+bay_ridge_s['location'] = 'Bay Ridge'
+bay_ridge_s = reorder(bay_ridge_s)
+
+mariners_harbor_s = get_stats(mariners_harbor)
+mariners_harbor_s['location'] = 'Bay Ridge'
+mariners_harbor_s = reorder(mariners_harbor_s)
+
+mariners_harbor_s = get_stats(mariners_harbor)
+mariners_harbor_s['location'] = 'Mariners Harbor'
+mariners_harbor_s = reorder(mariners_harbor_s)
+
+crown_heights_s = get_stats(crown_heights_s)
+crown_heights_s['location'] = 'Crown Heights'
+crown_heights_s = reorder(crown_heights_s)
 
 #%%
 
