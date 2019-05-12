@@ -1342,7 +1342,7 @@ brooklyn = {'East Flatbush': len(east_flatbush), 'Bensonhurst' : len(bensonhurst
      'Bay Ridge': len(bay_ridge), 'Marine Harbor' : len(mariners_harbor), 'Crown Heights': len(crown_heights), 'South Slope' : len(south_slope),
      'Bedford-Stuyvesant': len(bedford_stuyvesant), 'Boerum Hill' : len(boerum_hill), 'Kensington': len(kensington), 'Borough Park' : len(borough_park),
      'Bushwich': len(bushwick), 'Greenpoint' : len(greenpoint), 'Coney Island': len(coney_island), 'Flatbush' : len(flatbush),
-     'Dyker Heights': len(dyker_heights), 'Sheepshead Bey' : len(sheepshead_bay), 'Red Hook': len(red_hook), 'Bergen Beach': len(bergen_beach),
+     'Dyker Heights': len(dyker_heights), 'Sheepshead Bay' : len(sheepshead_bay), 'Red Hook': len(red_hook), 'Bergen Beach': len(bergen_beach),
      'Canarsie': len(canarsie), 'Prospect Heights' : len(prospect_heights), 'East Flatbush': len(east_flatbush), 'Carroll Gardens': len(carroll_gardens),
      'Fort Greene': len(fort_greene), 'Prospect-Lefferts Gardens' : len(prospect_lefferts), 'Brighton Beach': len(brighton_beach), 'DUMBO': len(dumbo),
      'Columbia St': len(columbia), 'Cypress Hills' : len(cypress_hills), 'Gravesend': len(gravesend), 'Sunset Park': len(sunset_park),
@@ -1357,6 +1357,101 @@ brooklyn_df
 
 brooklyn_df['Count of Listings'].plot(kind = 'bar', cmap = cmap)
 plt.title('Count of Listings')
+
+mahattan = {'Chelsea': len(chelsea), 'Lower East Side' : len(lower_east_side), 'Financial District' : len(fidi), 'East Village' : len(east_village),
+     'Flatiron District': len(flatiron), 'NoHo' : len(noho), 'SoHo': len(soho), 'Tribeca' : len(tribeca),
+     'West Village': len(west_village), 'Murray Hill' : len(murray_hill), 'Upper West Side': len(upper_west), 'Upper East Side' : len(upper_east),
+     'Midtown': len(midtown), 'Harlem' : len(harlem), 'East Harlem': len(east_harlem), 'Washington Heights' : len(washington_heights),
+     'Theater District': len(theater_district), f"Hell's Kitchen" : len(hells_kitchen), 'Clinton Hill': len(clinton_hill), 'Roosevelt Island': len(roosevelt_island),
+     'Battery Park City': len(battery_park), 'Riverdale' : len(riverdale), 'Long Island City': len(long_island), 'Ditmars Steinway': len(ditmars_steinway),
+     'Inwood': len(inwood), 'Gramercy' : len(gramercy), 'Nolita': len(nolita), 'Chinatown': len(chinatown),
+     'Kips Bay': len(kips_bay), 'Civic Center' : len(civic_center), 'Two Bridges': len(two_bridges)}
+
+mahattan_df = DataFrame(mahattan, index=[0]).stack()
+mahattan_df = DataFrame(mahattan_df).sort_values([0], ascending=[False]).reset_index(0)
+mahattan_df = mahattan_df[0]
+mahattan_df = DataFrame(mahattan_df)
+mahattan_df.columns = ['Count of Listings']
+mahattan_df
+
+mahattan_df['Count of Listings'].plot(kind = 'bar', cmap = cmap)
+plt.title('Count of Listings')
+
+queens = {'Glen Oaks': len(glen_oaks), 'Sunnyside' : len(sunnyside), 'Astoria' : len(astoria), 'Flushing' : len(flushing),
+     'College Point': len(college_point), 'Whitestone' : len(whitestone), 'Bayside': len(bayside), 'Little Neck' : len(little_neck),
+     'Fresh Meadows': len(fresh_meadows), 'Corona' : len(corona), 'East Elmhurst': len(east_elmhurst), 'Jackson Heights' : len(jackson_heights),
+     'Forst Hills': len(forest_hills), 'Woodside' : len(woodside), 'Maspeth': len(maspeth), 'Middle Village' : len(ridgewood),
+     'Cambria Heights': len(cambria_heights), 'Springfield Gardens' : len(springfield), 'Howard Beach': len(howard_beach), 'Roosevelt Island': len(roosevelt_island),
+     'Kew Gardnes': len(kew_gardens), 'Ozone Park' : len(ozone), 'Richmond Hill': len(richmond_hill), 'South Ozone Park': len(south_ozone_park),
+     'Woodhaven': len(woodhaven), 'Rosedale' : len(rosedale), 'Hollis': len(hollis), 'Bellerose': len(bellerose),
+     'Queens Village': len(queens_village), 'Jamaica' : len(jamaica), 'Edgemere': len(edgemere), 'Elmhurst': len(elmhurst),
+     'Rego Park': len(rego_park), 'Glendale' : len(glendale)}
+
+queens_df = DataFrame(queens, index=[0]).stack()
+queens_df = DataFrame(queens_df).sort_values([0], ascending=[False]).reset_index(0)
+queens_df = queens_df[0]
+queens_df = DataFrame(queens_df)
+queens_df.columns = ['Count of Listings']
+queens_df
+
+queens_df['Count of Listings'].plot(kind = 'bar', cmap = cmap)
+plt.title('Count of Listings')
+
+staten_island = {'Silver Lake': len(silver_lake), 'West Brighton' : len(west_brighton), 'Gyrmes Hill' : len(grymes_hill), 'Rosebank' : len(rosebank),
+     'Great Kills': len(great_kills), 'Tottenville' : len(tottenville), 'Rossville': len(rossville), 'West Brighton' : len(west_brighton),
+     f"Bull's Head": len(bull_head), 'Emerson Hill' : len(emerson_hill), 'Randall Manor': len(randall_manor), 'Longwood' : len(long_island),
+     'Clifton': len(clifton), 'Charleston' : len(charleston), 'St. George': len(st_george), 'Windsor Terrace' : len(windsor_terrace)}
+
+staten_island_df = DataFrame(staten_island, index=[0]).stack()
+staten_island_df = DataFrame(staten_island_df).sort_values([0], ascending=[False]).reset_index(0)
+staten_island_df = staten_island_df[0]
+staten_island_df = DataFrame(staten_island_df)
+staten_island_df.columns = ['Count of Listings']
+staten_island_df
+
+staten_island_df['Count of Listings'].plot(kind = 'bar', cmap = cmap)
+plt.title('Count of Listings')
+
+x = {'Pelham Bay': len(pelham_bay), 'Morris Park' : len(morris_park), 'Bronxdale' : len(bronxdale), 'Eastchester' : len(eastchester),
+     'Wakefield': len(wakefield), 'Kingsbridge' : len(kingsbridge), 'Pelham Gardens': len(pelham_gardens), 'Fieldston' : len(fieldston),
+     'Soundview': len(soundview), 'Mount Eden' : len(mount_eden), 'Port Morris': len(port_morris), 'Allerton' : len(allerton),
+     'Belmont': len(belmont), 'St. Albans' : len(st_albans), 'East Morrisania': len(east_morrisania), 'University Heights' : len(university_heights),
+     'Van Nest': len(van_nest), 'Morris Heights' : len(morris_heights), 'Claremont Village': len(claremont_village), 'East Flatbush': len(east_flatbush),
+     'Bensonhurst' : len(bensonhurst), 'Williamsburg' : len(williamsburg), 'City Island' : len(city_island), 'Bay Ridge': len(bay_ridge), 
+     'Marine Harbor' : len(mariners_harbor), 'Crown Heights': len(crown_heights), 'South Slope' : len(south_slope), 'Bedford-Stuyvesant': len(bedford_stuyvesant), 
+     'Boerum Hill' : len(boerum_hill), 'Kensington': len(kensington), 'Borough Park' : len(borough_park), 'Bushwich': len(bushwick), 'Greenpoint' : len(greenpoint),
+     'Coney Island': len(coney_island), 'Flatbush' : len(flatbush), 'Dyker Heights': len(dyker_heights), 'Sheepshead Bay' : len(sheepshead_bay), 'Red Hook': len(red_hook), 
+     'Bergen Beach': len(bergen_beach),'Canarsie': len(canarsie), 'Prospect Heights' : len(prospect_heights), 'East Flatbush': len(east_flatbush), 
+     'Carroll Gardens': len(carroll_gardens),'Fort Greene': len(fort_greene), 'Prospect-Lefferts Gardens' : len(prospect_lefferts), 'Brighton Beach': len(brighton_beach), 
+     'DUMBO': len(dumbo),'Columbia St': len(columbia), 'Cypress Hills' : len(cypress_hills), 'Gravesend': len(gravesend), 'Sunset Park': len(sunset_park),
+     'Cobble Hill': len(cobble_hill), 'Gowanus' : len(gowanus), 'Downtown Brooklyn': len(downtown_brooklyn), 'Bath Beach': len(bath_beach), 
+     'Chelsea': len(chelsea), 'Lower East Side' : len(lower_east_side), 'Financial District' : len(fidi), 'East Village' : len(east_village),
+     'Flatiron District': len(flatiron), 'NoHo' : len(noho), 'SoHo': len(soho), 'Tribeca' : len(tribeca), 'West Village': len(west_village), 
+     'Murray Hill' : len(murray_hill), 'Upper West Side': len(upper_west), 'Upper East Side' : len(upper_east), 'Midtown': len(midtown), 
+     'Harlem' : len(harlem), 'East Harlem': len(east_harlem), 'Washington Heights' : len(washington_heights),'Theater District': len(theater_district), 
+     f"Hell's Kitchen" : len(hells_kitchen), 'Clinton Hill': len(clinton_hill), 'Roosevelt Island': len(roosevelt_island), 'Battery Park City': len(battery_park), 
+     'Riverdale' : len(riverdale), 'Long Island City': len(long_island), 'Ditmars Steinway': len(ditmars_steinway),'Inwood': len(inwood), 'Gramercy' : len(gramercy), 
+     'Nolita': len(nolita), 'Chinatown': len(chinatown), 'Kips Bay': len(kips_bay), 'Civic Center' : len(civic_center), 'Two Bridges': len(two_bridges),
+     'Glen Oaks': len(glen_oaks), 'Sunnyside' : len(sunnyside), 'Astoria' : len(astoria), 'Flushing' : len(flushing),
+     'College Point': len(college_point), 'Whitestone' : len(whitestone), 'Bayside': len(bayside), 'Little Neck' : len(little_neck),
+     'Fresh Meadows': len(fresh_meadows), 'Corona' : len(corona), 'East Elmhurst': len(east_elmhurst), 'Jackson Heights' : len(jackson_heights),
+     'Forest Hills': len(forest_hills), 'Woodside' : len(woodside), 'Maspeth': len(maspeth), 'Middle Village' : len(ridgewood),
+     'Cambria Heights': len(cambria_heights), 'Springfield Gardens' : len(springfield), 'Howard Beach': len(howard_beach), 'Roosevelt Island': len(roosevelt_island),
+     'Kew Gardnes': len(kew_gardens), 'Ozone Park' : len(ozone), 'Richmond Hill': len(richmond_hill), 'South Ozone Park': len(south_ozone_park),
+     'Woodhaven': len(woodhaven), 'Rosedale' : len(rosedale), 'Hollis': len(hollis), 'Bellerose': len(bellerose),'Queens Village': len(queens_village), 
+     'Jamaica' : len(jamaica), 'Edgemere': len(edgemere), 'Elmhurst': len(elmhurst),'Rego Park': len(rego_park), 'Glendale' : len(glendale),
+     'Silver Lake': len(silver_lake), 'West Brighton' : len(west_brighton), 'Gyrmes Hill' : len(grymes_hill), 'Rosebank' : len(rosebank),
+     'Great Kills': len(great_kills), 'Tottenville' : len(tottenville), 'Rossville': len(rossville), 'West Brighton' : len(west_brighton),
+     f"Bull's Head": len(bull_head), 'Emerson Hill' : len(emerson_hill), 'Randall Manor': len(randall_manor), 'Longwood' : len(long_island),
+     'Clifton': len(clifton), 'Charleston' : len(charleston), 'St. George': len(st_george), 'Windsor Terrace' : len(windsor_terrace)}
+
+df = DataFrame(x, index=[0]).stack()
+df = DataFrame(df).sort_values([0], ascending=[False]).reset_index(0)
+df = df[0]
+df = DataFrame(df)
+df.columns = ['Count of Listings']
+df
+df.to_csv('DataScience/listing_count.csv')
 
 #Normalizing for Population
 #%%
