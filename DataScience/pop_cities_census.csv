@@ -1,6 +1,134 @@
-City,Population (MM)
-"Brooklyn, NY",2.58
-"Bronx, NY",1.43
-"Queens, NY",2.27
-"Manhattan, NY",1.66
-"Staten Island, NY",0.47
+City,Population
+Williamsburg,0.032926
+Bedford-Stuyvesant,0.15753
+Harlem,0.116345
+Bushwich,0.129239
+Upper West Side,0.214744
+Hell's Kitchen,0.045884
+East Village,0.063347
+Upper East Side,0.124231
+Midtown,0.104753
+Crown Heights,0.085886
+Chelsea,0.047325
+Greenpoint,0.034719
+East Harlem,0.115921
+Astoria,0.078793
+Lower East Side,0.072957
+Washington Heights,0.201591
+West Village,0.031794
+Financial District,0.057627
+Flatbush,0.110875
+Clinton Hill,0.026936
+Murray Hill,0.010864
+Prospect-Lefferts Gardens,0.099287
+Longwood,0.026196
+Long Island City,0.047501
+East Flatbush,0.135619
+Kips Bay,0.050742
+Fort Greene,0.028335
+Middle Village,0.037929
+Flushing,0.0720085
+Sunset Park,0.126
+SoHo,0.019573
+Gramercy,0.027988
+Chinatown,0.047844
+Prospect Heights,0.01618
+Sunnyside,0.016407
+Ditmars Steinway,0.044104
+Nolita,0.005082
+South Slope,0.023342
+Theater District,0.016232
+Gowanus,0.022919
+Inwood,0.058946
+Elmhurst,0.046662
+Carroll Gardens,0.012853
+Jamaica,0.055751
+Woodside,0.005564
+Kensington,0.002254
+Jackson Heights,0.108152
+East Elmhurst,0.058445
+Boerum Hill,0.011604
+Tribeca,0.017362
+Windsor Terrace,0.020988
+Sheepshead Bay,0.064518
+Canarsie,0.083693
+Borough Park,0.106357
+Bay Ridge,0.079371
+Forest Hills,0.083729
+Cypress Hills,0.016611
+Flatiron District,0.014353
+Cobble Hill,0.007589
+Rego Park,0.02826
+Maspeth,0.028916
+Richmond Hill,0.012632
+Roosevelt Island,0.011661
+Woodhaven,0.012486
+Bensonhurst,0.151705
+Springfield Gardens,0.039827
+Downtown Brooklyn,0.007053
+St. Albans,0.006918
+Red Hook,0.011319
+NoHo,0.077848
+Two Bridges,0.020073
+Gravesend,0.029436
+Battery Park City,0.009252
+Brighton Beach,0.035547
+Corona,0.114647
+Ozone Park,0.059706
+Kingsbridge,0.010669
+Queens Village,0.052504
+Rosedale,0.025063
+Glendale,0.032496
+Port Morris,0.003523
+Civic Center,0.00521
+St. George,0.003426
+Kew Gardnes,0.023232
+South Ozone Park,0.078297
+Columbia St,0.004548
+Wakefield,0.027157
+Bayside,0.049341
+Allerton,0.022823
+DUMBO,0.001139
+Fresh Meadows,0.039386
+Pelham Gardens,0.015388
+Belmont,0.024729
+Bronxdale,0.079188
+Cambria Heights,0.018677
+Morris Heights,0.036779
+University Heights,0.013028
+College Point,0.024275
+Claremont Village,0.036015
+Randall Manor,0.010346
+Dyker Heights,0.042419
+City Island,0.004362
+Howard Beach,0.026148
+Clifton,0.086607
+Bath Beach,0.029931
+West Brighton,0.020099
+Whitestone,0.036259
+Coney Island,0.024711
+Morris Park,0.025299
+Pelham Bay,0.011931
+Soundview,0.031825
+Hollis,0.007831
+Fieldston,0.003292
+Eastchester,0.033546
+Bergen Beach,0.045231
+Edgemere,0.008669
+East Morrisania,0.037075
+Riverdale,0.048049
+Van Nest,0.013909
+Great Kills,0.040721
+Marine Harbor,0.005941
+Bellerose,0.0018
+Mount Eden,0.027482
+Gyrmes Hill,0.007845
+Emerson Hill,0.019527
+Tottenville,0.014945
+Rosebank,0.012503
+Little Neck,0.017823
+Bull's Head,0.089961
+Glen Oaks,0.0295061
+Silver Lake,0.005321
+Rossville,0.009793
+Charleston,0.001373

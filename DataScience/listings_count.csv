@@ -1,0 +1,17 @@
+X,,,,,X
+,Table 2: Listings Count by City,,,,
+,,,,,
+,City,Count of Listings,Population (in Millions),Normalized by Population,
+,"Austin, TX",9067,0.95,9537.03,
+,"Boston, MA",4848,0.69,7076.40,
+,"Denver, CO",4077,0.62,6576.15,
+,"Los Angeles-Long Beach-Anaheim, CA",34455,4.00,8613.75,
+,"Nashville, TN",5527,0.69,7995.74,
+,"New Orleans, LA",6315,0.39,16056.77,
+,"New York, NY",37140,8.62,4307.09,
+,"Portland, OR",4823,0.65,7445.14,
+,"San Diego, CA",9728,1.42,6850.70,
+,"San Francisco, CA",5808,0.88,6567.44,
+,"Seattle, WA",7451,0.73,10238.48,
+,"Washington, DC",6952,0.63,10975.22,
+X,,,,,X
