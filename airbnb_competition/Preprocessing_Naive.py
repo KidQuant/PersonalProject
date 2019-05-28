@@ -43,7 +43,7 @@ test_users = test_users.drop(['date_account_created'], axis=1)
 train_users.loc[ train_users['gender'] == '-unknown-', 'gender'] = -1
 train_users.loc[ train_users['gender'].isnull(), 'gender'] = -1
 test_users.loc[ test_users['gender'] == '-unknown-', 'gender'] = -1
-test_users.loc[ test_user['gender'].isnull(), 'gender'] = -1
+test_users.loc[ test_users['gender'].isnull(), 'gender'] = -1
 
 # Encoding Female with 0, Male with 1 and Other with 2 in both test and train data
 gender_translation = {'FEMALE' : 0,
@@ -108,8 +108,8 @@ train_users['age'].describe()
 
 train_users.loc[train_users['age'] > 95, 'age'] = np.nan
 train_users.loc[train_users['age'] < 16, 'age'] = np.nan
-test_users.loc[test_user['age'] > 95, 'age'] = np.nan
-test_users.loc[test_user['age'] < 16, 'age'] = np.nan
+test_users.loc[test_users['age'] > 95, 'age'] = np.nan
+test_users.loc[test_users['age'] < 16, 'age'] = np.nan
 
 # Replace missing age with median
 print(train_users.age.median())
