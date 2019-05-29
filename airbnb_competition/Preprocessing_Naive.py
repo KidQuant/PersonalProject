@@ -442,3 +442,25 @@ for train, test in cross_validation.KFold(len(train_user), n_folds=10, random_st
     #ground_truth = te_Labels.as_matrix()
     #fold_results.Loc[foldnum, 'Accuracy'] = gnb.score(te_data, te_Labels)
     score_gnb1 = ndcg_score(te_labels.as_matrix(), prob_arr_gnb1, k=5)
+    fold_results.loc[foldnum, 'Ndcg_Gnb'] = score_gnb1
+
+print(fold_results.mean())
+
+from sklearn import preprocessing
+train_users_scaled = pd.DataFrame(preprocessing.StandardScaler().fit_transform(train_users))
+print(train_users_scaled.head(n=5))
+
+foldnum = 0
+fold_results = pd.DataFrame()
+for train, test in cross_validation.KFold(len(train_users_scaled), n_fold=10, random_state=20160302, shuffle=True):
+    foldnum+=1
+    [tr_data, te_data, tr_labels, te_labels] = folds_to_split(train_users_scaled,label_df,train, test)
+    gnb2 = GaussianNB()
+    gnb2.fit(tr_data, tr_labels.values.ravel())
+    prob_arr_gnb2 = gnb2.predict_proba(te_data)
+    #ground_truth = te_labels.as_matrix()
+    #fold_results.loc[foldnum, 'Accuracy'] = gnb.score(te_data, te_labels)
+    score_gnb2 = ndcg_score(te_labels.as_matrix(), prob_arr_gnb2, k=5)
+    fold_results.loc[foldnum, 'Ndcg_Gnb'] = score_gnb2
+
+print(fold_results.mean())
