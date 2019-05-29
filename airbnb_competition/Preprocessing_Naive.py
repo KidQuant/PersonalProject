@@ -11,15 +11,16 @@ test_users = pd.read_csv('airbnb_competition/input/test_users.csv')
 
 # Extracting labels from the train data
 train_users_labels = train_users.loc[:,'country_destination']
-print(train_users_labels.head(n=5))
+print (train_users_labels.head(n=5))
+
 
 # Extracting attributes from the train data
-train_users_attrs = train_users.iloc[:, 0:15]
+train_users_attrs = train_users.iloc[:,0:15]
 print(train_users_attrs.head(n=5))
 
 train_users = train_users_attrs
 
-train_users = train_users.drop(['date_first_booking'], axis =1)
+train_users = train_users.drop(['date_first_booking'], axis=1)
 test_users = test_users.drop(['date_first_booking'], axis=1)
 
 # %% Date is split into 3 parts as year, month, and day in both test and train. These are added
@@ -39,15 +40,15 @@ test_users = test_users.drop(['date_account_created'], axis=1)
 
 # %% Replacing unknown values in gender with -1 and null values with -1
 train_users.loc[ train_users['gender'] == '-unknown-', 'gender'] = -1
-train_users.loc[ train_users['gender'].isnull(), 'gender'] = -1
+train_users.loc[ train_users['gender'].isnull(), 'gender' ] = -1
 test_users.loc[ test_users['gender'] == '-unknown-', 'gender'] = -1
 test_users.loc[ test_users['gender'].isnull(), 'gender'] = -1
 
 # Encoding Female with 0, Male with 1 and Other with 2 in both test and train data
 gender_translation = {'FEMALE' : 0,
-                      'MALE' : 1,
-                      'OTHER' : 2,
-                      -1 : -1 }
+                     'MALE' : 1,
+                     'OTHER' : 2,
+                     -1 : -1 }
 for data in [train_users, test_users]:
     data['gender'] = data['gender'].apply(lambda x: gender_translation[x])
 
@@ -57,18 +58,18 @@ valid_gender_count = len(train_users.gender.values) - nan_gender_count
 
 # Creating a map with the gender distribution
 count_map = pd.value_counts(train_users['gender'].values)
-print('Existing gender value distribution')
+print ("Existing gender value distribution")
 for k, v in count_map.iteritems():
     if k == -1:
         continue
-    print(k, ':', float(v)/float(valid_gender_count))
+    print (k, ":", float(v)/float(valid_gender_count))
 
 
 # %% Making the gender distribution the same for missing imputation
 for k, v in count_map.iteritems():
     if k == -1:
         continue
-    c = int( nan_gender_count * float(v)/float(valid_gender_count))
+    c = int ( nan_gender_count * float(v)/float(valid_gender_count) )
     for i in range(len(train_users.gender.values)):
         if train_users.gender.values[i] == -1:
             train_users.gender.values[i] = k
@@ -110,10 +111,10 @@ test_users.loc[test_users['age'] > 95, 'age'] = np.nan
 test_users.loc[test_users['age'] < 16, 'age'] = np.nan
 
 # Replace missing age with median
-print(train_users.age.median())
-print(test_users.age.median())
-train_users.loc[ train_users['age'].isnull(), 'age'] = train_users.age.median()
-test_users.loc[ test_users['age'].isnull(), 'age'] = test_users.age.median()
+print (train_users.age.median())
+print (test_users.age.median())
+train_users.loc[ train_users['age'].isnull(), 'age' ] = train_users.age.median()
+test_users.loc[ test_users['age'].isnull(), 'age' ] = test_users.age.median()
 
 # %%  Encoding the signup method for test
 signup_translation = {'facebook' : 0,
@@ -169,7 +170,6 @@ affiliate_channel_encoding = {'direct' : 1,
 for data in [train_users, test_users]:
     data['affiliate_channel'] = data['affiliate_channel'].apply(lambda x: affiliate_channel_encoding[x])
 
-
 # Encoding for affiliate_provider
 affiliate_provider_encoding = {'direct':1,
 'google':2,
@@ -193,20 +193,19 @@ affiliate_provider_encoding = {'direct':1,
 for data in [train_users, test_users]:
     data['affiliate_provider'] = data['affiliate_provider'].apply(lambda x: affiliate_provider_encoding[x])
 
-train_users.loc[ train_users['first_affiliate_tracked'].isnull(), 'first_affiliate_tracked'] = 'untracked'
-test_users.loc[ test_users['first_affiliate_tracked'].isnull(), 'first_affiliate_tracked'] = 'untracked'
-first_affiliate_tracked_encoding = {'untracked': 1,
-                                    'linked' : 2,
-                                    'omg' : 3,
-                                    'tracked-other' : 4,
-                                    'product' : 5,
-                                    'marketing' : 6,
-                                    'local ops' : 7}
+train_users.loc[ train_users['first_affiliate_tracked'].isnull(), 'first_affiliate_tracked'] = "untracked"
+test_users.loc[ test_users['first_affiliate_tracked'].isnull(), 'first_affiliate_tracked'] = "untracked"
+first_affiliate_tracked_encoding = {'untracked' : 1,
+                                   'linked' : 2,
+                                   'omg' : 3,
+                                   'tracked-other' : 4,
+                                   'product' : 5,
+                                   'marketing' : 6,
+                                   'local ops' : 7}
 
 for data in [train_users, test_users]:
     data['first_affiliate_tracked'] = data['first_affiliate_tracked'].apply(lambda x: first_affiliate_tracked_encoding[x])
 
-# Encoding for signup_app
 # Encoding for signup_app
 signup_app_encoding = {'Web' : 1,
                       'iOS' : 2,
@@ -215,7 +214,6 @@ signup_app_encoding = {'Web' : 1,
 for data in [train_users, test_users]:
     data['signup_app'] = data['signup_app'].apply(lambda x: signup_app_encoding[x])
 
-# Encoding for first_device_type
 # Encoding for first_device_type
 first_device_type_encoding = { 'Mac Desktop' : 1,
                              'iPhone' : 2,
@@ -226,7 +224,6 @@ first_device_type_encoding = { 'Mac Desktop' : 1,
                              'Other/Unknown' : 7,
                              'Desktop (Other)' : 8,
                              'SmartPhone (Other)' : 9}
-
 for data in [train_users, test_users]:
     data['first_device_type'] = data['first_device_type'].apply(lambda x: first_device_type_encoding[x])
 
@@ -326,29 +323,29 @@ labels_df = train_users_labels.to_frame()
 for data in [labels_df]:
     data['country_destination'] = data['country_destination'].apply(lambda x: country_destination_encoding[x])
 
-
+#print train_users_merge.head()
 
 from sklearn import preprocessing
 
 stdscaler = preprocessing.StandardScaler()
-train_users_scaled = stdscaler.fit_transform(train_users.values)
+train_users_scaled = stdscaler.fit_transform(train_users.values);
 train_users = pd.DataFrame(train_users_scaled, columns = train_users.columns)
 
-train_users_merge_scaled = stdscaler.fit_transform(train_users_merge.values);
-train_users_merge = pd.DataFrame(train_users_merge_scaled, columns = train_users_merge.columns)
+train_users_merge_scaled = stdscaler.fit_transform(train_users.values);
+train_users_merge = pd.DataFrame(train_users_merge_scaled, columns = train_users.columns)
 
 test_users_scaled = stdscaler.fit_transform(test_users.values)
-#test_users = pd.DataFrame(test_users_scaled, columns = test_users.columns)
+test_users = pd.DataFrame(test_users_scaled, columns = test_users.columns)
 
-"""
+
 train_users['country_destination'] = labels_df
 print(train_users.head())
 
 train_users_merge['country_destination'] = labels_df
 #print(train_users_merge.head())
 
-#train_users.to_csv('train_users_wo_merge_scale.csv',index=False)
-#train_users_merge.to_csv('train_users_merge_scale.csv',index=False)
+train_users.to_csv('train_users_wo_merge_scale.csv',index=False)
+train_users_merge.to_csv('train_users_merge_scale.csv',index=False)
 
 #train_users_merge_wo_scale['country_destination'] = labels_df
 #train_users_merge_wo_scale.to_csv('train_users_merge_wo_scale.csv',index=False)
