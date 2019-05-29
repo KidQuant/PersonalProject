@@ -305,6 +305,8 @@ for key, val in df.iteritems():
 
 print(train_users['session_count'].max())
 
+
+
 #Encoding for country_destination
 country_destination_encoding = {'NDF': 0,
 'US' : 1,
@@ -325,25 +327,24 @@ for data in [labels_df]:
     data['country_destination'] = data['country_destination'].apply(lambda x: country_destination_encoding[x])
 
 
-#print train_users_merge.head()
-"""
+
 from sklearn import preprocessing
 
 stdscaler = preprocessing.StandardScaler()
-train_users_scaled = stdscaler.fit_transform(train_users.values);
+train_users_scaled = stdscaler.fit_transform(train_users.values)
 train_users = pd.DataFrame(train_users_scaled, columns = train_users.columns)
 
 train_users_merge_scaled = stdscaler.fit_transform(train_users_merge.values);
 train_users_merge = pd.DataFrame(train_users_merge_scaled, columns = train_users_merge.columns)
 
-#test_users_scaled = stdscaler.fit_transform(test_users.values);
+test_users_scaled = stdscaler.fit_transform(test_users.values)
 #test_users = pd.DataFrame(test_users_scaled, columns = test_users.columns)
 
 """
-#train_users['country_destination'] = labels_df
-#print(train_users.head())
+train_users['country_destination'] = labels_df
+print(train_users.head())
 
-#train_users_merge['country_destination'] = labels_df
+train_users_merge['country_destination'] = labels_df
 #print(train_users_merge.head())
 
 #train_users.to_csv('train_users_wo_merge_scale.csv',index=False)
@@ -411,12 +412,13 @@ train_users = train_users.drop(['id'], axis = 1)
 # %% Modeling
 
 from sklearn.naive_bayes import GaussianNB
-from sklearn import preprocessing, cross_validation
-from sklearn.ensemble import AdaBoostClassifer
+from sklearn import preprocessing
+from sklearn.model_selection import cross_validate
+from sklearn.model_selection import train_test_split
+from sklearn.ensemble import AdaBoostClassifier
 
 gnb = GaussianNB()
-[tr_data, te_data,
- tr_labels, te_labels] = cross_validation.train_test_split(train_users, labels_df, test_size=0.33,random_state=20160302)
+[tr_data, te_data, tr_labels, te_labels] = train_test_split(train_users, labels_df, test_size=0.33,random_state=20160302)
 gnb.fit(tr_data, tr_labels.values.ravel())
 
 prob_arr = gnb.predict_proba(te_data)
