@@ -22,18 +22,16 @@ train_users = train_users_attrs
 train_users = train_users.drop(['date_first_booking'], axis =1)
 test_users = test_users.drop(['date_first_booking'], axis=1)
 
-# %% Date is split into 3 parts as year, month, and day in both test and train. These are added 
+# %% Date is split into 3 parts as year, month, and day in both test and train. These are added
 # new features in both test and train
 
-date_acc_created = np.vstack(train_users.date_account_created.astype(str).apply(
-    lambda x: list(map(int, x.split('-')))).values)
+date_acc_created = np.vstack(train_users.date_account_created.astype(str).apply(lambda x: list(map(int, x.split('-')))).values)
 train_users['created_year'] = date_acc_created[:,0]
 train_users['created_month'] = date_acc_created[:,1]
 train_users['created_day'] = date_acc_created[:,2]
 train_users = train_users.drop(['date_account_created'], axis=1)
 
-date_acc_created_test = np.vstack(test_users.date_account_created.astype(str).apply(
-    lambda x: list(map(int, x.split('-')))).values)
+date_acc_created_test = np.vstack(test_users.date_account_created.astype(str).apply(lambda x: list(map(int, x.split('-')))).values)
 test_users['created_year'] = date_acc_created_test[:,0]
 test_users['created_month'] = date_acc_created_test[:,1]
 test_users['created_day'] = date_acc_created_test[:,2]
@@ -384,7 +382,7 @@ def dcg_score(y_true, y_score, k=5):
 
 #def ndcg_score(ground_truth, predictions, k=5):
 def ndcg_score(te_labels, predict, k):
-    
+
     lb = LabelBinarizer()
     lb.fit(range(len(predict) + 1))
     T = lb.transform(te_labels)
@@ -417,7 +415,7 @@ from sklearn import preprocessing, cross_validation
 from sklearn.ensemble import AdaBoostClassifer
 
 gnb = GaussianNB()
-[tr_data, te_data, 
+[tr_data, te_data,
  tr_labels, te_labels] = cross_validation.train_test_split(train_users, labels_df, test_size=0.33,random_state=20160302)
 gnb.fit(tr_data, tr_labels.values.ravel())
 
@@ -428,3 +426,19 @@ predictions = prob_arr
 score = ndcg_score(ground_truth, predictions, k=5)
 print(score)
 
+print('NDCG Score for Naive Bayes')
+print(score)
+
+# %% Native Bayes with 10-fold cross-validation
+
+foldnum = 0
+fold_results = pd.DataFrame()
+for train, test in cross_validation.KFold(len(train_user), n_folds=10, random_state=20160302,shuffle=True):
+    foldnum+=1
+    [tr_data, te_data, tr_labels, te_labels] = folds_to_split(train_users, labels_df, train,test)
+    gnb1 = GaussianNB()
+    gnb1.fit(tr_data, tr_labels, tr_labels.values.ravel())
+    prob_arr_gnb1 = gnb1.predict_proba(te_data)
+    #ground_truth = te_Labels.as_matrix()
+    #fold_results.Loc[foldnum, 'Accuracy'] = gnb.score(te_data, te_Labels)
+    score_gnb1 = ndcg_score(te_labels.as_matrix(), prob_arr_gnb1, k=5)
