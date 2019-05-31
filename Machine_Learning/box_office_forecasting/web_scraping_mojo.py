@@ -133,7 +133,7 @@ def get_details(name_link):
     return return_list
 
 # define the year
-year = '2017'
+year = '2019'
 # define the link
 link1 = 'http://www.BoxOfficeMojo.com/yearly/chart/?page='
 link2 = '&view=widedate&view2=domestic&yr' + year + '&p=.htm'
@@ -145,7 +145,7 @@ output_list.append(['rank', 'name', 'name_list', 'total_gross', 'total_thea', 'o
 'open_date', 'close_date', 'budget', 'studio', 'genre', 'runtime', 'MPAArating', 'Director_list', 'Director_links',
 'Writer_list', ' Writer_links', 'Actor_list', 'Actor_links', 'Producer_list', 'Producer_links', 'Cinematographer_list',
 'Cinematographer_links', 'Composer_list', 'Composer_links'])
-with open('box' + year +'2.csv', 'a+', encoding='UTF-8', newline='') as csvfile:
+with open('box' + year +'.csv', 'a+', encoding='UTF-8', newline='') as csvfile:
     w = csv.writer(csvfile)
     w.writerows(output_list)
 
@@ -161,7 +161,7 @@ for i in range(1,3):
 
     output_list = output_list + get_movie(movie_list1)
     output_list = output_list + get_movie(movie_list2)
-    with open('box' + year + '2.csv', 'a+', encoding='UTF-8', newline='') as csvfile:
+    with open('box' + year + '.csv', 'a+', encoding='UTF-8', newline='') as csvfile:
         w = csv.writer(csvfile)
         w.writerows(output_list)
     time.sleep(3)
