@@ -14,11 +14,9 @@ error = pd.read_csv('error' + thisyear + '.csv')
 box_imdb = pd.merge(box, imdb,  how='inner', left_on=['rank'], right_on = ['RankinBoxOffice'])
 all_wide = pd.merge(box_imdb, error,  how='left', left_on=['rank'], right_on = ['RankinBoxOffice'])
 
-all_wide.to_csv('all_wide.csv')
-
 for i in range(0, len(all_wide)):
     if pd.notnull(all_wide['imdbID_x'])[i]:
-        m= all_wide.iloc[i]['imdbID_x']
+        m = all_wide.iloc[i]['imdbID_x']
         link = 'http://www.omdbapi.com/?i=' + m + '&apikey=e30d2be'
         print (link)
         r = requests.get(link)

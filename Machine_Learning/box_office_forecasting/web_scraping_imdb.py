@@ -8,7 +8,7 @@ import requests
 thisyear = '2019'
 
 #import film name and rank from BoxOfficeMojo
-movie = pd.read_csv('box' + thisyear +'.csv')
+movie = pd.read_csv('box' + thisyear +'2.csv')
 name = movie['name']
 rank = movie['rank']
 
