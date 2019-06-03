@@ -4,15 +4,15 @@ import csv
 import time
 import re
 
-#Extract movie info from BoxOfficeMojo
+# Extract movie info from BoxOfficeMojo
 def get_movie(movie_list):
     output_list = []
     for movie in movie_list:
         try:
             rank = movie.contents[0].text
-            print(rank)
+            print (rank)
             name = movie.contents[1].text
-            name_link = 'http://www.BoxOfficeMojo.com/' + movie.contents[1].b.font.a['href']
+            name_link = 'http://www.boxofficemojo.com/' + movie.contents[1].b.font.a['href']
             total_gross = movie.contents[3].text.replace(',','').replace('$','')
             total_thea = movie.contents[4].text.replace(',','')
             open_gross = movie.contents[5].text.replace(',','').replace('$','')
@@ -38,14 +38,10 @@ def get_movie(movie_list):
             Cinematographer_links = details[14]
             Composer_list = details[15]
             Composer_links = details[16]
-            output_list.append([rank, name, name_link, total_gross, total_thea, open_gross,
-            open_thea, open_date, close_date, budget, studio, genre, runtime, MPAArating, Director_list,
-            Director_links, Writer_list, Writer_links, Actor_list, Actor_links, Producer_list, Producer_links,
-            Cinematographer_list, Cinematographer_links, Composer_list, Composer_links])
+            output_list.append([rank, name, name_link, total_gross, total_thea, open_gross, open_thea, open_date, close_date, budget, studio, genre, runtime, MPAArating, Director_list, Director_links, Writer_list, Writer_links, Actor_list, Actor_links, Producer_list, Producer_links, Cinematographer_list, Cinematographer_links, Composer_list, Composer_links])
         except Exception as ex:
             print(ex)
     return output_list
-
 
 # Enter each page of the movie to get detailed information
 
@@ -135,33 +131,30 @@ def get_details(name_link):
 # define the year
 year = '2019'
 # define the link
-link1 = 'http://www.BoxOfficeMojo.com/yearly/chart/?page='
-link2 = '&view=widedate&view2=domestic&yr' + year + '&p=.htm'
+link1 = 'http://www.boxofficemojo.com/yearly/chart/?page='
+link2 = '&view=widedate&view2=domestic&yr=' + year +'&p=.htm'
 
 headers = {'User-Agent' : 'Mozilla/5.0 (Windows; U; Windows NT 6.1; en-US; rv:1.9.1.6) Gecko/20091201 Firefox/3.5.6'}
 
 output_list = []
-output_list.append(['rank', 'name', 'name_list', 'total_gross', 'total_thea', 'open_gross', 'open_thea',
-'open_date', 'close_date', 'budget', 'studio', 'genre', 'runtime', 'MPAArating', 'Director_list', 'Director_links',
-'Writer_list', ' Writer_links', 'Actor_list', 'Actor_links', 'Producer_list', 'Producer_links', 'Cinematographer_list',
-'Cinematographer_links', 'Composer_list', 'Composer_links'])
-with open('box' + year +'.csv', 'a+', encoding='UTF-8', newline='') as csvfile:
+output_list.append(['rank', 'name', 'name_link', 'total_gross', 'total_thea', 'open_gross', 'open_thea', 'open_date', 'close_date', 'budget', 'studio', 'genre', 'runtime', 'MPAArating', 'Director_list', 'Director_links', 'Writer_list', 'Writer_links', 'Actor_list', 'Actor_links', 'Producer_list', 'Producer_links', 'Cinematographer_list', 'Cinematographer_links', 'Composer_list', 'Composer_links'])
+with open('box' + year +'2.csv', 'a+', encoding='UTF-8', newline='') as csvfile:
     w = csv.writer(csvfile)
     w.writerows(output_list)
 
 # get the info from BoxOfficeMojo
 for i in range(1,3):
-    print(i)
+    print (i)
     output_list = []
     link = link1 + str(i) + link2
-    r = requests.get(link, headers = headers)
+    r = requests.get(link, headers=headers)
     soup = BeautifulSoup(r.text, 'lxml')
-    movie_list1 = soup.find_all('tr', attrs={'bgcolor': '#ffffff'})
-    movie_list2 = soup.find_all('tr', attrs={'bgcolor': '#f4f4ff'})
+    movie_list1 = soup.find_all('tr', attrs={"bgcolor": "#ffffff"})
+    movie_list2 = soup.find_all('tr', attrs={"bgcolor": "#f4f4ff"})
 
     output_list = output_list + get_movie(movie_list1)
     output_list = output_list + get_movie(movie_list2)
-    with open('box' + year + '.csv', 'a+', encoding='UTF-8', newline='') as csvfile:
+    with open('box' + year +'2.csv', 'a+', encoding='UTF-8', newline='') as csvfile:
         w = csv.writer(csvfile)
         w.writerows(output_list)
     time.sleep(3)
