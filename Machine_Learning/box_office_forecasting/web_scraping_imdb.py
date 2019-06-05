@@ -5,7 +5,7 @@ import csv
 import requests
 
 #define the year to extract data
-thisyear = '2019'
+thisyear = '2018'
 
 #import film name and rank from BoxOfficeMojo
 movie = pd.read_csv('box' + thisyear +'2.csv')
@@ -24,7 +24,7 @@ with open('IMDB' + thisyear +'.csv', 'a+', encoding='UTF-8', newline='') as csvf
 for i in range(0, len(name)):
     RankinBoxOffice = rank[i]
     TitleinBoxOffice = name[i]
-    m = TitleinBoxOffice.replace(' (2019)','').replace(' ', '+')
+    m = TitleinBoxOffice.replace(' (2018)','').replace(' ', '+')
     link = 'http://www.omdbapi.com/?t=' + m + '&apikey=e30d2be'
     r = requests.get(link)
     movie_json = json.loads(r.text)
@@ -81,7 +81,7 @@ for i in range(0, len(name)):
 
 #Printing out incorrect movie matches
 
-thisyear = '2019'
+thisyear = '2018'
 df = pd.read_csv('IMDB' + thisyear +'.csv')
 
 df_not_match = df[~(df['TitleinBoxOffice'].str.lower() == df['Title'].str.lower())]

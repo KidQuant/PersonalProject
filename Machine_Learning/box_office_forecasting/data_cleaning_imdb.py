@@ -6,8 +6,8 @@ import time
 from bs4 import BeautifulSoup
 import csv
 
-thisyear = '2019'
-box = pd.read_csv('box' + thisyear + '.csv')
+thisyear = '2018'
+box = pd.read_csv('box' + thisyear + '2.csv')
 imdb = pd.read_csv('IMDB' + thisyear + '.csv')
 error = pd.read_csv('error' + thisyear + '.csv')
 
@@ -62,5 +62,5 @@ for i in range(0, len(all_wide)):
             all_wide.at[i, 'BoxOffice'] = ''
         all_wide.at[i, 'Awards'] = movie_json['Awards']
         all_wide.at[i, 'Actors'] = movie_json['Actors'].replace(',','|')
-all_wide.drop(['RankinBoxOffice_x', 'TitleinBoxOffice_x','RankinBoxOffice_y','TitleinBoxOffice_y', 'imdbID_x'], axis=1, inplace=True)
+all_wide.drop(['RankinBoxOffice_x', 'TitleinBoxOffice_x','RankinBoxOffice_y','TitleinBoxOffice_y', 'imdbID_y'], axis=1, inplace=True)
 all_wide.to_csv('all_wide_'+ thisyear +'.csv')
