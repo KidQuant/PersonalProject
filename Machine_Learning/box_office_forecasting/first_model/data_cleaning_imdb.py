@@ -6,7 +6,7 @@ import time
 from bs4 import BeautifulSoup
 import csv
 
-thisyear = '2018'
+thisyear = '2017'
 box = pd.read_csv('box' + thisyear + '2.csv')
 imdb = pd.read_csv('IMDB' + thisyear + '.csv')
 error = pd.read_csv('error' + thisyear + '.csv')

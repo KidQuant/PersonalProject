@@ -5,7 +5,7 @@ import pandas as pd
 import csv
 import time
 
-thisyear = '2018'
+thisyear = '2017'
 df = pd.read_csv('box' + thisyear +'2.csv')
 
 names = df['name'].str.replace('\(.*\)','').str.replace(r'[\.\':,\?]','').str.replace('& ','').str.replace('- ','')
