@@ -129,7 +129,7 @@ def get_details(name_link):
     return return_list
 
 # define the year
-year = '2018'
+year = '2017'
 # define the link
 link1 = 'http://www.boxofficemojo.com/yearly/chart/?page='
 link2 = '&view=widedate&view2=domestic&yr=' + year +'&p=.htm'
