@@ -110,3 +110,46 @@ date_train_s['release_month'] = date_train_s['release_date'].apply(lambda x:int(
 [0]) if type(x) == str else 0)
 date_test_s['release_year'] = date_test_s['release_date'].apply(lambda x:int(x.split('/')
 [2]) if type(x) == str else 0)
+
+date_test_s['release_month'] = date_test_s['release_date'].apply(lambda x: int(x.split('/')
+[0]) if type(x) == str else 0)
+date_test['release_year'] = date_test['release_date'].apply(lambda x: int(x.split('/')[2])
+if type(x) == str else 0)
+
+#Convert year
+date_train_s['release_year'] = date_train_s['release_date'].apply(ap)
+date_test_s['release_year'] = date_test_s['release_date'].apply(ap)
+date_test['release_year'] = date_test['release_date'].apply(ap)
+
+#Drop the release_date itself
+date_train_s.drop('release_date', axis=1, inplace=True)
+date_test_s.drop('release_date', axis=1, inplace=True)
+date_test.drop('release_date', axis=1, inplace=True)
+
+#on all
+date_train['release_month'] = date_train['release_date'].apply(lambda x:int(x.split('/')[0])
+if type(x) == str else 0)
+date_train['release_year'] = date_train['release_date'].apply(lambda x: int(x.split('/')[2])
+if type(x) == str else 0)
+date_train['release_year'] = date_train['release_date'].apply(ap)
+date_train.drop('release_date', axis =1, inplace=True)
+
+#MODEL 4
+title_train_s = title_train_s[['revenue', 'title']]
+title_train_s['revenue'] = title_train_s['revenue'].apply(np.log)
+title_train_s['revenue'] = title_train_s['revenue'].apply(f)
+
+#Full training
+title_train = title_train[['revenue', 'title']]
+title_train['revenue'] = title_train['revenue'].apply(np.log)
+title_train['revenue'] = title_train['revenue'].apply(f)
+
+#Validation
+title_test_s = title_test_s[['revenue', 'title']]
+title_test_s['revenue'] = title_test_s['revenue'].apply(np.log)
+title_test_s['revenue'] = title_test_s['revenue'].apply(f)
+
+#Full testing
+# title_test = title_test[['revenue','title']]
+# title_test['revenue'] = title_test['revenue'].apply(np.log)
+# title_test['revenue'] = title_test['revenue'].apply(f)
