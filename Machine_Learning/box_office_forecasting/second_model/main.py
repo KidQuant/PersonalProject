@@ -276,3 +276,54 @@ Y_0_3 = title_train['revenue']
 
 #Model 1
 train_all.head()
+
+from keras import models, layers, regularizers, optimizers
+
+def model1(X, Y, X_test, Y_test):
+    model1 = models.Sequential()
+    model1.add(layers.Dense(356, activation='relu', input_shape=(X.shape[1],)))
+    model1.add(layers.Dropout(0.1))
+    model1.add(layers.Dense(256, activation='relu'))
+    model1.add(layers.Dense(10,activation='relu'))
+    model1.add(layers.Dense(1))
+
+    model1.compile(optimizer=optimizers.rmsprop(lr=1e-5),loss='mse',metrics=['mean_squared_logarithmic_error'])
+    #history = model1.fit(X,Y,epochs=40, batch_size = 32, validation_data=(X_test, Y_test))
+    history = model1.fit(X, Y, epochs = 40, batch_size = 32)
+    return [model1, history]
+
+def model2(X1, Y1, X1_test, Y1_test):
+    model2 = models.Sequential()
+    model2.add(layers.Dense(356, activation='relu', input_shape=(X1.shape[1],)))
+    model2.add(layers.Dropout(0.2))
+    model2.add(layers.BatchNormalization())
+    model2.add(layers.Dense(256, activation='relu'))
+    model2.add(layers.Dropout(0.2))
+    model2.add(layers.Dense(128, activation='relu'))
+    model2.add(layers.Dropout(0.2))
+    model2.add(layers.Dense(64, activation='relu')) #Added
+    model2.add(layers.Dropout(0.2)) #Added
+    model2.add(layers.Dense(10,activation='relu'))
+    model2.add(layers.Dense(1))
+
+    model2.compile(optimizer=optimizers.rmsprop(lr=1e-5),loss='msle',metrics=['mean_squared_logarithmic_error'])
+    #history = model2.fit(X1, Y1, epochs=50, batch_size = 32, validation_data=(X1_test, Y1_test))
+    history = model2.fit(X1, Y1, epochs = 50, batch_size = 32)
+    return [model2, history]
+
+def model3(X2, Y2, X2_test, Y2_test):
+    model3 = models.Sequential()
+    model3.add(layers.Dense(356, activation='relu', input_shape=(X2.shape[1],)))
+    model3.add(layers.Dropout(0.2))
+    model3.add(layers.Dense(256, activation='relu'))
+    model3.add(layers.Dense(10,activation='relu'))
+    model3.add(layers.Dense(1))
+
+    model3.compile(optimizer=optimizers.rmsprop(lr=1e-5),loss='mse',metrics=['mean_squared_logarithmic_error'])
+    #history = model3.fit(X2, Y2, epochs=40, batch_size = 32, validation_data=(X2_test, Y2_test))
+    history = model3.fit(X2, Y2, epochs = 50, batch_size = 32)
+
+    return [model3, history]
+
+model1, history1 = model1(X_0, Y_0, X_test, Y_test)
+model1.summary()
