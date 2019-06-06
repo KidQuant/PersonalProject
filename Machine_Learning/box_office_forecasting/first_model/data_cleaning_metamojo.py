@@ -4,7 +4,7 @@ from bs4 import BeautifulSoup
 import re
 import time
 
-thisyear = '2018'
+thisyear = '2017'
 df = pd.read_csv('mc'+ thisyear +'.csv')
 
 error = df[df['meta_movie_name'] == 'error']
