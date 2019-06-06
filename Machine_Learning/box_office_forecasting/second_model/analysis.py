@@ -93,3 +93,20 @@ plot_graph([train_df['release_year'],'year'],[train_df['runtime'], 'runtime'])
 plot_graph([train_df['release_year']/train_df['runtime'],'year/runtime'], [train_df['revenue'],'revenue'])
 
 plot_graph([train_df['runtime'].apply(np.log),'runtime'],[train_df['revenue'].apply(np.log),'revenue'])
+
+import seaborn as sns
+
+df = train_df
+Var_Corr = df.corr()
+fig, ax = plt.subplots(figsize=(10,10))
+# plot the heatmap and annotation on it
+sns.heatmap(Var_Corr, xticklabels=Var_Corr.columns, yticklabels=Var_Corr.columns, annot=True,ax=ax)
+
+yearvsrev = (df.groupby(['release_year'], as_index=False).mean())[['release_year','revenue']]
+
+plot_graph([yearvsrev['release_year'],'year'],[yearvsrev['revenue'],'revenue'])
+
+df_for_merge = df[['release_year']]
+df_for_merge
+
+df['avg_rev_per_year'] =pd.merge(df_for_merge, yearvsrev, how = 'left', on = "release_year")
