@@ -1,3 +1,5 @@
+#%%
+
 import matplotlib
 import numpy as np
 import matplotlib.pyplot as plt
@@ -236,6 +238,7 @@ statistics = pd.concat([bath_beach_s, bay_ridge_s, bedstuy_s, bensonhurst_s, ber
 
 statistics.index
 
+#%%
 
 x = {'Bath Beach': len(nyc[nyc['neighbourhood_cleansed'] == 'Bath Beach']),
       'Bay Ridge': len(nyc[nyc['neighbourhood_cleansed'] == 'Bay Ridge']),
@@ -295,7 +298,8 @@ df
 df['Count of Listings'].plot(kind = 'bar', cmap = cmap)
 plt.title('Count of Listings')
 
-# Creating DataFrame of population in each metro area in millions from US Census 2015
+
+# %% Creating DataFrame of population in each metro area in millions from US Census 2015
 pop = pd.read_csv('brooklyn_population.csv').convert_objects(convert_numeric=True)
 pop.columns = ['City', 'Population']
 pop = pop.set_index('City')
@@ -318,10 +322,105 @@ y = df2['mean']
 
 n = (df2.index.tolist())
 
-fig ax = plt.subplots()
+fig, ax = plt.subplots()
 
 fig, ax = plt.subplots()
 ax.scatter(x, y, c=y,cmap = cmap, s =200)
 
 for i, txt in enumerate(n):
     ax.annotate(txt, (x[i],y[i]), fontsize = 9)
+
+
+#%% Average Availability of Listings
+x = (365 - statistics['availability_365']['mean']).convert_objects(convert_numeric=True)
+x = pd.DataFrame(x).sort_values(['mean'], ascending=[False])
+x.columns = ['Availability']
+x
+
+x = pd.DataFrame(statistics['number_of_reviews']['mean'].convert_objects(convert_numeric=True)).sort_values(['mean'], ascending=[False])
+x.columns = ['Avg. # of Reviews']
+x
+
+x = (365 - statistics['availability_365']['mean']).convert_objects(convert_numeric=True)
+y = statistics['price']['mean'].convert_objects(convert_numeric=True)
+
+n = (x.reset_index().location.tolist())
+
+fig, ax = plt.subplots()
+ax.scatter(x, y, c=y,cmap = cmap , s =200)
+
+for i, txt in enumerate(n):
+    ax.annotate(txt, (x[i],y[i]), fontsize=10)
+
+plt.xlabel('Average Number of Days booked in next 365 days', fontsize=14)
+plt.ylabel('Average Price', fontsize=14)
+plt.title('Average Price and Popularity of Listings', fontsize=14, fontweight='bold')
+
+
+#%% Dropping Mill Basin
+
+x = (365 - statistics['availability_365']['mean'].convert_objects(convert_numeric = True).drop('Mill Basin'))
+y = statistics['price']['mean'].convert_objects(convert_numeric = True).drop('Mill Basin')
+n = (x.reset_index()).location.tolist()
+
+fig, ax = plt.subplots(figsize=(9, 7))
+ax.scatter(x, y, c=y,cmap = cmap , s =200)
+
+for i, txt in enumerate(n):
+    ax.annotate(txt, (x[i],y[i]), fontsize = 15)
+    
+plt.xlabel('Average Number of Days booked in next 365 days', fontsize=18)
+plt.ylabel('Average Price', fontsize=18)
+plt.title('Average Price and Popularity of Listings', fontsize=18, fontweight='bold')
+
+
+#%% Correlation between the two variables
+df = pd.concat ([x,y], axis =1 )
+df.corr()
+
+#%% Price and Average Rating Relationship
+
+x = statistics['review_scores_rating']['mean'].convert_objects(convert_numeric=True)
+y = statistics['price']['mean'].convert_objects(convert_numeric=True)
+
+n = (x.reset_index()).location.tolist()
+
+fig, ax = plt.subplots()
+ax.scatter(x, y, c=y,cmap = cmap, s =200)
+
+for i, txt in enumerate(n):
+    ax.annotate(txt, (x[i],y[i]), fontsize = 10)
+    
+    
+plt.xlabel('Average Rating', fontsize=14)
+plt.ylabel('Price', fontsize=14)
+plt.title('Price and Average Rating', fontsize=14, fontweight='bold')
+
+
+#%% Correlation Matrix
+
+df1 = statistics.iloc[:,[2,7,12,17,22,27,32,37,42,47]].reset_index().drop('location',axis = 1).fillna(0)
+df1.columns = df1.columns.droplevel(1)
+df1.columns = ['acc', 'bt', 'bd', 'pr', 'min', '365', '#rev', 'rat', "acc", "val"]
+#df_zillow = df_zillow['ZHVI_10Year']
+#df1 = concat([df1, df_zillow], axis = 1).fillna(0)
+
+coor= df1.corr()
+
+# Generate a mask for the upper triangle
+mask = np.zeros_like(df1.corr(), dtype=np.bool)
+mask[np.triu_indices_from(mask)] = True
+
+# Set up the matplotlib figure
+f, ax = plt.subplots(figsize=(11, 9))
+
+# Generate a custom diverging colormap
+cmap = sns.diverging_palette(220, 10, as_cmap=True)
+
+# Draw the heatmap with the mask and correct aspect ratio
+sns.heatmap(df1.corr(), mask=mask, cmap=cmap, vmax=.3,
+            square=True, xticklabels=2, yticklabels=5,
+            linewidths=.5, cbar_kws={"shrink": .5}, ax=ax)
+
+
+#%%
