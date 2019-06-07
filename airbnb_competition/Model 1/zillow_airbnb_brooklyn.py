@@ -474,4 +474,65 @@ plt.title('Home Price(ZHVI) and Airbnb Listing Price', fontsize=20, fontweight='
 df = df.drop(['Mill Basin', 'South Slope'])
 df.corr()
 
+df = pd.concat([statistics['price']['mean'], df_zillow['ZHVI_5Year']], axis =1).dropna()
 
+x = df['ZHVI_5Year'] * 100
+y = df['mean']
+
+n = (df.index).tolist()
+
+fig, ax = plt.subplots(figsize=(12, 10))
+ax.scatter(x, y, c=y,cmap = cmap , s =200)
+
+for i, txt in enumerate(n):
+    ax.annotate(txt, (x[i],y[i]), fontsize = 16)
+    
+plt.xlabel('5 Year Home Price Growth ', fontsize=20)    
+plt.ylabel('Average Price ABNB Listing', fontsize=20)
+plt.title('Home Price Growth, 5 Years and ABNB Listing Price', fontsize=20, fontweight='bold')
+
+
+
+#%% Correlation Matrix for Zillow Parameters
+df2 = df_zillow
+df2.columns = ['Z', 'M', 'Q', 'Y', '5', '10']
+coor= df1.corr()
+
+# Generate a mask for the upper triangle
+mask = np.zeros_like(df2.corr(), dtype=np.bool)
+mask[np.triu_indices_from(mask)] = True
+
+# Set up the matplotlib figure
+f, ax = plt.subplots(figsize=(11, 9))
+
+# Generate a custom diverging colormap
+cmap = sns.diverging_palette(220, 10, as_cmap=True)
+
+# Draw the heatmap with the mask and correct aspect ratio
+sns.heatmap(df2.corr(), mask=mask, cmap=cmap, vmax=.3,
+            square=True, xticklabels=2, yticklabels=5,
+            linewidths=.5, cbar_kws={"shrink": .5}, ax=ax)
+
+
+#%% Corrlation Matrix for Zillow parameters and Airbnb Prices
+
+df1 = pd.DataFrame(statistics.iloc[:,17])
+df = pd.concat([df1, df2], axis =1)
+coor= df.corr()
+
+# Generate a mask for the upper triangle
+mask = np.zeros_like(df.corr(), dtype=np.bool)
+mask[np.triu_indices_from(mask)] = True
+
+# Set up the matplotlib figure
+f, ax = plt.subplots(figsize=(11, 9))
+
+# Generate a custom diverging colormap
+cmap = sns.diverging_palette(220, 10, as_cmap=True)
+
+# Draw the heatmap with the mask and correct aspect ratio
+sns.heatmap(df.corr(), mask=mask, cmap=cmap, vmax=.3,
+            square=True, xticklabels=2, yticklabels=5,
+            linewidths=.5, cbar_kws={"shrink": .5}, ax=ax)
+
+#%%
