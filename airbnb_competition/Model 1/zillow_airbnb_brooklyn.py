@@ -231,7 +231,7 @@ windsor_terrace_s = reorder(windsor_terrace_s)
 
 statistics = pd.concat([bath_beach_s, bay_ridge_s, bedstuy_s, bensonhurst_s, bergen_beach_s, boerum_hill_s, borough_park_s,
             brighton_beach_s, brooklyn_height_s, brownsville_s, bushwick_s, canarsie_s, carroll_gardens_s, clinton_hill_s, cobble_hill_s,
-            columbia_st_s, coney_island_s, crown_heights_s, downtown_brooklyn_s, dumbo_s, dyker_heights_s, east_flatbash_s, east_ny_s,
+            columbia_st_s, coney_island_s, crown_heights_s, cypress_hills_s, downtown_brooklyn_s, dumbo_s, dyker_heights_s, east_flatbash_s, east_ny_s,
             flatbush_s, flatlands_s, fort_greene_s, fort_hamilton_s, gowanus_s, gravesend_s, greenpoint_s, kensington_s, manhattan_beach_s,
             midwood_s, mill_basin_s, navy_yard_s, park_slope_s, prospect_heights_s, pros_leff_gard_s, red_hook_s, sea_gate_s, sheepshead_bay_s,
             south_slope_s, sunset_park_s, vinegar_hill_s, williamsburg_s, windsor_terrace_s])
@@ -423,4 +423,55 @@ sns.heatmap(df1.corr(), mask=mask, cmap=cmap, vmax=.3,
             linewidths=.5, cbar_kws={"shrink": .5}, ax=ax)
 
 
-#%%
+#%% The Zillow Real Estate Data
+
+ZHVI = pd.read_csv('Zip_Zhvi_Summary_AllHomes.csv').set_index('RegionName')
+
+x = ['Bath Beach', 'Bay Ridge', 'Bedford-Stuyvesant', 'Bensonhurst',
+       'Bergen Beach', 'Boerum Hill', 'Borough Park', 'Brighton Beach',
+       'Brooklyn Heights', 'Brownsville', 'Bushwick', 'Canarsie',
+       'Carroll Gardens', 'Clinton Hill', 'Cobble Hill', 'Columbia St',
+       'Coney Island', 'Crown Heights', 'Cypress Hills', 'Downtown Brooklyn',
+       'DUMBO', 'Dyker Heights', 'East Flatbush', 'East New York', 'Flatbush',
+       'Flatlands', 'Fort Greene', 'Fort Hamilton', 'Gowanus', 'Gravesend',
+       'Greenpoint', 'Kensington', 'Manhattan Beach', 'Midwood', 'Mill Basin',
+       'Navy Yard', 'Park Slope', 'Prospect Heights',
+       'Prospect-Lefferts Gardens', 'Red Hook', 'Sea Gate', 'Sheepshead Bay',
+       'South Slope', 'Sunset Park', 'Vinegar Hill', 'Williamsburg',
+       'Windsor Terrace']
+
+y = ['Zhvi', 'MoM', 'QoQ', 'YoY', '5Year', '10Year']
+
+ZHVI = ZHVI.loc[x , y ]
+
+df_zillow = ZHVI
+df_zillow.columns = ['ZHVI', 'ZHVI_MoM', 'ZHVI_QoQ', 'ZHVI_YoY', 'ZHVI_5Year', 'ZHVI_10Year']
+df_zillow
+
+#%% Listing Trends and the Real Estate Metrics
+
+df = pd.concat([statistics['price']['mean'], df_zillow['ZHVI']], axis = 1).dropna()
+
+x = df['ZHVI']
+y = df['mean']
+
+
+n = (df.index).tolist()
+
+fig, ax = plt.subplots(figsize=(12, 10))
+ax.scatter(x, y, c=y,cmap = cmap, s =200)
+
+for i, txt in enumerate(n):
+    ax.annotate(txt, (x[i],y[i]), fontsize = 16)
+    
+    
+plt.xlabel('Median Home Price', fontsize=20)
+plt.ylabel('Average Price ABNB Listing', fontsize=20)
+plt.title('Home Price(ZHVI) and Airbnb Listing Price', fontsize=20, fontweight='bold')
+
+#%% Dropping two outliers to determine the correlation
+
+df = df.drop(['Mill Basin', 'South Slope'])
+df.corr()
+
+
