@@ -702,7 +702,7 @@ df_abnb = pd.concat([bath_beach, bay_ridge, bed_stuy, bensonhurst, bergen_beach,
 df_abnb
 
 #DataFrame with Zillow Feature: Zillow Home Value Index
-ZHVI = pd.read_csv('Zip_Zhvi_Summary_AllHomes_2.csv').set_index('RegionName')
+ZHVI = pd.read_csv('Zip_Zhvi_Summary_AllHomes.csv').set_index('RegionName')
 ZHVI = ZHVI.ix[:,[7,11,12]]
 
 # Merge on Zipcode
