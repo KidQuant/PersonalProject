@@ -44,4 +44,4 @@ del rolling_sales_agglom['BOROUGH']
 
 %ls
 
-rpad_data_agglom = pd.concat([pd.read_csv('tcl.txt'), pd.read_csv('tc234.txt')], ignore_index = True)
+rpad_data_agglom = pd.concat([pd.read_csv('tcl.txt'), pd.read_csv('tc234.txt')], ignore_index = True) #Work on this part
