@@ -1,4 +1,4 @@
-#%%
+#%% loading the packages
 
 import matplotlib
 import numpy as np
@@ -35,7 +35,6 @@ def reorder(location):
     return new
 
 nyc = pd.read_csv('listings.csv.gz')
-nyc.to_csv('listings.csv')
 nyc = read_data(nyc)
 nyc['price'] = nyc['price'].map(lambda x: str(x)[1:]).convert_objects(convert_numeric=True)
 
@@ -323,8 +322,6 @@ y = df2['mean']
 n = (df2.index.tolist())
 
 fig, ax = plt.subplots()
-
-fig, ax = plt.subplots()
 ax.scatter(x, y, c=y,cmap = cmap, s =200)
 
 for i, txt in enumerate(n):
@@ -346,7 +343,7 @@ y = statistics['price']['mean'].convert_objects(convert_numeric=True)
 
 n = (x.reset_index().location.tolist())
 
-fig, ax = plt.subplots()
+fig, ax = plt.subplots(figsize=(11,9))
 ax.scatter(x, y, c=y,cmap = cmap , s =200)
 
 for i, txt in enumerate(n):
@@ -363,12 +360,12 @@ x = (365 - statistics['availability_365']['mean'].convert_objects(convert_numeri
 y = statistics['price']['mean'].convert_objects(convert_numeric = True).drop('Mill Basin')
 n = (x.reset_index()).location.tolist()
 
-fig, ax = plt.subplots(figsize=(9, 7))
+fig, ax = plt.subplots(figsize=(11, 9))
 ax.scatter(x, y, c=y,cmap = cmap , s =200)
 
 for i, txt in enumerate(n):
     ax.annotate(txt, (x[i],y[i]), fontsize = 15)
-    
+
 plt.xlabel('Average Number of Days booked in next 365 days', fontsize=18)
 plt.ylabel('Average Price', fontsize=18)
 plt.title('Average Price and Popularity of Listings', fontsize=18, fontweight='bold')
@@ -385,13 +382,13 @@ y = statistics['price']['mean'].convert_objects(convert_numeric=True)
 
 n = (x.reset_index()).location.tolist()
 
-fig, ax = plt.subplots()
+fig, ax = plt.subplots(figsize=(11,9))
 ax.scatter(x, y, c=y,cmap = cmap, s =200)
 
 for i, txt in enumerate(n):
     ax.annotate(txt, (x[i],y[i]), fontsize = 10)
-    
-    
+
+
 plt.xlabel('Average Rating', fontsize=14)
 plt.ylabel('Price', fontsize=14)
 plt.title('Price and Average Rating', fontsize=14, fontweight='bold')
@@ -464,8 +461,8 @@ ax.scatter(x, y, c=y,cmap = cmap, s =200)
 
 for i, txt in enumerate(n):
     ax.annotate(txt, (x[i],y[i]), fontsize = 16)
-    
-    
+
+
 plt.xlabel('Median Home Price', fontsize=20)
 plt.ylabel('Average Price ABNB Listing', fontsize=20)
 plt.title('Home Price(ZHVI) and Airbnb Listing Price', fontsize=20, fontweight='bold')
@@ -487,8 +484,8 @@ ax.scatter(x, y, c=y,cmap = cmap , s =200)
 
 for i, txt in enumerate(n):
     ax.annotate(txt, (x[i],y[i]), fontsize = 16)
-    
-plt.xlabel('5 Year Home Price Growth ', fontsize=20)    
+
+plt.xlabel('5 Year Home Price Growth ', fontsize=20)
 plt.ylabel('Average Price ABNB Listing', fontsize=20)
 plt.title('Home Price Growth, 5 Years and ABNB Listing Price', fontsize=20, fontweight='bold')
 
@@ -536,6 +533,7 @@ sns.heatmap(df.corr(), mask=mask, cmap=cmap, vmax=.3,
             square=True, xticklabels=2, yticklabels=5,
             linewidths=.5, cbar_kws={"shrink": .5}, ax=ax)
 
+<<<<<<< HEAD
 #%% Regression Model for Predicting Average Price -- Using ZHVI and Airbnb Listing Data
 
 def read_data(location):
@@ -898,3 +896,6 @@ plt.xlim(0,1000)
 
 x = df1.price
 sns.distplot(x, kde=False)
+=======
+#%%
+>>>>>>> 543773398223141a4db50c4cfb6c26a110eb6ce7
