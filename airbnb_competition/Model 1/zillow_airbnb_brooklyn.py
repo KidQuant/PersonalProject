@@ -426,6 +426,7 @@ sns.heatmap(df1.corr(), mask=mask, cmap=cmap, vmax=.3,
 #%% The Zillow Real Estate Data
 
 ZHVI = pd.read_csv('Zip_Zhvi_Summary_AllHomes.csv').set_index('RegionName')
+ZHVI.to_csv('Zip_Zhvi_Summary_AllHomes.csv.gz', compression='gzip')
 
 x = ['Bath Beach', 'Bay Ridge', 'Bedford-Stuyvesant', 'Bensonhurst',
        'Bergen Beach', 'Boerum Hill', 'Borough Park', 'Brighton Beach',
@@ -702,7 +703,8 @@ df_abnb = pd.concat([bath_beach, bay_ridge, bed_stuy, bensonhurst, bergen_beach,
 df_abnb
 
 #DataFrame with Zillow Feature: Zillow Home Value Index
-ZHVI = pd.read_csv('Zip_Zhvi_Summary_AllHomes.csv').set_index('RegionName')
+ZHVI = pd.read_csv('Zip_Zhvi_Summary_AllHomes_2.csv').set_index('RegionName')
+ZHVI.to_csv('Zip_Zhvi_Summary_AllHomes_2.csv.gz', compression ='gzip')
 ZHVI = ZHVI.ix[:,[7,11,12]]
 
 # Merge on Zipcode
@@ -805,7 +807,6 @@ x3 = df1['accommodates']
 
 y1 = df1['price']
 
-
 fig, ax = plt.subplots()
 ax.scatter(x1, y1, c= 'c', alpha = .5)
 ax.scatter(x2, y1, c='r', alpha = .5)
@@ -897,6 +898,3 @@ plt.xlim(0,1000)
 
 x = df1.price
 sns.distplot(x, kde=False)
-plt.title('Distribution of Price')
-
-
