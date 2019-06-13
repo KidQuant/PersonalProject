@@ -49,13 +49,13 @@ del rolling_sales_agglom['BOROUGH']
 
 %ls
 
-rpad_data_agglom = pd.concat([pd.read_csv('tcl.txt',  error_bad_lines=False), 
-        pd.read_csv('tc234.txt', error_bad_lines=False)], ignore_index = True) #Work on this part
+rpad_data_agglom = pd.concat([pd.read_csv('tcl.txt',  error_bad_lines=False, encoding = 'encoding'), 
+        pd.read_csv('tc234.txt', error_bad_lines=False, encoding = 'encoding')], ignore_index = True) #Work on this part
 
 
 #%% Merging
 
-rolling_sales_agglom.columns = [c.title().replace(' ', '') for x in list(rolling_sales_agglom.columns)]
+rolling_sales_agglom.columns = [c.title().replace(' ', '') for c in list(rolling_sales_agglom.columns)]
 
 # rolling_sales_agglom = rolling_sales_agglom[rolling_sales_agglom['SalePrice'] > 1000]
 
