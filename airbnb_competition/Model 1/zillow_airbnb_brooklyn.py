@@ -315,17 +315,37 @@ df2
 
 z = [(365 - statistics['availability_365']['mean']).convert_objects(convert_numeric=True), df1['Normalized by Population']]
 df2 = pd.concat(z, axis=1)
+df2.index.name  = 'location'
+df2
 
 x = df2['Normalized by Population']
 y = df2['mean']
 
 n = (df2.index.tolist())
 
-fig, ax = plt.subplots()
+fig, ax = plt.subplots(figsize=(11,6))
 ax.scatter(x, y, c=y,cmap = cmap, s =200)
+plt.xlabel('Listing Count (Normalized)')
+plt.ylabel('Days Booked Until Next Calendar Year')
 
 for i, txt in enumerate(n):
     ax.annotate(txt, (x[i],y[i]), fontsize = 9)
+
+x2 = df2['Normalized by Population'].drop(['Williamsburg', 'Kensington', 'Mill Basin'])
+y2 = statistics['price']['mean'].convert_objects(convert_numeric = True).drop(['Williamsburg', 'Kensington', 'Mill Basin'])
+
+n2 = (x2.reset_index().location.tolist())
+
+fig, ax = plt.subplots(figsize=(11,6))
+ax.scatter(x2, y2, c=y2,cmap = cmap, s =200)
+plt.xlabel('Listings Count (Normalized)')
+plt.ylabel('Price')
+plt.title('Price and Normalized Listings Count')
+
+for i, txt in enumerate(n2):
+       ax.annotate(txt, (x2[i],y2[i]), fontsize=9)
+
+plt.savefig('price_listing.png', bbox_inches = 'tight')
 
 
 #%% Average Availability of Listings
@@ -342,6 +362,8 @@ x = (365 - statistics['availability_365']['mean']).convert_objects(convert_numer
 y = statistics['price']['mean'].convert_objects(convert_numeric=True)
 
 n = (x.reset_index().location.tolist())
+
+corrnp = np.corrcoef(x,y)
 
 fig, ax = plt.subplots(figsize=(11,9))
 ax.scatter(x, y, c=y,cmap = cmap , s =200)
@@ -360,7 +382,10 @@ x = (365 - statistics['availability_365']['mean'].convert_objects(convert_numeri
 y = statistics['price']['mean'].convert_objects(convert_numeric = True).drop('Mill Basin')
 n = (x.reset_index()).location.tolist()
 
-fig, ax = plt.subplots(figsize=(11, 9))
+corr = np.corrcoef(x, y)
+corr
+
+fig, ax = plt.subplots(figsize=(11, 6))
 ax.scatter(x, y, c=y,cmap = cmap , s =200)
 
 for i, txt in enumerate(n):
@@ -369,7 +394,7 @@ for i, txt in enumerate(n):
 plt.xlabel('Average Number of Days booked in next 365 days', fontsize=18)
 plt.ylabel('Average Price', fontsize=18)
 plt.title('Average Price and Popularity of Listings', fontsize=18, fontweight='bold')
-
+plt.savefig('Price_listing.png', bbox_inches = 'tight')
 
 #%% Correlation between the two variables
 df = pd.concat ([x,y], axis =1 )
@@ -403,6 +428,7 @@ df1.columns = ['acc', 'bt', 'bd', 'pr', 'min', '365', '#rev', 'rat', "acc", "val
 #df1 = concat([df1, df_zillow], axis = 1).fillna(0)
 
 coor= df1.corr()
+coor
 
 # Generate a mask for the upper triangle
 mask = np.zeros_like(df1.corr(), dtype=np.bool)
@@ -537,7 +563,7 @@ sns.heatmap(df.corr(), mask=mask, cmap=cmap, vmax=.3,
 #%% Regression Model for Predicting Average Price -- Using ZHVI and Airbnb Listing Data
 
 def read_data(location):
-       location = location[['zipcode', 'accommodates', 'bathrooms', 'bedrooms', 'price', 
+       location = location[['zipcode', 'accommodates', 'bathrooms', 'bedrooms', 'price',
               'minimum_nights', 'availability_365', 'number_of_reviews', 'review_scores_rating',
               'review_scores_accuracy', 'review_scores_value']].dropna(axis =0)
        location = location.set_index('zipcode')
@@ -694,7 +720,7 @@ windsor_terrace['price'] = windsor_terrace['price'].map(lambda x: str(x)[1:]).co
 df_abnb = pd.concat([bath_beach, bay_ridge, bed_stuy, bensonhurst, bergen_beach, boerum_hill, borough_park, brighton_beach,
               brooklyn_heights, brownsville, bushwick, canarsie, carroll_gardens, clinton_hill, cobble_hill, columbia_st,
               coney_island, crown_heights, cypress_hills, downtown_brooklyn, dumbo, dyker_heights, east_flatbush, east_newyork,
-              flatbush, flatlands, fort_greene, fort_hamilton, gowanus, gravesend, greenpoint, kensington, manhattan_beach, 
+              flatbush, flatlands, fort_greene, fort_hamilton, gowanus, gravesend, greenpoint, kensington, manhattan_beach,
               midwood, mill_basin, park_slope, prospect_heights, pros_leff, red_hook, sunset_park, vinegar_hill, williamsburg,
               windsor_terrace])
 
@@ -769,7 +795,7 @@ y1 = df1['price']
 fig, ax = plt.subplots()
 ax.scatter(x1, y1, c= 'm', alpha = .5)
 
-plt.xlabel('5 Year Change in ZHVI (Median Home Price)', fontsize=14)   
+plt.xlabel('5 Year Change in ZHVI (Median Home Price)', fontsize=14)
 plt.ylabel('Price', fontsize=14)
 plt.title('Price and 5 Year Median Home Value (ZHVI)', fontsize=14, fontweight='bold')
 plt.ylim (0,1000)
@@ -783,7 +809,7 @@ ax.scatter(x, y, c= 'c', alpha = .5)
 plt.ylim (0,1000)
 plt.xlim(20 ,122)
 
-plt.xlabel('Sum of Ratings', fontsize=14)   
+plt.xlabel('Sum of Ratings', fontsize=14)
 plt.ylabel('Price', fontsize=14)
 plt.title('Sum of Ratings', fontsize=14, fontweight='bold')
 
@@ -795,7 +821,7 @@ ax.scatter(x1, y1, c = 'r', alpha = .5)
 plt.ylim (0,1000)
 plt.xlim(-.1 ,2)
 
-plt.xlabel('# of Bedrooms', fontsize=14)   
+plt.xlabel('# of Bedrooms', fontsize=14)
 plt.ylabel('Price', fontsize=14)
 plt.title('# of Bedrooms and Price', fontsize=14, fontweight='bold')
 
@@ -812,7 +838,7 @@ ax.scatter(x3, y1, c='m', alpha = .5)
 plt.ylim (-2,1000)
 plt.xlim(-.1 ,17)
 
-plt.xlabel('# of Bedrooms, Bathrooms, Accommodates', fontsize=14)   
+plt.xlabel('# of Bedrooms, Bathrooms, Accommodates', fontsize=14)
 plt.ylabel('Price', fontsize=14)
 plt.title('# of Bedrooms/Bathroom/Accommodates and Price', fontsize=14, fontweight='bold')
 
