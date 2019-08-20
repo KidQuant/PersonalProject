@@ -5,8 +5,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 import seaborn as sns
 import pandas as pd
-%matplotlib inline
-
+sns.set()
 import warnings
 warnings.filterwarnings('ignore')
 
@@ -315,13 +314,13 @@ df2
 
 z = [(365 - statistics['availability_365']['mean']).convert_objects(convert_numeric=True), df1['Normalized by Population']]
 df2 = pd.concat(z, axis=1)
+df2.drop(['Kensington', 'Williamsburg'], inplace = True)
 df2.index.name  = 'location'
-df2
 
 x = df2['Normalized by Population']
 y = df2['mean']
 
-n = (df2.index.tolist())
+n = (df2.reset_index()).location.tolist()
 
 fig, ax = plt.subplots(figsize=(11,6))
 ax.scatter(x, y, c=y,cmap = cmap, s =200)
@@ -331,21 +330,22 @@ plt.ylabel('Days Booked Until Next Calendar Year')
 for i, txt in enumerate(n):
     ax.annotate(txt, (x[i],y[i]), fontsize = 9)
 
-x2 = df2['Normalized by Population'].drop(['Williamsburg', 'Kensington', 'Mill Basin'])
-y2 = statistics['price']['mean'].convert_objects(convert_numeric = True).drop(['Williamsburg', 'Kensington', 'Mill Basin'])
 
-n2 = (x2.reset_index().location.tolist())
-
-fig, ax = plt.subplots(figsize=(11,6))
-ax.scatter(x2, y2, c=y2,cmap = cmap, s =200)
-plt.xlabel('Listings Count (Normalized)')
-plt.ylabel('Price')
-plt.title('Price and Normalized Listings Count')
-
-for i, txt in enumerate(n2):
-       ax.annotate(txt, (x2[i],y2[i]), fontsize=9)
-
-plt.savefig('price_listing.png', bbox_inches = 'tight')
+#x2 = df2['Normalized by Population'].drop(['Williamsburg', 'Kensington', 'Mill Basin'])
+#y2 = statistics['price']['mean'].convert_objects(convert_numeric = True).drop(['Williamsburg', 'Kensington', 'Mill Basin'])
+#
+#n2 = (x2.reset_index().location.tolist())
+#
+#fig, ax = plt.subplots(figsize=(11,6))
+#ax.scatter(x2, y2, c=y2,cmap = cmap, s =200)
+#plt.xlabel('Listings Count (Normalized)')
+#plt.ylabel('Price')
+#plt.title('Price and Normalized Listings Count')
+#
+#for i, txt in enumerate(n2):
+#       ax.annotate(txt, (x2[i],y2[i]), fontsize=9)
+#
+#plt.savefig('price_listing.png', bbox_inches = 'tight')
 
 
 #%% Average Availability of Listings
@@ -385,7 +385,7 @@ n = (x.reset_index()).location.tolist()
 corr = np.corrcoef(x, y)
 corr
 
-fig, ax = plt.subplots(figsize=(11, 6))
+fig, ax = plt.subplots(figsize=(11, 9))
 ax.scatter(x, y, c=y,cmap = cmap , s =200)
 
 for i, txt in enumerate(n):
@@ -394,7 +394,6 @@ for i, txt in enumerate(n):
 plt.xlabel('Average Number of Days booked in next 365 days', fontsize=18)
 plt.ylabel('Average Price', fontsize=18)
 plt.title('Average Price and Popularity of Listings', fontsize=18, fontweight='bold')
-plt.savefig('Price_listing.png', bbox_inches = 'tight')
 
 #%% Correlation between the two variables
 df = pd.concat ([x,y], axis =1 )
@@ -413,11 +412,12 @@ ax.scatter(x, y, c=y,cmap = cmap, s =200)
 for i, txt in enumerate(n):
     ax.annotate(txt, (x[i],y[i]), fontsize = 10)
 
-
 plt.xlabel('Average Rating', fontsize=14)
 plt.ylabel('Price', fontsize=14)
 plt.title('Price and Average Rating', fontsize=14, fontweight='bold')
 
+days_booked_price = np.corrcoef(x, y)
+days_booked_price
 
 #%% Correlation Matrix
 
@@ -482,7 +482,7 @@ y = df['mean']
 
 n = (df.index).tolist()
 
-fig, ax = plt.subplots(figsize=(12, 10))
+fig, ax = plt.subplots(figsize=(11, 9))
 ax.scatter(x, y, c=y,cmap = cmap, s =200)
 
 for i, txt in enumerate(n):
@@ -505,7 +505,7 @@ y = df['mean']
 
 n = (df.index).tolist()
 
-fig, ax = plt.subplots(figsize=(12, 10))
+fig, ax = plt.subplots(figsize=(11, 9))
 ax.scatter(x, y, c=y,cmap = cmap , s =200)
 
 for i, txt in enumerate(n):
@@ -559,7 +559,6 @@ sns.heatmap(df.corr(), mask=mask, cmap=cmap, vmax=.3,
             square=True, xticklabels=2, yticklabels=5,
             linewidths=.5, cbar_kws={"shrink": .5}, ax=ax)
 
-<<<<<<< HEAD
 #%% Regression Model for Predicting Average Price -- Using ZHVI and Airbnb Listing Data
 
 def read_data(location):
@@ -727,7 +726,7 @@ df_abnb = pd.concat([bath_beach, bay_ridge, bed_stuy, bensonhurst, bergen_beach,
 df_abnb
 
 #DataFrame with Zillow Feature: Zillow Home Value Index
-ZHVI = pd.read_csv('Zip_Zhvi_Summary_AllHomes_2.csv').set_index('RegionName')
+ZHVI = pd.read_csv('Zip_Zhvi_Summary_AllHomes_2.csv.gz').set_index('RegionName')
 ZHVI.to_csv('Zip_Zhvi_Summary_AllHomes_2.csv.gz', compression ='gzip')
 ZHVI = ZHVI.ix[:,[7,11,12]]
 
@@ -920,8 +919,6 @@ plt.xlabel('Predict Listing Price')
 plt.ylabel('Actual Listing Price')
 plt.xlim(0,1000)
 
-x = df1.price
-sns.distplot(x, kde=False)
-=======
+
+
 #%%
->>>>>>> 543773398223141a4db50c4cfb6c26a110eb6ce7
