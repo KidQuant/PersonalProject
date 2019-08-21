@@ -498,7 +498,7 @@ plt.title('Home Price(ZHVI) and Airbnb Listing Price', fontsize=20, fontweight='
 df = df.drop(['Mill Basin', 'South Slope'])
 df.corr()
 
-df = pd.concat([statistics['price']['mean'], df_zillow['ZHVI_5Year']], axis =1).dropna()
+df = pd.concat([statistics['price']['mean'], df_zillow['ZHVI_5Year']], axis =1).dropna().drop(['Mill Basin', 'South Slope'])
 
 x = df['ZHVI_5Year'] * 100
 y = df['mean']
@@ -514,8 +514,6 @@ for i, txt in enumerate(n):
 plt.xlabel('5 Year Home Price Growth ', fontsize=20)
 plt.ylabel('Average Price ABNB Listing', fontsize=20)
 plt.title('Home Price Growth, 5 Years and ABNB Listing Price', fontsize=20, fontweight='bold')
-
-
 
 #%% Correlation Matrix for Zillow Parameters
 df2 = df_zillow
