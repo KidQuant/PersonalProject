@@ -15,7 +15,7 @@ cmap = sns.diverging_palette(220, 10, as_cmap=True)
 
 def read_data(location):
     location = location[['id', 'room_type', 'accommodates', 'bathrooms', 'bedrooms', 'price', 'minimum_nights',
-       'availability_365', 'number_of_reviews', 'review_scores_rating', 'neighbourhood', 'neighbourhood_cleansed',
+  ab     'availability_365', 'number_of_reviews', 'review_scores_rating', 'neighbourhood', 'neighbourhood_cleansed',
        'review_scores_accuracy', 'review_scores_value']]
     return location
 
@@ -365,7 +365,7 @@ n = (x.reset_index().location.tolist())
 
 corrnp = np.corrcoef(x,y)
 
-fig, ax = plt.subplots(figsize=(11,9))
+fig, ax = plt.subplots(figsize=(11,6))
 ax.scatter(x, y, c=y,cmap = cmap , s =200)
 
 for i, txt in enumerate(n):
@@ -385,7 +385,7 @@ n = (x.reset_index()).location.tolist()
 corr = np.corrcoef(x, y)
 corr
 
-fig, ax = plt.subplots(figsize=(11, 9))
+fig, ax = plt.subplots(figsize=(11, 6))
 ax.scatter(x, y, c=y,cmap = cmap , s =200)
 
 for i, txt in enumerate(n):
@@ -406,7 +406,7 @@ y = statistics['price']['mean'].convert_objects(convert_numeric=True)
 
 n = (x.reset_index()).location.tolist()
 
-fig, ax = plt.subplots(figsize=(11,9))
+fig, ax = plt.subplots(figsize=(11,6))
 ax.scatter(x, y, c=y,cmap = cmap, s =200)
 
 for i, txt in enumerate(n):
@@ -435,7 +435,7 @@ mask = np.zeros_like(df1.corr(), dtype=np.bool)
 mask[np.triu_indices_from(mask)] = True
 
 # Set up the matplotlib figure
-f, ax = plt.subplots(figsize=(11, 9))
+f, ax = plt.subplots(figsize=(11, 6))
 
 # Generate a custom diverging colormap
 cmap = sns.diverging_palette(220, 10, as_cmap=True)
@@ -482,7 +482,7 @@ y = df['mean']
 
 n = (df.index).tolist()
 
-fig, ax = plt.subplots(figsize=(11, 9))
+fig, ax = plt.subplots(figsize=(11, 6))
 ax.scatter(x, y, c=y,cmap = cmap, s =200)
 
 for i, txt in enumerate(n):
@@ -505,7 +505,7 @@ y = df['mean']
 
 n = (df.index).tolist()
 
-fig, ax = plt.subplots(figsize=(11, 9))
+fig, ax = plt.subplots(figsize=(11, 6))
 ax.scatter(x, y, c=y,cmap = cmap , s =200)
 
 for i, txt in enumerate(n):
@@ -515,6 +515,10 @@ plt.xlabel('5 Year Home Price Growth ', fontsize=20)
 plt.ylabel('Average Price ABNB Listing', fontsize=20)
 plt.title('Home Price Growth, 5 Years and ABNB Listing Price', fontsize=20, fontweight='bold')
 
+<<<<<<< HEAD
+
+=======
+>>>>>>> a66a9fde3124c8b31bb88f1307e61a785ca17114
 #%% Correlation Matrix for Zillow Parameters
 df2 = df_zillow
 df2.columns = ['Z', 'M', 'Q', 'Y', '5', '10']
@@ -525,7 +529,7 @@ mask = np.zeros_like(df2.corr(), dtype=np.bool)
 mask[np.triu_indices_from(mask)] = True
 
 # Set up the matplotlib figure
-f, ax = plt.subplots(figsize=(11, 9))
+f, ax = plt.subplots(figsize=(11, 6))
 
 # Generate a custom diverging colormap
 cmap = sns.diverging_palette(220, 10, as_cmap=True)
@@ -547,7 +551,7 @@ mask = np.zeros_like(df.corr(), dtype=np.bool)
 mask[np.triu_indices_from(mask)] = True
 
 # Set up the matplotlib figure
-f, ax = plt.subplots(figsize=(11, 9))
+f, ax = plt.subplots(figsize=(11, 6))
 
 # Generate a custom diverging colormap
 cmap = sns.diverging_palette(220, 10, as_cmap=True)
@@ -874,8 +878,8 @@ print('R-squared on Testing Data:', r2_score(Y_test, clf.predict(X_test)))
 
 from sklearn.metrics import mean_squared_error
 
-print('R-squared on Test set:', mean_squared_error(Y_test, clf.predict(X_test)))
-print('R-squared on Testing Data:', mean_squared_error(Y_train, clf.predict(X_train)))
+print('Mean squared error on Test set:', mean_squared_error(Y_test, clf.predict(X_test)))
+print('Mean squared error on Testing Data:', mean_squared_error(Y_train, clf.predict(X_train)))
 
 coef_df = pd.concat([pd.DataFrame(features.columns), pd.DataFrame(clf.coef_).transpose()], axis=1)
 coef_df.columns = ['Feature', 'Regression Coefficient']
@@ -883,7 +887,7 @@ coef_df
 
 import matplotlib.patches as mpatches
 
-plt.figure(figsize=(10,6))
+plt.figure(figsize=(11,6))
 plt.scatter(clf.predict(X_train), clf.predict(X_train) - Y_train, c='c', s=40, alpha=0.5)
 plt.scatter(clf.predict(X_test), clf.predict(X_test) - Y_test, c='r', s=40, alpha=0.65)
 plt.hlines(y = 0, xmin=-30, xmax= 50)
@@ -891,6 +895,79 @@ plt.title('Residuals vs Fitted Values')
 plt.ylabel('Residuals')
 plt.xlabel('Fitted Values')
 
+blue_patch = mpatches.Patch(color = 'c', label = 'Train')
+green_patch = mpatches.Patch(color ='r', label = 'Test')
+plt.legend(handles=[blue_patch, green_patch])
+plt.xlim(-10,750)
+plt.ylim(-800,400)
+
+#%% Dataframe with Airbnb data on highly popular cities:
+
+x = ((statistics['availability_365']['mean'] / 365)*100).convert_objects(convert_numeric=True)
+pd.DataFrame(x).sort_values(['mean'], ascending=[True])
+
+df_abnb = pd.concat([downtown_brooklyn, navy_yard, cobble_hill, sea_gate, brooklyn_heights, columbia_st, carroll_gardens, williamsburg, boerum_hill,
+                  prospect_heights, greenpoint, vinegar_hill, windsor_terrace, south_slope, kensington, park_slope, fort_greene, flatbush, clinton_hill,
+                  prospect_heights, bushwick, crown_heights, red_hook, midwood, sunset_park, dumbo, bed_stuy])
+
+
+# DataFrame with Zillow Feature: Zillow Home value Index
+ZHVI = pd.read_csv('Zip_Zhvi_Summary_AllHomes_2.csv.gz').set_index('RegionName')
+ZHVI = ZHVI.ix[:, [7,11,12]]
+
+# Merge on Region Name
+df1 = pd.merge(df_abnb, ZHVI, left_index = True, right_index = True).dropna()
+df1['reviewtotal'] = (df1['review_scores_rating'] + df1['review_scores_accuracy'] + df1['review_scores_value'])
+
+#Transforming:
+df1['number_of_reviews'] = np.log(df1['number_of_reviews'])
+df1['availability_365'] = np.log(df1['availability_365'])
+
+#Final Features dataframe
+features = df1[[ 'Zhvi', 'number_of_reviews', 'availability_365', 'reviewtotal', '10Year', '5Year', 'accommodates', 'bathrooms']].replace([np.inf, -np.inf], np.nan).fillna(0)
+
+
+#%% Linear Regression using highly popular areas
+
+from sklearn.model_selection import train_test_split
+from sklearn.linear_model import LinearRegression
+from sklearn.metrics import r2_score
+
+X = features
+Y = pd.DataFrame(df1['price']).fillna(0)
+
+X_train, X_test, Y_train, Y_test = train_test_split(X, Y, test_size=0.2)
+
+clf = LinearRegression()
+clf.fit(X_train, Y_train)
+
+print('R-Squared on Training Data:', r2_score(Y_train, clf.predict(X_train)))
+print('R-Squared on Testing Data:', r2_score(Y_test, clf.predict(X_test)))
+
+from sklearn.metrics import mean_squared_error
+
+print('Mean Squared Error on Testing set:', mean_squared_error(Y_test, clf.predict(X_test)))
+print('Mean Squared Error on Training set:', mean_squared_error(Y_train, clf.predict(X_train)))
+
+coef_df = pd.concat([pd.DataFrame(features.columns), pd.DataFrame(clf.coef_).transpose()], axis = 1)
+coef_df.columns = ['Feature', 'Coefficient']
+coef_df
+
+import matplotlib.patches as mpatches
+
+plt.figure(figsize=(11,6))
+plt.scatter(clf.predict(X_train), clf.predict(X_train) - Y_train, c='c', s=40, alpha=0.5)
+plt.scatter(clf.predict(X_test), clf.predict(X_test) - Y_test, c='r', s=40, alpha=0.65)
+plt.hlines(y = 0, xmin=-30, xmax= 50)
+plt.title('Residuals vs Fitted Values')
+plt.ylabel('Residuals')
+plt.xlabel('Fitted Values')
+
+blue_patch = mpatches.Patch(color = 'c', label = 'Train')
+green_patch = mpatches.Patch(color ='r', label = 'Test')
+plt.legend(handles=[blue_patch, green_patch])
+plt.xlim(-10,750)
+plt.ylim(-800,400)
 
 #%% Using the Random Forest Regression Model
 
@@ -899,24 +976,24 @@ from sklearn.ensemble import RandomForestRegressor
 X = features
 Y = pd.DataFrame(df1['price']).fillna(0)
 
-X_train, X_test, Y_train, Y_test = train_test_split(X,Y,test_size=0.2)
+X_train, X_test, Y_train, Y_test = train_test_split(X, Y, test_size=0.2)
 
-rf = RandomForestRegressor(random_state=1)
+rf = RandomForestRegressor(random_state = 1)
 rf.fit(X_train, Y_train)
 
-print('R-squared for training data: ', rf.score(X_train, Y_train))
-print('R-squared for test data: ',rf.score(X_test, Y_test))
+print('R-Squared on Training Data:', r2_score(Y_train, clf.predict(X_train)))
+print('R-Squared on Testing Data:', r2_score(Y_test, clf.predict(X_test)))
 
 from sklearn.metrics import mean_squared_error
-print('Mean squared error on the test set: ', mean_squared_error(Y_test, rf.predict(X_test)))
-print('Mean squared error on the training set: ', mean_squared_error(Y_train, rf.predict(X_train)))
 
+print('Mean Squared Error on Testing set:', mean_squared_error(Y_test, clf.predict(X_test)))
+print('Mean Squared Error on Training set:', mean_squared_error(Y_train, clf.predict(X_train)))
+
+plt.figure(figsize=(11,6))
 plt.scatter(rf.predict(X_test), Y_test.as_matrix())
 plt.title('Random Forest: Predicted vs. Actual Price')
-plt.xlabel('Predict Listing Price')
+plt.xlabel('Predicted Listing Price')
 plt.ylabel('Actual Listing Price')
 plt.xlim(0,1000)
 
-
-
-#%%
+#update
