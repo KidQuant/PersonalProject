@@ -1,3 +1,5 @@
+#%%
+
 import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
@@ -7,13 +9,15 @@ import matplotlib.ticker as plticker
 from sklearn.model_selection import train_test_split
 from sklearn.linear_model import LogisticRegression
 
-world_cup = pd.read_csv('Machine_Learning/FIFA_WorldCup_Predictions/World Cup 2018 Dataset.csv')
-results = pd.read_csv('Machine_Learning/FIFA_WorldCup_Predictions/results.csv')
+world_cup = pd.read_csv('World Cup 2018 Dataset.csv')
+results = pd.read_csv('results.csv')
 
 world_cup.head()
 
+#%%
+
 results.head()
-results = results.drop(['neutral'], axis =1)
+# results = results.drop(['neutral'], axis =1)
 
 winner = []
 for i in range (len(results['home_team'])):
@@ -30,30 +34,34 @@ results['goal_difference'] = np.absolute(results['home_score'] - results['away_s
 
 results.head()
 
+#%%
+
 #working with a subset of the data one that includes games played by Nigeria in a Nigeria DataFrame
-df = results[(results['home_team'] == 'Nigeria') | (results['away_team'] == 'Nigeria')]
-nigeria = df.iloc[:]
-nigeria.head()
+df = results[(results['home_team'] == 'Germany') | (results['away_team'] == 'Germany')]
+germany = df.iloc[:]
+germany.head()
 
 year = []
-for row in nigeria['date']:
+for row in germany['date']:
     year.append(int(row[:4]))
-nigeria['match_year'] = year
-nigeria_1930 = nigeria[nigeria.match_year >= 1930]
-nigeria_1930.count()
+germany['match_year'] = year
+germany_1930 = germany[germany.match_year >= 1930]
+germany_1930.count()
 
 wins = []
-for row in nigeria_1930['winning_team']:
-    if row != 'Nigeria' and row != 'Draw':
+for row in germany_1930['winning_team']:
+    if row != 'Germany' and row != 'Draw':
         wins.append('Loss')
     else:
         wins.append(row)
-winsdf = pd.DataFrame(wins, columns = ['Nigeria_Results'])
+winsdf = pd.DataFrame(wins, columns = ['Germany_Results'])
 
 fig, ax = plt.subplots(1)
 fig.set_size_inches(10.7,6.27)
 sns.set(style = 'darkgrid')
-sns.countplot(x = 'Nigeria_Results', data=winsdf)
+sns.countplot(x = 'Germany_Results', data=winsdf)
+
+#%% Adding the additional teams to the tournament
 
 worldcup_teams = ['Australia', 'Iran', 'Japan', 'Korea Republic',
                   'Saudi Arabia', 'Egypt', 'Morocco', 'Nigeria',
@@ -79,14 +87,14 @@ df_teams['match_year'] = year
 df_teams_1930 = df_teams[df_teams.match_year >= 1930]
 df_teams_1930.head()
 
-#dropping columns that will not affect match outcomes
+#%% dropping columns that will not affect match outcomes
 
 df_teams_1930 = df_teams.drop(['date', 'home_score', 'away_score', 'tournament', 'city', 'country',
                                'goal_difference', 'match_year'], axis = 1)
 
 df_teams_1930.head()
 
-#Building the model
+#%% Building the model
 #The Predection label
 #winning_team column shows '2' if home team wins, '1' if there was a tie, and '0' for a Loss
 
@@ -119,12 +127,12 @@ score2 = logreg.score(X_test, y_test)
 print('Training set accuracy ', '%.3f'%(score))
 print('Test set accuracy ', '%.3f'%(score2))
 
-#teams ranked higher will be considered the favorite and will be positioned
+#%% teams ranked higher will be considered the favorite and will be positioned
 # under the "home teams" column since there are no "home" or "away" teams in
 # world cup games
 
-fixtures = pd.read_csv('Machine_Learning/FIFA_WorldCup_Predictions/fixtures.csv')
-ranking = pd.read_csv('Machine_Learning/FIFA_WorldCup_Predictions/fifa_rankings.csv', encoding = 'latin-1')
+fixtures = pd.read_csv('fixtures.csv')
+ranking = pd.read_csv('fifa_rankings.csv', encoding = 'latin-1')
 fixtures.head()
 ranking.head()
 
@@ -166,7 +174,7 @@ pred_set = pred_set.drop(['winning_team'], axis = 1)
 
 pred_set.head()
 
-#group match predictions
+#%% group match predictions
 predictions = logreg.predict(pred_set)
 for i in range(fixtures.shape[0]):
     print(backup_pred_set.iloc[i, 1] + ' and ' + backup_pred_set.iloc[i, 0])
@@ -254,6 +262,8 @@ def clean_and_predict(matches, ranking, final, logreg):
 
 clean_and_predict(group_16, ranking, final, logreg)
 
+#%% Quarter Final Predictions
+
 quarters = [('Portugal', 'France'),
             ('Spain', 'Argentina'),
             ('Brazil', 'England'),
@@ -268,3 +278,6 @@ clean_and_predict(semi, ranking, final, logreg)
 finals = [('Brazil', 'Germany')]
 
 clean_and_predict(finals, ranking, final, logreg)
+
+
+#%%
