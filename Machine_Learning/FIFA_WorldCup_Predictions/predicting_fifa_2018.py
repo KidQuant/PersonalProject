@@ -8,6 +8,7 @@ import matplotlib.ticker as ticker
 import matplotlib.ticker as plticker
 from sklearn.model_selection import train_test_split
 from sklearn.linear_model import LogisticRegression
+sns.set()
 
 world_cup = pd.read_csv('World Cup 2018 Dataset.csv')
 results = pd.read_csv('results.csv')
@@ -86,8 +87,6 @@ for row in df_teams['date']:
 df_teams['match_year'] = year
 df_teams_1930 = df_teams[df_teams.match_year >= 1930]
 df_teams_1930.head()
-
-#%% dropping columns that will not affect match outcomes
 
 df_teams_1930 = df_teams.drop(['date', 'home_score', 'away_score', 'tournament', 'city', 'country',
                                'goal_difference', 'match_year'], axis = 1)
