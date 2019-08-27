@@ -79,8 +79,6 @@ df_teams = pd.concat((df_teams_home, df_teams_away))
 df_teams.drop_duplicates()
 df_teams.count()
 
-df_teams.head()
-
 year = []
 for row in df_teams['date']:
     year.append(int(row[:4]))
@@ -270,11 +268,11 @@ quarters = [('Portugal', 'France'),
 
 clean_and_predict(quarters, ranking, final, logreg)
 
-semi = [('Portugal', 'Brazil'),
+semi = [('France', 'Brazil'),
         ('Argentina', 'Germany')]
 
 clean_and_predict(semi, ranking, final, logreg)
-finals = [('Brazil', 'Germany')]
+finals = [('France', 'Germany')]
 
 clean_and_predict(finals, ranking, final, logreg)
 
