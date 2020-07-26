@@ -15,12 +15,13 @@ today = time.strftime('%m-%d')
 df = pd.read_csv(
     'covid-19-time-series-clean-complete-{}.csv'.format(today), parse_dates=['Date'])
 
-df.head()
-
-df.drop(columns=['Confirmed', 'Deaths', 'Active'], inplace=True)
-
 new_df = df[(df['Province_State'] == 'Florida')
             | (df['Province_State'] == 'Texas')]
+
+new_df.head()
+
+new_df.drop(columns=['Confirmed', 'Deaths'], inplace=True)
+
 new_df.rename(columns={'Province_State': 'State'}, inplace=True)
 
 new_df = new_df.reset_index().drop(columns=['index'])
