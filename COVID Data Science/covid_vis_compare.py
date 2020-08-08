@@ -12,29 +12,33 @@ alt.renderers.enable('altair_viewer')
 # Use for the most recent data release from JHU; otherwise change csv directory
 today = time.strftime('%m-%d')
 
-df = pd.read_csv(
-    'covid-19-time-series-clean-complete-{}.csv'.format(today), parse_dates=['Date'])
 
-new_df = df[(df['Province_State'] == 'Florida')
-            | (df['Province_State'] == 'Texas')]
+# us_df = pd.read_csv(
+#     'covid-19-time-series-clean-us-{}.csv'.format(today), parse_dates=['Date'], usecols=['Date', 'Province_State', 'New Deaths']
+# )
 
-new_df.head()
+global_df = pd.read_csv(
+    'covid-19-time-series-clean-global-{}.csv'.format(today), parse_dates=['Date'], usecols=['Date', 'Country/Region', 'New Deaths']
+)
 
-new_df.drop(columns=['Confirmed', 'Deaths'], inplace=True)
+# us_df.rename(columns={'Province_State': 'Region'}, inplace=True)
+global_df.rename(columns={'Country/Region': 'Region'}, inplace=True)
 
-new_df.rename(columns={'Province_State': 'State'}, inplace=True)
+florida = us_df[us_df['Region'] == 'Arizona']
+newyork = us_df[us_df['Region'] == 'New York']
+# italy = global_df[global_df['Region'] == 'Italy']
+
+new_df = pd.concat([florida, newyork], axis=0, sort=False)
 
 new_df = new_df.reset_index().drop(columns=['index'])
-new_df.sort_values(['State', 'Date'], inplace=True)
-
 
 alt.Chart(new_df).mark_bar(opacity=0.7).encode(
     x='Date:T',
-    y=alt.Y('New cases:Q', stack=None),
-    color="State").configure_view(
-    strokeWidth=0
+    y=alt.Y('New Deaths:Q', stack=None),
+    color="Region").configure_view(
+    strokeWidth=00
 ).properties(
-    title='Daily New Cases',
+    title='Daily New Fatalities',
     width=600,
     height=300
 ).configure_title(
