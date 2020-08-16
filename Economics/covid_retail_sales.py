@@ -82,7 +82,9 @@ fig.update_yaxes(showline=True, linewidth=1.5, linecolor='lightgray',
 
 fig.show()
 
+############################################
 # Retail sales from January
+############################################
 
 retail_2020_relative['variation'] = retail_2020_relative['Jan. 2020'].apply(
     lambda x: '+' if x > 0 else '-')
@@ -96,8 +98,9 @@ fig.update_layout(title_text='% Growth of retail sales in the USA by sector in J
                   yaxis=dict(showgrid=True))
 fig.show()
 
+############################################
 # Retail Sales from Feburary
-
+############################################
 
 retail_2020_relative['variation'] = retail_2020_relative['Feb. 2020'].apply(
     lambda x: '+' if x > 0 else '-')
@@ -111,7 +114,10 @@ fig.update_layout(title_text='% Growth of retail sales in the USA by sector in F
                   yaxis=dict(showgrid=True))
 fig.show()
 
+############################################
 # Retail Sales from March
+############################################
+
 
 retail_2020_relative['variation'] = retail_2020_relative['Mar. 2020'].apply(
     lambda x: '+' if x > 0 else '-')
@@ -127,12 +133,3 @@ fig.show()
 
 retail_2020_relative['variation'] = retail_2020_relative['Apr. 2020'].apply(
     lambda x: '+' if x > 0 else '-')
-
-
-fig = px.bar(retail_2020_relative[7:].sort_values(by='Apr. 2020'), y='Kind of Business', color='variation',
-             x='Apr. 2020', template='plotly_white', width=900, height=850,
-             color_discrete_sequence=['#DB4437', '#00CED1'])
-
-fig.update_layout(
-    title_text='% Growth of retail sales in the USA by sector in April 2020', showlegend=False)
-fig.show()
