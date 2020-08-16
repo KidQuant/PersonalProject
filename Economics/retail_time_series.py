@@ -13,7 +13,9 @@ retailSales['Change in Retail Sales'] = retailSales['Retail Sales'].diff()
 retailSales.reset_index(inplace=True)
 
 base = alt.Chart(retailSales).encode(
-    alt.X('Date:T')
+    alt.X('Date:T',
+        axis=alt.Axis(title='Source: U.S. Census Bureau'),
+        textAlign='right')
 )
 
 
@@ -40,7 +42,8 @@ alt.layer(bar, line).resolve_scale(
     y='independent'
 ).properties(
     title='Monthly and Aggregate U.S. Retail Sales',
-    width=600
+    width=750,
+    height=400
 ).configure_title(
     fontSize=16,
     anchor='start'
