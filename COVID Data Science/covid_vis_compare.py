@@ -13,22 +13,24 @@ alt.renderers.enable('altair_viewer')
 today = time.strftime('%m-%d')
 
 
-# us_df = pd.read_csv(
-#     'covid-19-time-series-clean-us-{}.csv'.format(today), parse_dates=['Date'], usecols=['Date', 'Province_State', 'New Deaths']
-# )
-
-global_df = pd.read_csv(
-    'covid-19-time-series-clean-global-{}.csv'.format(today), parse_dates=['Date'], usecols=['Date', 'Country/Region', 'New Deaths']
+us_df = pd.read_csv(
+    'covid-19-time-series-clean-us-{}.csv'.format(today), parse_dates=['Date'], usecols=['Date', 'Province_State', 'New Deaths']
 )
 
-# us_df.rename(columns={'Province_State': 'Region'}, inplace=True)
-global_df.rename(columns={'Country/Region': 'Region'}, inplace=True)
+us_df.rename(columns={'Province_State': 'Region'}, inplace=True)
 
-florida = us_df[us_df['Region'] == 'Arizona']
-newyork = us_df[us_df['Region'] == 'New York']
-# italy = global_df[global_df['Region'] == 'Italy']
+# global_df = pd.read_csv(
+#     'covid-19-time-series-clean-global-{}.csv'.format(today), parse_dates=['Date'], usecols=['Date', 'Country/Region', 'New Cases']
+# )
+#
+#
+# global_df.rename(columns={'Country/Region': 'Region'}, inplace=True)
 
-new_df = pd.concat([florida, newyork], axis=0, sort=False)
+state_1 = us_df[us_df['Region'] == 'Florida']
+state_2 = us_df[us_df['Region'] == 'New York']
+# country_1 = global_df[global_df['Region'] == 'Denmark']
+
+new_df = pd.concat([state_1, state_2], axis=0, sort=False)
 
 new_df = new_df.reset_index().drop(columns=['index'])
 
