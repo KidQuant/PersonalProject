@@ -36,7 +36,8 @@ for year in range(2):
     adjusted[year] = adjusted[year].loc[:, ~adjusted[year].isnull().all(axis=0)]
 
 retail_2020 = adjusted[0].reset_index(drop=True)[0:38]
-months = ['Jan. 2020', 'Feb. 2020', 'Mar. 2020', 'Apr. 2020', 'May 2020 (p)']
+months = ['Jan. 2020', 'Feb. 2020', 'Mar. 2020',
+          'Apr. 2020', 'May 2020', 'Jun. 2020(p)']
 for month in months:
     retail_2020[month] = retail_2020[month].replace('(S)', '0').astype(float)
 
@@ -114,6 +115,7 @@ fig.update_layout(title_text='% Growth of retail sales in the USA by sector in F
                   yaxis=dict(showgrid=True))
 fig.show()
 
+
 ############################################
 # Retail Sales from March
 ############################################
@@ -131,5 +133,66 @@ fig.update_layout(
     title_text='% Growth of retail sales in the USA by sector in March 2020', showlegend=False)
 fig.show()
 
+############################################
+# Retail Sales from April
+############################################
+
 retail_2020_relative['variation'] = retail_2020_relative['Apr. 2020'].apply(
     lambda x: '+' if x > 0 else '-')
+
+
+fig = px.bar(retail_2020_relative[7:].sort_values(by='Apr. 2020'), y='Kind of Business', color='variation',
+             x='Apr. 2020', template='plotly_white', width=900, height=850,
+             color_discrete_sequence=['#DB4437', '#00CED1'])
+
+fig.update_layout(
+    title_text='% Growth of retail sales in the USA by sector in April 2020', showlegend=False)
+fig.show()
+
+############################################
+# Retail Sales from May
+############################################
+
+retail_2020_relative['variation'] = retail_2020_relative['May 2020'].apply(
+    lambda x: '+' if x > 0 else '-')
+
+fig = px.bar(retail_2020_relative[7:].sort_values(by='May 2020'), y='Kind of Business', color='variation',
+             x='May 2020', template='plotly_white', width=900, height=850,
+             color_discrete_sequence=['#00CED1'])
+
+fig.update_layout(title_text='% Growth of retail sales in the USA by sector in May 2020',
+                  showlegend=False, xaxis=dict(showgrid=True),
+                  yaxis=dict(showgrid=True))
+fig.show()
+
+############################################
+# Recovery by Sector
+############################################
+
+fig = px.bar(retail_2020_relative[7:].sort_values(by='May 2020', ascending=True).tail(
+    10), y='Kind of Business', x='May 2020', template='plotly_white', width=950, height=450, text='May 2020')
+
+fig.update_traces(marker_color='#00CED1', marker_line_width=1.5,
+                  opacity=0.5, textposition='outside', texttemplate='%{text:.2f}%')
+fig.update_xaxes(showline=True, linewidth=0.5, linecolor='white', title_text='')
+fig.update_yaxes(showline=True, linewidth=1.5, linecolor='lightgray',
+                 zerolinecolor='lightgray', title_text='')
+
+fig.update_layout(title_text='Top 10 Sales Recovery by Sector')
+fig.show()
+
+############################################
+# COVID Proof Industries
+############################################
+
+retail_2020['total_effect'] = (
+    (retail_2020['Jun. 2020(p)'] - retail_2020['Jan. 2020']) / retail_2020['Jan. 2020']) * 100
+retail_2020['variation'] = retail_2020['total_effect'].apply(
+    lambda x: '+' if x > 0 else '-')
+
+fig = px.bar(retail_2020[7:].sort_values(by='total_effect'), y='Kind of Business', color='variation',
+             x='total_effect', template='plotly_white', width=900, height=850,
+             color_discrete_sequence=['#DB4437', '#00CED1'])
+
+fig.update_layout(
+    title_text='% Variation in sales from January to June, by Sector', showlegend=False)
