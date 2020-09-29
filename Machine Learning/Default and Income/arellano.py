@@ -261,3 +261,108 @@ def simulate(model, T, default_states, iBstar, q, y_init=None, B_init=None):
         Bi = Bi_next
 
     return y_sim, B_sim, q_sim, default_sim
+
+
+β, γ, r = 0.953, 2.0, 0.017
+ρ, η, θ = 0.945, 0.025, 0.282
+ny = 21
+nB = 251
+Bgrid = np.linspace(-0.45, 0.45, nB)
+mc = qe.markov.tauchen(ρ, η, 0, 3, ny)
+ygrid, P = np.exp(mc.state_values), mc.P
+
+ae = Arellano_Economy(
+    Bgrid, P, ygrid, β=β, γ=γ, r=r, ρ=ρ, η=η, θ=θ
+)
+
+V, Vc, Vd, iBstar, default_prob, default_states, q = solve(ae)
+
+
+# Create "Y High" and "Y Low" values as 5% devs from mean
+high, low = np.mean(ae.y) * 1.05, np.mean(ae.y) * .95
+iy_high, iy_low = (np.searchsorted(ae.y, x) for x in (high, low))
+
+fig, ax = plt.subplots(figsize=(10, 6.5))
+ax.set_title("Bond price schedule $q(y, B')$")
+
+# Extract a suitable plot grid
+x = []
+q_low = []
+q_high = []
+for i in range(nB):
+    b = ae.B[i]
+    if -0.35 <= b <= 0:  # To match fig 3 of Arellano
+        x.append(b)
+        q_low.append(q[iy_low, i])
+        q_high.append(q[iy_high, i])
+ax.plot(x, q_high, label="$y_H$", lw=2, alpha=0.7)
+ax.plot(x, q_low, label="$y_L$", lw=2, alpha=0.7)
+ax.set_xlabel("$B'$")
+ax.legend(loc='upper left', frameon=False)
+plt.show()
+
+# Create "Y High" and "Y Low" values as 5% devs from mean
+high, low = np.mean(ae.y) * 1.05, np.mean(ae.y) * .95
+iy_high, iy_low = (np.searchsorted(ae.y, x) for x in (high, low))
+
+fig, ax = plt.subplots(figsize=(10, 6.5))
+ax.set_title("Value Functions")
+ax.plot(ae.B, V[iy_high], label="$y_H$", lw=2, alpha=0.7)
+ax.plot(ae.B, V[iy_low], label="$y_L$", lw=2, alpha=0.7)
+ax.legend(loc='upper left')
+ax.set(xlabel="$B$", ylabel="$V(y, B)$")
+ax.set_xlim(ae.B.min(), ae.B.max())
+plt.show()
+
+xx, yy = ae.B, ae.y
+zz = default_prob
+
+# Create figure
+fig, ax = plt.subplots(figsize=(10, 6.5))
+hm = ax.pcolormesh(xx, yy, zz)
+cax = fig.add_axes([.92, .1, .02, .8])
+fig.colorbar(hm, cax=cax)
+ax.axis([xx.min(), 0.05, yy.min(), yy.max()])
+ax.set(xlabel="$B'$", ylabel="$y$", title="Probability of Default")
+plt.show()
+
+T = 250
+
+np.random.seed(42)
+y_vec, B_vec, q_vec, default_vec = simulate(ae, T, default_states, iBstar, q)
+
+# Pick up default start and end dates
+start_end_pairs = []
+i = 0
+while i < len(default_vec):
+    if default_vec[i] == 0:
+        i += 1
+    else:
+        # If we get to here we're in default
+        start_default = i
+        while i < len(default_vec) and default_vec[i] == 1:
+            i += 1
+        end_default = i - 1
+        start_end_pairs.append((start_default, end_default))
+
+plot_series = (y_vec, B_vec, q_vec)
+titles = 'output', 'foreign assets', 'bond price'
+
+fig, axes = plt.subplots(len(plot_series), 1, figsize=(10, 12))
+fig.subplots_adjust(hspace=0.3)
+
+for ax, series, title in zip(axes, plot_series, titles):
+    # Determine suitable y limits
+    s_max, s_min = max(series), min(series)
+    s_range = s_max - s_min
+    y_max = s_max + s_range * 0.1
+    y_min = s_min - s_range * 0.1
+    ax.set_ylim(y_min, y_max)
+    for pair in start_end_pairs:
+        ax.fill_between(pair, (y_min, y_min), (y_max, y_max),
+                        color='k', alpha=0.3)
+    ax.grid()
+    ax.plot(range(T), series, lw=2, alpha=0.7)
+    ax.set(title=title, xlabel="time")
+
+plt.show()
