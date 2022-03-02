@@ -1,7 +1,8 @@
 import requests
 import urllib.request
 import json
-
+import datetime
+import time
 
 user_agent = 'Mozilla/5.0 (Windows; U; Windows NT 5.1; en-US; rv:1.9.0.7) Gecko/2009021910 Firefox/3.0.7'
 
@@ -15,6 +16,13 @@ data = response.read()
 jsonData = data.decode('utf8').replace("''", '"')
 
 data = json.loads(jsonData)
+
+data['data']['segments']
+
+timestamp = data['data']['metadata']['timestamp']
+dateTime = datetime.datetime.fromtimestamp(timestamp/1000)
+date = dateTime.strftime("%m-%d-%Y")
+time = dateTime.strftime("%H:%M:%S")
 
 list(data['data']['attributes']['avgKd'].values())[0]
 
