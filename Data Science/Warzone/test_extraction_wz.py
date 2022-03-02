@@ -88,12 +88,17 @@ df['LobbyKD'] = avgKD
 df['Date'] = matchDate
 df['Time'] = matchTime
 
+df.head()
+
 with open('{}.pickle'.format(user), 'rb') as f:
     old = pickle.load(f)
 
 
+new = pd.concat([df, old], ignore_index=False)
+new.drop_duplicates(subset = 'MatchID', inplace=True)
+
 with open('{}.pickle'.format(user), 'wb') as f:
-    pickle.dump(df, f)
+    pickle.dump(new, f)
 
 now = datetime.now()
 date_time =  now.strftime("%m-%d-%Y %H%H%S")
