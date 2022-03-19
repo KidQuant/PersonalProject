@@ -8,7 +8,7 @@ import os
 gamerTags = pd.read_csv('GamerTags.csv')
 gamerTags
 
-index = 3
+index = 5
 
 user = gamerTags['User'][index]
 gamerTag = gamerTags['GamerTag'][index]
@@ -87,6 +87,7 @@ oldMatches = old['MatchID'].tolist()
 
 match = 1
 
+
 for i in df['MatchID']:
 
     print('Collecting data for {}'.format(i))
@@ -131,6 +132,10 @@ for i in df['MatchID']:
         else:
 
             print('Match for {} already in database'.format(i))
+            print('')
+            df = df[df['MatchID'] != i]
+            df = df.reset_index().drop(columns=['index'])
+
 
     while len(errors) != 0:
 
@@ -161,6 +166,7 @@ for i in df['MatchID']:
                     date = dateTime.strftime("%m-%d-%Y")
                     time = dateTime.strftime("%H:%M:%S")
 
+                    print('')
                     print('{} - Match ID: {} | Lobby KD: {}'.format(match, i, avg))
 
                     matchDate.append(date)
@@ -195,4 +201,5 @@ if not os.path.exists('{}'.format(savePath)):
 
 
 df.to_csv("{}/{}{}.csv".format(savePath, user, date_time), index=False)
-new
+
+new[new['Date'] == '03-18-2022']
