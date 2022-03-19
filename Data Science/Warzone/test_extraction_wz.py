@@ -8,7 +8,7 @@ import os
 gamerTags = pd.read_csv('GamerTags.csv')
 gamerTags
 
-index = 10
+index = 11
 
 user = gamerTags['User'][index]
 gamerTag = gamerTags['GamerTag'][index]
@@ -23,7 +23,6 @@ except FileNotFoundError:
     print('No Files Found for {}'.format(user))
     old = pd.DataFrame()
     oldMatches = []
-
 
 url = "https://call-of-duty-modern-warfare.p.rapidapi.com/warzone-matches/{}/{}/".format(gamerTag, platform)
 
@@ -178,14 +177,11 @@ for i in df['MatchID']:
                     avgKD.append(avg)
                     match += 1
 
-errors
-
 df['LobbyKD'] = avgKD
 df['Date'] = matchDate
 df['Time'] = matchTime
 
-
-new = old
+df.head()
 
 new = pd.concat([df, old], ignore_index=False)
 new.drop_duplicates(subset = 'MatchID', inplace=True)
@@ -205,6 +201,6 @@ if not os.path.exists('{}'.format(savePath)):
     os.mkdir('{}'.format(savePath))
 
 
-new.to_csv("{}/{}{}.csv".format(savePath, user, date_time), index=False)
+df.to_csv("{}/{}{}.csv".format(savePath, user, date_time), index=False)
 
 new[new['Date'] == '03-18-2022']
