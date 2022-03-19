@@ -3,16 +3,23 @@ import json
 import pandas as pd
 import pickle
 from datetime import datetime
-import pandas as pd
 import os
 
 gamerTags = pd.read_csv('GamerTags.csv')
-gamerTags.head()
+gamerTags
 
-user = gamerTags['User'][2]
-battleNet = gamerTags['BattleNet'][2]
+index = 3
 
-url = "https://call-of-duty-modern-warfare.p.rapidapi.com/warzone-matches/{}/battle/".format(battleNet)
+user = gamerTags['User'][index]
+gamerTag = gamerTags['GamerTag'][index]
+platform = gamerTags['Platform'][index]
+
+with open('{}.pickle'.format(user), 'rb') as f:
+    print('Collecting old matches for: {}'.format(user))
+    old = pickle.load(f)
+
+
+url = "https://call-of-duty-modern-warfare.p.rapidapi.com/warzone-matches/{}/{}/".format(gamerTag, platform)
 
 user_agent = 'Mozilla/5.0 (Windows; U; Windows NT 5.1; en-US; rv:1.9.0.7) Gecko/2009021910 Firefox/3.0.7'
 
@@ -50,7 +57,7 @@ df['Mode'] = gameMode
 df['Kills'] = kills
 df['Deaths'] = deaths
 df['KDRatio'] = kdRatio
-df.head()
+
 
 df = df[df['Mode'] != 'br_dmz_plunquad']
 df = df.reset_index().drop(columns= ['index'])
@@ -68,13 +75,23 @@ headers={'User-Agent':user_agent,}
 # data = response.read()
 # jsonData = data.decode('utf8')
 # data = json.loads(jsonData)
-# avg = list(data['data']['attributes']['avgKd'].values())[0]
+# match  = data['data']['attributes']['id']
 
 avgKD = []
 matchDate = []
 matchTime = []
 
+errors = []
+
+oldMatches = old['MatchID'].tolist()
+
+match = 1
+
 for i in df['MatchID']:
+
+    print('Collecting data for {}'.format(i))
+    print('')
+
     endpoint = "https://api.tracker.gg/api/v1/warzone/matches/{}".format(i)
     request = urllib.request.Request(endpoint, None, headers)
     response = urllib.request.urlopen(request)
@@ -84,30 +101,80 @@ for i in df['MatchID']:
 
     data = json.loads(jsonData)
 
-    avg = list(data['data']['attributes']['avgKd'].values())[0]
+    if 'errors' in data:
+        errors.append(i)
 
-    timestamp = data['data']['metadata']['timestamp']
-    dateTime = datetime.fromtimestamp(timestamp/1000)
-    date = dateTime.strftime("%m-%d-%Y")
-    time = dateTime.strftime("%H:%M:%S")
+        print('Adding {} to errors list'.format(i))
+        print('')
 
-    print('Match ID: {} | Lobby KD: {}'.format(i, avg))
+    else:
 
-    matchDate.append(date)
-    matchTime.append(time)
-    avgKD.append(avg)
+        if i not in oldMatches:
 
+            print('Match for {} not recorded'.format(i))
+            print('')
 
+            avg = list(data['data']['attributes']['avgKd'].values())[0]
+
+            timestamp = data['data']['metadata']['timestamp']
+            dateTime = datetime.fromtimestamp(timestamp/1000)
+            date = dateTime.strftime("%m-%d-%Y")
+            time = dateTime.strftime("%H:%M:%S")
+
+            print('{} - Match ID: {} | Lobby KD: {}'.format(match, i, avg))
+
+            matchDate.append(date)
+            matchTime.append(time)
+            avgKD.append(avg)
+            match += 1
+
+        else:
+
+            print('Match for {} already in database'.format(i))
+
+    while len(errors) != 0:
+
+        for j in errors:
+
+            if j not in oldMatches:
+
+                print('Match for {} not recorded'.format(j))
+                print('')
+
+                endpoint = "https://api.tracker.gg/api/v1/warzone/matches/{}".format(j)
+                request = urllib.request.Request(endpoint, None, headers)
+                response = urllib.request.urlopen(request)
+
+                data = response.read()
+                jsonData = data.decode('utf8')
+
+                data = json.loads(jsonData)
+
+                if 'errors' not in data:
+
+                    errors.remove(str(j))
+
+                    avg = list(data['data']['attributes']['avgKd'].values())[0]
+
+                    timestamp = data['data']['metadata']['timestamp']
+                    dateTime = datetime.fromtimestamp(timestamp/1000)
+                    date = dateTime.strftime("%m-%d-%Y")
+                    time = dateTime.strftime("%H:%M:%S")
+
+                    print('{} - Match ID: {} | Lobby KD: {}'.format(match, i, avg))
+
+                    matchDate.append(date)
+                    matchTime.append(time)
+                    avgKD.append(avg)
+                    match += 1
+
+errors
 
 df['LobbyKD'] = avgKD
 df['Date'] = matchDate
 df['Time'] = matchTime
 
-new = df
-
-with open('{}.pickle'.format(user), 'rb') as f:
-    print('Collecting old matches for: {}'.format(user))
-    old = pickle.load(f)
+# new = df
 
 new = pd.concat([df, old], ignore_index=False)
 new.drop_duplicates(subset = 'MatchID', inplace=True)
@@ -123,7 +190,9 @@ date_time =  now.strftime("%m-%d-%Y %H%H%S")
 savePath = 'Game History/' + str(user)
 
 if not os.path.exists('{}'.format(savePath)):
+    print('Creating Directory for {}'.format(user))
     os.mkdir('{}'.format(savePath))
 
 
-df.to_csv("{}/{}{}.csv".format(savePath, user, date_time))
+df.to_csv("{}/{}{}.csv".format(savePath, user, date_time), index=False)
+new
