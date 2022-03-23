@@ -1,3 +1,5 @@
+
+#%%
 import requests
 import json
 import pandas as pd
@@ -5,10 +7,11 @@ import pickle
 from datetime import datetime
 import os
 
+#%%
 gamerTags = pd.read_csv('GamerTags.csv')
 gamerTags
 
-index = 11
+index = 31
 
 user = gamerTags['User'][index]
 gamerTag = gamerTags['GamerTag'][index]
@@ -39,6 +42,8 @@ response = requests.request("GET", url, headers=headers)
 
 print(response.text)
 
+
+#%%
 data = json.loads(response.text)
 
 matchID = []
@@ -67,6 +72,7 @@ df['KDRatio'] = kdRatio
 df = df[df['Mode'] != 'br_dmz_plunquad']
 df = df.reset_index().drop(columns= ['index'])
 
+#%%
 import urllib.request
 
 user_agent = 'Mozilla/5.0 (Windows; U; Windows NT 5.1; en-US; rv:1.9.0.7) Gecko/2009021910 Firefox/3.0.7'
@@ -140,49 +146,50 @@ for i in df['MatchID']:
             df = df.reset_index().drop(columns=['index'])
 
 
-    while len(errors) != 0:
+        while len(errors) != 0:
 
-        for j in errors:
+            for j in errors:
 
-            if j not in oldMatches:
+                if j not in oldMatches:
 
-                print('Match for {} not recorded'.format(j))
-                print('')
-
-                endpoint = "https://api.tracker.gg/api/v1/warzone/matches/{}".format(j)
-                request = urllib.request.Request(endpoint, None, headers)
-                response = urllib.request.urlopen(request)
-
-                data = response.read()
-                jsonData = data.decode('utf8')
-
-                data = json.loads(jsonData)
-
-                if 'errors' not in data:
-
-                    errors.remove(str(j))
-
-                    avg = list(data['data']['attributes']['avgKd'].values())[0]
-
-                    timestamp = data['data']['metadata']['timestamp']
-                    dateTime = datetime.fromtimestamp(timestamp/1000)
-                    date = dateTime.strftime("%m-%d-%Y")
-                    time = dateTime.strftime("%H:%M:%S")
-
+                    print('Match for {} not recorded'.format(j))
                     print('')
-                    print('{} - Match ID: {} | Lobby KD: {}'.format(match, i, avg))
 
-                    matchDate.append(date)
-                    matchTime.append(time)
-                    avgKD.append(avg)
-                    match += 1
+                    endpoint = "https://api.tracker.gg/api/v1/warzone/matches/{}".format(j)
+                    request = urllib.request.Request(endpoint, None, headers)
+                    response = urllib.request.urlopen(request)
+
+                    data = response.read()
+                    jsonData = data.decode('utf8')
+
+                    data = json.loads(jsonData)
+
+                    if 'errors' not in data:
+
+                        errors.remove(str(j))
+
+                        avg = list(data['data']['attributes']['avgKd'].values())[0]
+
+                        timestamp = data['data']['metadata']['timestamp']
+                        dateTime = datetime.fromtimestamp(timestamp/1000)
+                        date = dateTime.strftime("%m-%d-%Y")
+                        time = dateTime.strftime("%H:%M:%S")
+
+                        print('')
+                        print('{} - Match ID: {} | Lobby KD: {}'.format(match, i, avg))
+
+                        matchDate.append(date)
+                        matchTime.append(time)
+                        avgKD.append(avg)
+                        match += 1
 
 df['LobbyKD'] = avgKD
 df['Date'] = matchDate
 df['Time'] = matchTime
 
-df.head()
+df
 
+#%%
 new = pd.concat([df, old], ignore_index=False)
 new.drop_duplicates(subset = 'MatchID', inplace=True)
 new = new.reset_index().drop(columns=['index'])
@@ -203,4 +210,7 @@ if not os.path.exists('{}'.format(savePath)):
 
 df.to_csv("{}/{}{}.csv".format(savePath, user, date_time), index=False)
 
-new[new['Date'] == '03-18-2022']
+new[new['Date'] == '03-22-2022']
+
+
+# %%

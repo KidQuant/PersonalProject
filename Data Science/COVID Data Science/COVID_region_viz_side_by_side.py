@@ -36,7 +36,7 @@ variable1 = 'New Cases'
 variable2 = 'New Deaths'
 
 global_df = pd.read_csv(
-    'covid-19-time-series-clean-global-{}.csv'.format(today), parse_dates=['Date'], usecols=['Date', 'Country/Region', variable1, variable2])
+    'Data/covid-19-time-series-clean-global-{}.csv'.format(today), parse_dates=['Date'], usecols=['Date', 'Country/Region', variable1, variable2])
 
 global_df.rename(columns={'Country/Region': 'Region'}, inplace=True)
 
