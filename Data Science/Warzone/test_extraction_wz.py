@@ -11,21 +11,24 @@ import os
 gamerTags = pd.read_csv('GamerTags.csv')
 gamerTags
 
-index = 31
+index = 0
 
 user = gamerTags['User'][index]
 gamerTag = gamerTags['GamerTag'][index]
 platform = gamerTags['Platform'][index]
 
 try:
-    with open('{}.pickle'.format(user), 'rb') as f:
+    with open('User History\{}.pickle'.format(user), 'rb') as f:
         print('Collecting old matches for: {}'.format(user))
         old = pickle.load(f)
         oldMatches = old['MatchID'].tolist()
+        print(old)
 except FileNotFoundError:
     print('No Files Found for {}'.format(user))
     old = pd.DataFrame()
     oldMatches = []
+
+#%%
 
 url = "https://call-of-duty-modern-warfare.p.rapidapi.com/warzone-matches/{}/{}/".format(gamerTag, platform)
 
@@ -210,7 +213,7 @@ if not os.path.exists('{}'.format(savePath)):
 
 df.to_csv("{}/{}{}.csv".format(savePath, user, date_time), index=False)
 
-new[new['Date'] == '03-22-2022']
+new[new['Date'] == '03-23-2022']
 
 
 # %%
