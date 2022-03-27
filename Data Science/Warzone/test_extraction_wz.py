@@ -12,7 +12,7 @@ import os
 gamerTags = pd.read_csv('GamerTags.csv')
 gamerTags
 
-index = 2
+index = 47
 
 user = gamerTags['User'][index]
 gamerTag = gamerTags['GamerTag'][index]
@@ -216,5 +216,8 @@ if len(df) != 0:
 
 df
 
+
+# %%
+len(old[old['LobbyKD'] <1])/ len(old)
 
 # %%
