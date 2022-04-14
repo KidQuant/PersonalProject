@@ -12,7 +12,7 @@ import os
 gamerTags = pd.read_csv('GamerTags.csv')
 gamerTags
 
-index = 58
+index = 1
 
 user = gamerTags['User'][index]
 gamerTag = gamerTags['GamerTag'][index]
