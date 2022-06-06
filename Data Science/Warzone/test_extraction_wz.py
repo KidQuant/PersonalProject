@@ -12,7 +12,7 @@ import os
 gamerTags = pd.read_csv('GamerTags.csv')
 gamerTags
 
-index = 1
+index = 7
 
 user = gamerTags['User'][index]
 gamerTag = gamerTags['GamerTag'][index]
@@ -78,9 +78,7 @@ df = df[df['Mode'] != 'br_rumble_clash_caldera']
 df = df.reset_index().drop(columns=['index'])
 
 
-user_agent = 'Mozilla/5.0 (Windows; U; Windows NT 5.1; en-US; rv:1.9.0.7) Gecko/2009021910 Firefox/3.0.7'
-
-headers = {'User-Agent': user_agent, }
+# headers = {"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/100.0.4896.127 Safari/537.36 Edg/100.0.1185.50"}
 
 
 # endpoint = "https://api.tracker.gg/api/v1/warzone/matches/10508390693456844744"
@@ -107,7 +105,7 @@ for i in df['MatchID']:
         print('')
 
         endpoint = "https://api.tracker.gg/api/v1/warzone/matches/{}".format(i)
-        request = urllib.request.Request(endpoint, None, headers)
+        request = urllib.request.Request(endpoint, None)
         response = urllib.request.urlopen(request)
 
         data = response.read()
