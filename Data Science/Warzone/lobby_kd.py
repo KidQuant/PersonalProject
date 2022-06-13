@@ -9,6 +9,7 @@ import math
 import numpy as np
 import matplotlib.pyplot as plt
 import json
+from selenium import webdriver
 %matplotlib inline
 
 
@@ -29,7 +30,7 @@ data = {'username': 'andre@kidquant.com',
 
 s.post('https://profile.callofduty.com/do_login?new_SiteId=cod', params=data)
 
-match_id = "11435916617093634673"
+match_id = "2311647224443150730"
 
 url = "https://www.callofduty.com/api/papi-client/crm/cod/v2/title/mw/platform/battle/fullMatch/wz/{}/it".format(match_id)
 
@@ -62,22 +63,39 @@ headers = {
 
 
 for i in range(len(lobby_players)):
-        time.sleep(4)
+        time.sleep(2)
         uno = lobby_players[i]['player']['uno']
         user = lobby_players[i]['player']['username']
-        # print(user, uno)
-
         url = "https://call-of-duty-modern-warfare.p.rapidapi.com/warzone/{}/uno".format(uno)
         response = requests.request("GET", url, headers=headers)
-        print(response.json())
 
 
-        # if 'br' in response.json().keys():
-        #         kd = response.json()['br']['kdRatio'] 
-        #         print("{}: {}".format(user, kd))
 
-        # else:
-        #         print("NA Player")
+        if 'br' in response.json().keys():
+                kd = response.json()['br']['kdRatio'] 
+                print("{}: {} | {}".format(user, kd, uno))
+
+        else:
+                print("{}: NA Player | {}".format(user, uno))
 
 
         # print(lobby_players[i]['player']['username'] + ': ' + lobby_players[i]['player']['uno'] )
+import requests
+
+
+endpoint = "https://api.tracker.gg/api/v1/warzone/matches/11435916617093634673"
+r = requests.get(endpoint)
+data = r.json()["data"]
+
+from selenium import webdriver
+import json
+
+PATH = 'C:\Program Files (x86)\chromedriver.exe'
+driver = webdriver.Chrome(PATH)
+
+driver.get("https://api.tracker.gg/api/v1/warzone/matches/11435916617093634673")
+test = driver.find_element_by_xpath("/html/body").text
+json.loads(test)
+
+
+driver.quit()

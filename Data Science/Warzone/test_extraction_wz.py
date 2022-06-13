@@ -7,12 +7,16 @@ import pandas as pd
 import pickle
 from datetime import datetime
 import os
+from selenium import webdriver
+
+PATH = 'C:\Program Files (x86)\chromedriver.exe'
+
 
 # %%
 gamerTags = pd.read_csv('GamerTags.csv')
 gamerTags
 
-index = 7
+index = 4
 
 user = gamerTags['User'][index]
 gamerTag = gamerTags['GamerTag'][index]
@@ -105,38 +109,48 @@ for i in df['MatchID']:
         print('')
 
         endpoint = "https://api.tracker.gg/api/v1/warzone/matches/{}".format(i)
-        request = urllib.request.Request(endpoint, None)
-        response = urllib.request.urlopen(request)
 
-        data = response.read()
-        jsonData = data.decode('utf8')
+        driver = webdriver.Chrome(PATH)
+        driver.get(endpoint)
 
-        data = json.loads(jsonData)
+        body = driver.find_element_by_xpath("/html/body").text
 
-        if 'errors' in data:
-            errors.append(i)
 
-            print('Adding {} to errors list'.format(i))
-            print('')
+        # request = urllib.request.Request(endpoint, None)
+        # response = urllib.request.urlopen(request)
 
-        else:
+        # data = response.read()
+        # jsonData = data.decode('utf8')
 
-            print('Match for {} not recorded'.format(i))
-            print('')
+        data = json.loads(body)
 
-            avg = list(data['data']['attributes']['avgKd'].values())[0]
+        driver.quit()
 
-            timestamp = data['data']['metadata']['timestamp']
-            dateTime = datetime.fromtimestamp(timestamp/1000)
-            date = dateTime.strftime("%m-%d-%Y")
-            time = dateTime.strftime("%H:%M:%S")
 
-            print('{} - Match ID: {} | Lobby KD: {}'.format(match, i, avg))
+        # if 'errors' in data:
+        #     errors.append(i)
 
-            matchDate.append(date)
-            matchTime.append(time)
-            avgKD.append(avg)
-            match += 1
+        #     print('Adding {} to errors list'.format(i))
+        #     print('')
+
+        # else:
+
+        print('Match for {} not recorded'.format(i))
+        
+        avg = list(data['data']['attributes']['avgKd'].values())[0]
+
+        timestamp = data['data']['metadata']['timestamp']
+        dateTime = datetime.fromtimestamp(timestamp/1000)
+        date = dateTime.strftime("%m-%d-%Y")
+        time = dateTime.strftime("%H:%M:%S")
+
+        print('{} - Match ID: {} | Lobby KD: {}'.format(match, i, avg))
+        print('')
+
+        matchDate.append(date)
+        matchTime.append(time)
+        avgKD.append(avg)
+        match += 1
 
     else:
 
@@ -156,32 +170,39 @@ for i in df['MatchID']:
 
                 endpoint = "https://api.tracker.gg/api/v1/warzone/matches/{}".format(
                     j)
-                request = urllib.request.Request(endpoint, None, headers)
-                response = urllib.request.urlopen(request)
 
-                data = response.read()
-                jsonData = data.decode('utf8')
 
-                data = json.loads(jsonData)
+                # request = urllib.request.Request(endpoint, None, headers)
+                # response = urllib.request.urlopen(request)
 
-                if 'errors' not in data:
+                # data = response.read()
+                # jsonData = data.decode('utf8')
 
-                    errors.remove(str(j))
+                driver = webdriver.Chrome(PATH)
+                driver.get(endpoint)
 
-                    avg = list(data['data']['attributes']['avgKd'].values())[0]
+                body = driver.find_element_by_xpath("/html/body").text
 
-                    timestamp = data['data']['metadata']['timestamp']
-                    dateTime = datetime.fromtimestamp(timestamp/1000)
-                    date = dateTime.strftime("%m-%d-%Y")
-                    time = dateTime.strftime("%H:%M:%S")
+                data = json.loads(body)
+                
+                driver.quit()
 
-                    print('')
-                    print('{} - Match ID: {} | Lobby KD: {}'.format(match, i, avg))
+                errors.remove(str(j))
 
-                    matchDate.append(date)
-                    matchTime.append(time)
-                    avgKD.append(avg)
-                    match += 1
+                avg = list(data['data']['attributes']['avgKd'].values())[0]
+
+                timestamp = data['data']['metadata']['timestamp']
+                dateTime = datetime.fromtimestamp(timestamp/1000)
+                date = dateTime.strftime("%m-%d-%Y")
+                time = dateTime.strftime("%H:%M:%S")
+
+                print('{} - Match ID: {} | Lobby KD: {}'.format(match, i, avg))
+                print('')
+
+                matchDate.append(date)
+                matchTime.append(time)
+                avgKD.append(avg)
+                match += 1
 
 df['LobbyKD'] = avgKD
 df['Date'] = matchDate
@@ -210,7 +231,7 @@ if len(df) != 0:
 
     df.to_csv("{}/{}{}.csv".format(savePath, user, date_time), index=False)
 
-    new[new['Date'] == '03-26-2022']
+    new[new['Date'] == '06-12-2022']
 
 df
 
