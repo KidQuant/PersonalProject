@@ -16,7 +16,7 @@ PATH = 'C:\Program Files (x86)\chromedriver.exe'
 gamerTags = pd.read_csv('GamerTags.csv')
 gamerTags
 
-index = 59
+index = 0
 
 user = gamerTags['User'][index]
 gamerTag = gamerTags['GamerTag'][index]
