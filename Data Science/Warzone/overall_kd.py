@@ -2,15 +2,23 @@ import pickle
 from selenium import webdriver
 import json
 import os
+from datetime import datetime
+import pandas as pd
+
 
 PATH = 'C:\Program Files (x86)\chromedriver.exe'
 
-user = 'Diaz Biffle'
+gamerTags = pd.read_csv('GamerTags.csv')
+user = gamerTags['User'][2]
 
 with open('User History\{}.pickle'.format(user), 'rb') as f:
     print('Collecting old matches for: {}'.format(user))
     df = pickle.load(f)
 
+today = datetime.today().strftime('%m-%d-%Y')
+
+brDF = df[~df['Mode'].str.contains('rebirth')]
+dateDF = brDF[brDF['Date'] == today]
 
 # endpoint = 'https://api.tracker.gg/api/v1/warzone/matches/battlenet/diazbiffle%231415?/type=wz&next=null'
 # driver = webdriver.Chrome(PATH)
@@ -18,13 +26,10 @@ with open('User History\{}.pickle'.format(user), 'rb') as f:
 
 # body = driver.find_element_by_xpath("/html/body").text
 
-df = df[df['Date'] == '06-20-2022']
-oldMatches = df['MatchID'].tolist()
-
 
 hist = []
 
-for i in oldMatches:
+for i in dateDF['MatchID']:
 
         print(i)
 
@@ -44,5 +49,39 @@ for i in oldMatches:
                 print(obs)
 
                 hist.append(obs)
+
+hist = []
+for user in gamerTags['User']:
+    with open('User History\{}.pickle'.format(user), 'rb') as f:
+        print('Colling old matches for: {}'.format(user))
+        df = pickle.load(f)
+
+    brDF = df[~df['Mode'].str.contains('rebirth')]
+    dateDF = brDF[brDF['Date'] == today]
+
+
+    for i in dateDF['MatchID']:
+
+        print(i)
+        print('')
+
+        endpoint = "https://api.tracker.gg/api/v1/warzone/matches/{}".format(i)
+        driver = webdriver.Chrome(PATH)
+        driver.get(endpoint)
+
+        body = driver.find_element_by_xpath("/html/body").text
+
+        match = json.loads(body)
+
+        driver.quit()
+
+        histogram = match['data']['attributes']['kdHistogram']
+
+        for data in histogram:
+            print(data)
+
+            hist.append(data)
+
+
 
 
