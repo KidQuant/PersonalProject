@@ -13,11 +13,11 @@ from selenium import webdriver
 %matplotlib inline
 
 
-sso_token = "MTczNzE4NDQ4NDY2MzE4NDgxNTk6MTY1NTQ5ODUwNjExNjo4ODZmMmNjNTUwNzFlY2U4OTgwMTEzYzllOTMxZDhjMQ"
-cookies={"ACT_SSO_COOKIE": sso_token}
+# sso_token = "MTczNzE4NDQ4NDY2MzE4NDgxNTk6MTY1NTQ5ODUwNjExNjo4ODZmMmNjNTUwNzFlY2U4OTgwMTEzYzllOTMxZDhjMQ"
+# cookies={"ACT_SSO_COOKIE": sso_token}
 
-resp_profile = requests.get('https://www.callofduty.com/api/papi-client/crm/cod/v2/title/mw/platform/xbl/gamer/coltie119/matches/wz/start/0/end/0/details', cookies=cookies)
-uno = resp_profile.json()['data']['matches'][0]['player']['uno']
+# resp_profile = requests.get('https://www.callofduty.com/api/papi-client/crm/cod/v2/title/mw/platform/xbl/gamer/coltie119/matches/wz/start/0/end/0/details', cookies=cookies)
+# uno = resp_profile.json()['data']['matches'][0]['player']['uno']
 
 
 s = requests.Session()
@@ -30,7 +30,7 @@ data = {'username': 'andre@kidquant.com',
 
 s.post('https://profile.callofduty.com/do_login?new_SiteId=cod', params=data)
 
-match_id = "2311647224443150730"
+match_id = "5272732878023183550"
 
 url = "https://www.callofduty.com/api/papi-client/crm/cod/v2/title/mw/platform/battle/fullMatch/wz/{}/it".format(match_id)
 
@@ -46,6 +46,11 @@ response = requests.request("GET", url, headers=headers, data=payload)
 lobby_players = response.json()['data']['allPlayers']
 lobby_players_df = pd.DataFrame.from_records(lobby_players)
 lobby_players_df.info()
+
+for i in range(len(lobby_players)):
+        username = lobby_players[i]['player']['username']
+        uno = lobby_players[i]['player']['uno']
+        print('{} : {}'.format(username, uno))
 
 lobby_players_df['playerStats']
 
