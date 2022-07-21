@@ -29,7 +29,7 @@ gamerTags = pd.read_sql(tag_query, my_conn)
 
 
 print("Enter User Index Number")
-index = 0
+index = 7
 # index = int(input())
 
 user = gamerTags['User'][index]
@@ -140,7 +140,6 @@ for i in df['MatchID']:
 
         print('Match for {} not recorded'.format(i))
 
-
         try:
 
             avg = list(data['data']['attributes']['avgKd'].values())[0]
@@ -170,7 +169,6 @@ for i in df['MatchID']:
             matchTime.append(time)
             avgKD.append(avg)
             match += 1
-            
 
     else:
 
@@ -256,8 +254,3 @@ if len(df) != 0:
     print('')
     print('Creating game history for {}'.format(user))
     df.to_csv("{}/{}{}.csv".format(savePath, user, date_time), index=False)
-
-
-
-
-
