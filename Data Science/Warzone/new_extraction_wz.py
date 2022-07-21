@@ -1,5 +1,5 @@
-
-# %%
+from sqlite3 import ProgrammingError
+from sqlalchemy import create_engine
 import urllib.request
 import requests
 import json
@@ -8,32 +8,48 @@ import pickle
 from datetime import datetime
 import os
 from selenium import webdriver
+import MySQLdb
 
 PATH = 'C:\Program Files (x86)\chromedriver.exe'
 
+######################
+# Creating Engine
+######################
 
-# %%
-gamerTags = pd.read_csv('GamerTags.csv')
-gamerTags
+engine = create_engine("mysql+mysqldb://root:root@localhost/Warzone")
+my_conn = engine.connect()
 
-index = 22
+#################################
+# Exporting Relevant Tables
+#################################
+
+
+tag_query = "SELECT * FROM gamertags"
+gamerTags = pd.read_sql(tag_query, my_conn)
+
+
+print("Enter User Index Number")
+index = 0
+# index = int(input())
 
 user = gamerTags['User'][index]
 gamerTag = gamerTags['GamerTag'][index]
 platform = gamerTags['Platform'][index]
 
 try:
-    with open('User History\{}.pickle'.format(user), 'rb') as f:
-        print('Collecting old matches for: {}'.format(user))
-        old = pickle.load(f)
-        oldMatches = old['MatchID'].tolist()
-        print(old.head())
-except FileNotFoundError:
-    print('No Files Found for {}'.format(user))
+    print('')
+    print('Exporting old matches from {}'.format(user))
+    table_query = "SELECT * FROM {}".format(user.lower())
+    old = pd.read_sql(table_query, my_conn)
+    oldMatches = old['MatchID'].tolist()
+except MySQLdb.ProgrammingError:
     old = pd.DataFrame()
     oldMatches = []
 
-# %%
+###############################
+# RapidAPI Match Extraction
+###############################
+
 
 url = "https://call-of-duty-modern-warfare.p.rapidapi.com/warzone-matches/{}/{}/".format(
     gamerTag, platform)
@@ -46,9 +62,7 @@ headers = {
     'User-Agent': user_agent
 }
 
-
 response = requests.request("GET", url, headers=headers)
-
 
 data = json.loads(response.text)
 
@@ -57,7 +71,6 @@ gameMode = []
 kills = []
 deaths = []
 kdRatio = []
-
 
 for i in data['matches']:
     matchID.append(i['matchID'])
@@ -74,24 +87,16 @@ df['Kills'] = kills
 df['Deaths'] = deaths
 df['KDRatio'] = kdRatio
 
+# df = df[df['Mode'] != 'br_dmz_plunquad']
+# df = df.reset_index().drop(columns=['index'])
 
-df = df[df['Mode'] != 'br_dmz_plunquad']
-df = df.reset_index().drop(columns=['index'])
+# df = df[df['Mode'] != 'br_rumble_clash_caldera']
+# df = df.reset_index().drop(columns=['index'])
 
-df = df[df['Mode'] != 'br_rumble_clash_caldera']
-df = df.reset_index().drop(columns=['index'])
+###############################
+# Selenium Match Extraction
+###############################
 
-
-# headers = {"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/100.0.4896.127 Safari/537.36 Edg/100.0.1185.50"}
-
-
-# endpoint = "https://api.tracker.gg/api/v1/warzone/matches/10508390693456844744"
-# request = urllib.request.Request(endpoint, None, headers)
-# response = urllib.request.urlopen(request)
-# data = response.read()
-# jsonData = data.decode('utf8')
-# data = json.loads(jsonData)
-# match  = data['data']['attributes']['id']
 
 avgKD = []
 matchDate = []
@@ -115,7 +120,6 @@ for i in df['MatchID']:
 
         body = driver.find_element_by_xpath("/html/body").text
 
-
         # request = urllib.request.Request(endpoint, None)
         # response = urllib.request.urlopen(request)
 
@@ -126,7 +130,6 @@ for i in df['MatchID']:
 
         driver.quit()
 
-
         # if 'errors' in data:
         #     errors.append(i)
 
@@ -136,21 +139,38 @@ for i in df['MatchID']:
         # else:
 
         print('Match for {} not recorded'.format(i))
-        
-        avg = list(data['data']['attributes']['avgKd'].values())[0]
 
-        timestamp = data['data']['metadata']['timestamp']
-        dateTime = datetime.fromtimestamp(timestamp/1000)
-        date = dateTime.strftime("%m-%d-%Y")
-        time = dateTime.strftime("%H:%M:%S")
 
-        print('{} - Match ID: {} | Lobby KD: {}'.format(match, i, avg))
-        print('')
+        try:
 
-        matchDate.append(date)
-        matchTime.append(time)
-        avgKD.append(avg)
-        match += 1
+            avg = list(data['data']['attributes']['avgKd'].values())[0]
+            timestamp = data['data']['metadata']['timestamp']
+            dateTime = datetime.fromtimestamp(timestamp/1000)
+            date = dateTime.strftime("%m-%d-%Y")
+            time = dateTime.strftime("%H:%M:%S")
+
+            print('{} - Match ID: {} | Lobby KD: {}'.format(match, i, avg))
+            print('')
+
+            matchDate.append(date)
+            matchTime.append(time)
+            avgKD.append(avg)
+            match += 1
+
+        except KeyError:
+
+            avg = 0.0
+            dateTime = datetime.now().timestamp()/1000
+            date = datetime.now().date().strftime("%m-%d-%Y")
+
+            print('{} - Match ID: {} | Lobby KD: {}'.format(match, i, avg))
+            print('')
+
+            matchDate.append(date)
+            matchTime.append(time)
+            avgKD.append(avg)
+            match += 1
+            
 
     else:
 
@@ -171,7 +191,6 @@ for i in df['MatchID']:
                 endpoint = "https://api.tracker.gg/api/v1/warzone/matches/{}".format(
                     j)
 
-
                 # request = urllib.request.Request(endpoint, None, headers)
                 # response = urllib.request.urlopen(request)
 
@@ -184,7 +203,7 @@ for i in df['MatchID']:
                 body = driver.find_element_by_xpath("/html/body").text
 
                 data = json.loads(body)
-                
+
                 driver.quit()
 
                 errors.remove(str(j))
@@ -210,15 +229,20 @@ df['Time'] = matchTime
 df['User'] = user
 
 
+###############################
+# Uploading To Database
+###############################
+
+
 if len(df) != 0:
 
-    new = pd.concat([df, old], ignore_index=False)
-    new.drop_duplicates(subset='MatchID', inplace=True)
-    new = new.reset_index().drop(columns=['index'])
-
-    with open('User History\{}.pickle'.format(user), 'wb') as f:
-        print('Storing new matches for: {}'.format(user))
-        pickle.dump(new, f)
+    df['MatchID'] = df['MatchID'].astype(str)
+    df['Date'] = pd.to_datetime(df['Date']).dt.strftime('%Y-%m-%d')
+    df.sort_values(by=['Date'], ascending=False, inplace=False)
+    print('')
+    print('Uploading {} to Database'.format(user))
+    df.to_sql(con=my_conn, name='{}'.format(user.lower()),
+              if_exists='append', index=False)
 
     now = datetime.now()
     date_time = now.strftime("%m-%d-%Y %H%H%S")
@@ -227,18 +251,13 @@ if len(df) != 0:
 
     if not os.path.exists('{}'.format(savePath)):
         print('Creating Directory for {}'.format(user))
-        os.mkdir('{}'.format(savePath))
+        os.makedirs('{}'.format(savePath))
 
+    print('')
+    print('Creating game history for {}'.format(user))
     df.to_csv("{}/{}{}.csv".format(savePath, user, date_time), index=False)
 
-    new[new['Date'] == '06-12-2022']
-
-df
 
 
-# %%
 
-lobby = old[~old['Mode'].str.contains('rebirth')]
-len(lobby[lobby['LobbyKD'] <1])/ len(lobby)
 
-# %%
