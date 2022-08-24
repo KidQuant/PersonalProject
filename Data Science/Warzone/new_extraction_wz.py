@@ -29,7 +29,7 @@ gamerTags = pd.read_sql(tag_query, my_conn)
 
 
 print("Enter User Index Number")
-index = 42
+index = 0
 # index = int(input())
 
 user = gamerTags['User'][index]

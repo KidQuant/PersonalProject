@@ -5,10 +5,11 @@ SELECT * FROM gamertags;
 UPDATE metaphor SET Date = str_to_date(Date, "%m-%d-%Y");
 UPDATE metaphor SET Time = time_format(Time, "%H:%i:%s");
 
-SELECT * FROM quants
+SELECT * FROM swagg
+Where Mode LIKE '%br_br%'
 ORDER BY Date DESC, Time DESC;
 
-CREATE TABLE qrissy(MatchID text,
+CREATE TABLE Crowder(MatchID text,
 					Mode text,
                     Kills int,
                     Deaths int,
@@ -17,4 +18,6 @@ CREATE TABLE qrissy(MatchID text,
                     Date text,
                     Time text,
                     User text);
-            
+
+DELETE FROM gamertags
+WHERE User = 'Davizzera';

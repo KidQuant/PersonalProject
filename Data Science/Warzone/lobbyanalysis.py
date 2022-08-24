@@ -4,7 +4,7 @@ from sqlalchemy import create_engine
 
 engine=create_engine("mysql+mysqldb://root:root@localhost/Warzone")
 my_conn = engine.connect()
-query="SELECT * FROM kingaj"
+query="SELECT * FROM quants"
 df=pd.read_sql(query,my_conn)
 
 
