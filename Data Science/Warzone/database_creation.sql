@@ -5,8 +5,8 @@ SELECT * FROM gamertags;
 UPDATE metaphor SET Date = str_to_date(Date, "%m-%d-%Y");
 UPDATE metaphor SET Time = time_format(Time, "%H:%i:%s");
 
-SELECT * FROM swagg
-Where Mode LIKE '%br_br%'
+SELECT * FROM biffle 
+-- Where Mode LIKE '%br_br%'
 ORDER BY Date DESC, Time DESC;
 
 CREATE TABLE Crowder(MatchID text,

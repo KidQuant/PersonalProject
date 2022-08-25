@@ -30,7 +30,7 @@ data = {'username': 'andre@kidquant.com',
 
 s.post('https://profile.callofduty.com/do_login?new_SiteId=cod', params=data)
 
-match_id = "5272732878023183550"
+match_id = "6523302528087950146"
 
 url = "https://www.callofduty.com/api/papi-client/crm/cod/v2/title/mw/platform/battle/fullMatch/wz/{}/it".format(match_id)
 
