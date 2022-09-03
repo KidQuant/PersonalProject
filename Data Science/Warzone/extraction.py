@@ -72,7 +72,10 @@ def rapid_match_extraction(a, b):
         gameMode.append(i['mode'])
         kills.append(i['playerStats']['kills'])
         deaths.append(i['playerStats']['deaths'])
-        kdRatio.append(i['playerStats']['kdRatio'])
+        try:
+            kdRatio.append(i['playerStats']['kdRatio'])
+        except KeyError:
+            kdRatio.append(int(0))
 
     df = pd.DataFrame()
 
@@ -230,7 +233,7 @@ def upload_matches(df):
         df.to_csv("{}/{}{}.csv".format(savePath, user, date_time), index=False)
 
 
-for i in range(len(gamerTags)):
+for i in range(len(gamerTags))[53:]:
 
     username, platformID = get_match_data(i)
 

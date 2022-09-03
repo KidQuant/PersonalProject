@@ -29,7 +29,7 @@ gamerTags = pd.read_sql(tag_query, my_conn)
 
 
 print("Enter User Index Number")
-index = 2
+index = 53
 # index = int(input())
 
 user = gamerTags['User'][index]
@@ -73,11 +73,15 @@ deaths = []
 kdRatio = []
 
 for i in data['matches']:
+    print(i['matchID'])
     matchID.append(i['matchID'])
     gameMode.append(i['mode'])
     kills.append(i['playerStats']['kills'])
     deaths.append(i['playerStats']['deaths'])
-    kdRatio.append(i['playerStats']['kdRatio'])
+    try:
+        kdRatio.append(i['playerStats']['kdRatio'])
+    except KeyError:
+        kdRatio.append(int(0))
 
 df = pd.DataFrame()
 
