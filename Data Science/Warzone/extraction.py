@@ -233,7 +233,7 @@ def upload_matches(df):
         df.to_csv("{}/{}{}.csv".format(savePath, user, date_time), index=False)
 
 
-for i in range(len(gamerTags))[53:]:
+for i in range(len(gamerTags))[:43]:
 
     username, platformID = get_match_data(i)
 

@@ -3,21 +3,48 @@
 SELECT * FROM gamertags;
 
 UPDATE metaphor SET Date = str_to_date(Date, "%m-%d-%Y");
+
 UPDATE metaphor SET Time = time_format(Time, "%H:%i:%s");
 
-SELECT * FROM biffle 
--- Where Mode LIKE '%br_br%'
+SELECT *
+FROM icemanissac
+Where Mode LIKE '%br_vg_royale_quads%'
 ORDER BY Date DESC, Time DESC;
 
-CREATE TABLE Crowder(MatchID text,
-					Mode text,
-                    Kills int,
-                    Deaths int,
-                    KDRatio double,
-                    LobbyKD double,
-                    Date text,
-                    Time text,
-                    User text);
+SELECT
+SELECT *
+FROM bbreadman
+WHERE NOT EXISTS (
+        SELECT *
+        FROM huskerrs
+        WHERE (
+                bbreadman.MatchID = huskerrs.MatchID
+            )
+            AND NOT EXISTS (
+                SELECT *
+                FROM fifakill
+                WHERE
+                    bbreadman.MatchID = fifakill.MatchID
+            )
+            OR NOT EXISTS (
+                SELECT *
+                FROM joewo
+                WHERE
+                    bbreadman.MatchID = joewo.MatchID
+            )
+    );
 
-DELETE FROM gamertags
-WHERE User = 'Davizzera';
+CREATE TABLE
+    Crowder(
+        MatchID text,
+        Mode text,
+        Kills int,
+        Deaths int,
+        KDRatio double,
+        LobbyKD double,
+        Date text,
+        Time text,
+        User text
+    );
+
+DELETE FROM icemanissac WHERE MatchID = '17253392717770040513';
