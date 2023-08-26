@@ -13,6 +13,7 @@ import MySQLdb
 
 PATH = 'C:\Program Files (x86)\chromedriver.exe'
 
+
 ######################
 # Creating Engine
 ######################
@@ -233,7 +234,7 @@ def upload_matches(df):
         df.to_csv("{}/{}{}.csv".format(savePath, user, date_time), index=False)
 
 
-for i in range(len(gamerTags))[:43]:
+for i in range(len(gamerTags))[44:]:
 
     username, platformID = get_match_data(i)
 

@@ -2,9 +2,15 @@
 
 SELECT * FROM gamertags;
 
+SELECT * FROM aydan;
+
 UPDATE metaphor SET Date = str_to_date(Date, "%m-%d-%Y");
 
 UPDATE metaphor SET Time = time_format(Time, "%H:%i:%s");
+
+UPDATE gamertags
+SET GamerTag = 'Mutex%2311566'
+WHERE User = 'MuTex';
 
 SELECT *
 FROM icemanissac

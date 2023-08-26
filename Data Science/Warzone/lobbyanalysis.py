@@ -184,3 +184,17 @@ for i in thirdlist:
         filterList.append(i)
 
 bbreadman = bbreadman[~bbreadman.MatchID.isin(filterList)]
+
+########################################
+# SuperEvan
+########################################
+
+# Removing Biffle
+superevan = modefilteredDF[modefilteredDF['User'] == 'SuperEvan']
+biffle = modefilteredDF[modefilteredDF['User'] == 'Biffle']
+
+mergedbiffle = superevan.merge(biffle, on = ['MatchID'], how = 'inner')
+
+filterList = list(mergedbiffle['MatchID'])
+
+superevan = superevan[~superevan.MatchID.isin(filterList)]
