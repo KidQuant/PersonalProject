@@ -3,6 +3,8 @@ import numpy as np
 from datetime import datetime
 
 rfp_receipts = pd.read_csv('RFP_Itemized_schedule_a.csv')
+trump_receipts = pd.read_csv('scheduleatrump.csv')
+trump_receipts
 rfp_receipts.head()
 
 
@@ -17,4 +19,4 @@ cleaned = rfp_receipts.drop_duplicates(subset=['Last_Name', 'Zip_Code', 'Amount'
 cleaned[cleaned['Last_Name'] == 'CASSIDY']
 
 
-cleaned['Amount'].mean()
+trump_receipts['Aggrergate'].mean()

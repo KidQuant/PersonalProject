@@ -23,3 +23,6 @@ BASE_URL = 'http://api.open.fec.gov/v1'
 API_KEY = open('key.txt','r').read().strip()
 %env OPENFEC_API_KEY=bQhsk7IYSSpvB05Yz5ZgqDd09CzwkxEqPmekwAZa
 promise_keepers = [c for c in api.Committee.search('Keep the Promise')]
+
+
+requests.get('https://docquery.fec.gov/cgi-bin/forms/C00841130/1714417/sa/ALL/2')
