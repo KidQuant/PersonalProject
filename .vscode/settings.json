@@ -1,4 +1,4 @@
 {
     "python.linting.pylintEnabled": true,
-    "jupyter.sendSelectionToInteractiveWindow": true
+    "jupyter.interactiveWindow.textEditor.executeSelection": true
 }
