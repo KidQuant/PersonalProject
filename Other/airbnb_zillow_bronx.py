@@ -38,7 +38,7 @@ def reorder(location):
 
 #%%
 
-new_york = read_csv('DataScience\listings.csv.gz')
+new_york = read_csv('listings.csv.gz')
 
 new_york = read_data(new_york)
 new_york['price'] = new_york['price'].map(lambda x: str(x)[1:]).convert_objects(convert_numeric=True)
