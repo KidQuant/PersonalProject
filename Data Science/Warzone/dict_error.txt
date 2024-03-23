@@ -1,3 +1,0 @@
-[{'code': 'WzMatchService::MatchNotFound',
-  'message': 'Could not find the requested match.',
-  'data': {}}]
