@@ -1,10 +1,11 @@
 import quandl
 import pandas as pd
 import altair as alt
+import altair_viewer
 import numpy as np
 from altair import Scale, Color, Row, Column, Chart, Text
 
-alt.renderers.enable('altair_viewer')
+# alt.renderers.enable('altair_viewer')
 
 df = pd.read_csv('Data\Q2GDP.csv')
 
